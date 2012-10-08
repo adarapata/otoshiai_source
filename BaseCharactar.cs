@@ -15,6 +15,6 @@ public class BaseCharactar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		state.Update();
+		State.Update();
 	}
 }

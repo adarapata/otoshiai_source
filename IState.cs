@@ -6,6 +6,7 @@ public interface IState {
 	void Update();
 }
 
+
 public class BaseState :IState {
 	protected BaseCharactar stateParent;
 	
