@@ -11,17 +11,18 @@ public class BaseCharactar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		stateManager.Update();
+		state.Update();
 	}
 	
+	protected void ChangeState(IState nextState)
+	{
+		state = nextState;
+	}
 	/// <summary>
 	/// Defines the state.
 	/// </summary>
 	virtual protected void DefineState()
 	{
-		stateManager = new StateManager();
-		IState state = new BaseState(stateManager, this);
-		
-		stateManager.SetFirstState(state);
+		IState state = new BaseState(this);
 	}
 }
