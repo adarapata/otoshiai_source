@@ -5,16 +5,11 @@ public class PlayableCharactar : BaseCharactar {
 
 	// Use this for initialization
 	void Start () {
-		// 状態の定義
+		// 状態の設定
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-	}
-	
-	protected override void DefineState ()
-	{
-		
 	}
 }
