@@ -13,3 +13,8 @@ public class PlayableCharactar : BaseCharactar {
 	
 	}
 }
+
+class MoveState : BaseState
+{
+	
+}
