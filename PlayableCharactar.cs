@@ -18,7 +18,7 @@ class MoveState : BaseState
 {
 	private MoveParameter moveParameter;
 	
-	public MoveState():base(stateParent)
+	public MoveState(BaseCharactar parent):base(parent)
 	{
 		moveParameter = stateParent.baseParameter.moveParameter;
 	}
