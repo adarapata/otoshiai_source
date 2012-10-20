@@ -16,5 +16,15 @@ public class PlayableCharactar : BaseCharactar {
 
 class MoveState : BaseState
 {
+	private MoveParameter moveParameter;
 	
+	public MoveState():base(stateParent)
+	{
+		moveParameter = stateParent.baseParameter.moveParameter;
+	}
+
+	public void Update()
+	{
+		stateParent.transform.localPosition += moveParameter.velocity;
+	}
 }
