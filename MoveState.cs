@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-class MoveState : BaseState
+public class MoveState : BaseState
 {
 	protected MoveParameter moveParameter;
 	
