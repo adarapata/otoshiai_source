@@ -13,13 +13,7 @@ public class Poler {
 		private get;
 		set;
 	}
-
-	public Poler(int direction, float speed)
-	{
-		this.direction = direction;
-		this.speed = speed;
-	}
-
+	
 	public Vector3 ConvertToPoler(int direction, float speed)
 	{
 		Vector3 val = new Vector3(Mathf.Cos(direction) * speed, Mathf.Sin(direction) * speed, 0f);

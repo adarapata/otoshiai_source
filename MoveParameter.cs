@@ -10,18 +10,32 @@ public class MoveParameter : MonoBehaviour
 		get;
 		private set;
 	}
+	
+	public float speed
+	{
+		set 
+		{ 
+			m_poler.speed = value; 
+			Caluclate();
+		}
+	}
+	
+	public int direction
+	{
+		set 
+		{ 
+			m_poler.direction = value;
+			Caluclate();
+		}
+	}
 
 	public MoveParameter(Poler poler)
 	{
 		m_poler = poler;
+		Caluclate();
 	}
 
-	public void Caluclate()
-	{
-		Caluclate(m_poler);
-	}
-
-	public void Caluclate(Poler poler)
+	private void Caluclate()
 	{
 		velocity = poler.ConvertToPoler();
 	}
