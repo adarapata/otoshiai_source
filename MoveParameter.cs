@@ -37,7 +37,7 @@ public class MoveParameter : MonoBehaviour
 
 	private void Caluclate()
 	{
-		velocity = poler.ConvertToPoler();
+		velocity = m_poler.ConvertToPoler();
 	}
 }
 
