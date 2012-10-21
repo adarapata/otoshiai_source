@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MoveParameter : MonoBehaviour
 {
-	private Poler m_poler;
+	private PolarCoordinates m_polar;
 
 	public Vector3 velocity
 	{
@@ -15,7 +15,7 @@ public class MoveParameter : MonoBehaviour
 	{
 		set 
 		{ 
-			m_poler.speed = value; 
+			m_polar.speed = value; 
 			Caluclate();
 		}
 	}
@@ -24,20 +24,20 @@ public class MoveParameter : MonoBehaviour
 	{
 		set 
 		{ 
-			m_poler.direction = value;
+			m_polar.direction = value;
 			Caluclate();
 		}
 	}
 
-	public MoveParameter(Poler poler)
+	public MoveParameter(PolarCoordinates polar)
 	{
-		m_poler = poler;
+		m_polar = polar;
 		Caluclate();
 	}
 
 	private void Caluclate()
 	{
-		velocity = m_poler.ConvertToPoler();
+		velocity = m_polar.ConvertToPolar();
 	}
 }
 
