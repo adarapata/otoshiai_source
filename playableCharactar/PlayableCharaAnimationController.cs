@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CharactarAnimation
+public class PlayableCharaAnimationController : IAnimationController
 {
-	public const string UP = "up",
+	class CharactarAnimation
+	{
+		public const string UP = "up",
 						DOWN = "down",
 						RIGHT = "right",
 						LEFT = "left",
@@ -12,10 +14,8 @@ public class CharactarAnimation
 						UPLEFT = "upleft",
 						DOWNRIGHT = "downright",
 						DOWNLEFT = "downleft";
-}
-
-public class PlayableCharaAnimationController : IAnimationController
-{
+	}
+	
 	public UISprite sprite
 	{
 		get;
