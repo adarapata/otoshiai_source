@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class CharactarAnimationController : IAnimationController
+public class CharacterAnimationController : IAnimationController
 {
 	class Animations
 	{
@@ -24,7 +24,7 @@ public class CharactarAnimationController : IAnimationController
 	
 	private AnimationParameter parameter;
 	
-	public CharactarAnimationController(UISprite targetSprite)
+	public CharacterAnimationController(UISprite targetSprite)
 	{	
 		sprite = targetSprite;
 		var list = targetSprite.atlas.GetListOfSprites();
