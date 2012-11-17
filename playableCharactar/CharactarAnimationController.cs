@@ -2,9 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayableCharaAnimationController : IAnimationController
+public class CharactarAnimationController : IAnimationController
 {
-	class CharactarAnimation
+	class Animations
 	{
 		public const string UP = "up",
 						DOWN = "down",
@@ -24,7 +24,7 @@ public class PlayableCharaAnimationController : IAnimationController
 	
 	private AnimationParameter parameter;
 	
-	public PlayableCharaAnimationController(UISprite targetSprite)
+	public CharactarAnimationController(UISprite targetSprite)
 	{	
 		sprite = targetSprite;
 		var list = targetSprite.atlas.GetListOfSprites();
@@ -52,14 +52,14 @@ public class PlayableCharaAnimationController : IAnimationController
 		string newPattern="";
 		switch(st)
 		{
-			case Stick.Down:newPattern = CharactarAnimation.DOWN;break;
-			case Stick.Up:newPattern = CharactarAnimation.UP;break;
-			case Stick.Right:newPattern = CharactarAnimation.RIGHT;break;
-			case Stick.Left:newPattern = CharactarAnimation.LEFT;break;
-			case Stick.RightDown:newPattern = CharactarAnimation.DOWNRIGHT;break;
-			case Stick.RightUp:newPattern = CharactarAnimation.UPRIGHT;break;
-			case Stick.LeftUp:newPattern = CharactarAnimation.UPLEFT;break;
-			case Stick.LeftDOwn:newPattern = CharactarAnimation.DOWNLEFT;break;
+			case Stick.Down:newPattern = Animations.DOWN;break;
+			case Stick.Up:newPattern = Animations.UP;break;
+			case Stick.Right:newPattern = Animations.RIGHT;break;
+			case Stick.Left:newPattern = Animations.LEFT;break;
+			case Stick.RightDown:newPattern = Animations.DOWNRIGHT;break;
+			case Stick.RightUp:newPattern = Animations.UPRIGHT;break;
+			case Stick.LeftUp:newPattern = Animations.UPLEFT;break;
+			case Stick.LeftDOwn:newPattern = Animations.DOWNLEFT;break;
 		}
 		
 		if(parameter.pattern == newPattern)return;
