@@ -3,11 +3,28 @@ using System.Collections;
 
 public class CharacterParameter
 {
-	private Power power;
-	private Deffence deffence;
-	private Weight weight;
-	private Stamina stamina;
-	private Charge charge;
+	public Power power
+	{
+		get;
+		set;
+	}
+	public Diffence diffence
+	{
+		get;
+		set;
+	}
+	
+	public Weight weight
+	{
+		get;
+		set;
+	}
+	
+	public Stamina stamina
+	{
+		get;
+		set;
+	}
 }
 
 public class Stamina
@@ -24,15 +41,23 @@ public class Charge
 
 public class Weight
 {
-	float quantity;
+	public const float HEAVY = 65F;
+	public const float MIDDLE = 50F;
+	public const float LIGHT = 35F;
+	public float quantity;
+	
+	static public Vector3 CalculateVelocityByWeight(MoveParameter param, Weight weight)
+	{
+		return param.velocity * (Weight.MIDDLE / weight.quantity);
+	}
 }
 
-public class Deffence
+public class Diffence
 {
 	float quantity;
 }
 
 public class Power
 {
-	float power;
+	float quantity;
 }
