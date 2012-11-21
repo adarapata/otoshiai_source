@@ -29,14 +29,52 @@ public class CharacterParameter
 
 public class Stamina
 {
-	float quantity;
-	float recoveryRate;
+	const int MAX = 100;
+	
+	private float m_quantity;
+	
+ 	public float quantity
+	{
+		get{ return m_quantity; }
+		set
+		{
+			m_quantity = value;
+			if(m_quantity > MAX)m_quantity = MAX;
+			else if(m_quantity < 0)m_quantity = 0;
+		}
+	}
+	
+	public float recoveryRate
+	{
+		get;
+		set;
+	}
+	
+	public void Recovery(float rate)
+	{
+		quantity += rate;
+	}
+	
+	public void Recovery()
+	{
+		Recovery(recoveryRate);
+	}
 }
 
 public class Charge
 {
-	float quantity;
-	float speed;
+	public const float MAX =100F;
+	
+	public float quantity
+	{
+		get;
+		set;
+	}
+	public float speed
+	{
+		get;
+		set;
+	}
 }
 
 public class Weight
@@ -44,7 +82,12 @@ public class Weight
 	public const float HEAVY = 65F;
 	public const float MIDDLE = 50F;
 	public const float LIGHT = 35F;
-	public float quantity;
+	
+	public float quantity
+	{
+		get;
+		set;
+	}
 	
 	static public Vector3 CalculateVelocityByWeight(MoveParameter param, Weight weight)
 	{
@@ -54,10 +97,18 @@ public class Weight
 
 public class Diffence
 {
-	float quantity;
+	public float quantity
+	{
+		get;
+		set;
+	}
 }
 
 public class Power
 {
-	float quantity;
+	public float quantity
+	{
+		get;
+		set;
+	}
 }
