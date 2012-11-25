@@ -33,7 +33,7 @@ public class CharacterAnimationController : IAnimationController
 	
 	public void ChangeFrame(bool isLoop)
 	{
-		sprite.spriteName = parameter.NextFrame(true);
+		sprite.spriteName = parameter.NextFrame(isLoop);
 	}
 	
 	public bool ChangePattern(string newPattern)
@@ -71,6 +71,12 @@ public class AnimationParameter
 {
 	public int frame;
 	public string pattern;
+	
+	public string spriteName
+	{
+		get{ return pattern + frame.ToString(); }
+	}
+	
 	private List<string> nameList;
 	
 	public AnimationParameter(List<string> animationNameList)
@@ -79,9 +85,14 @@ public class AnimationParameter
 	}
 	
 	public string NextFrame(bool isLoop)
-	{
-		frame = nameList.Contains(pattern + (frame+1).ToString()) ? frame + 1 : 0;
-		string nextframe = pattern + frame.ToString();
+	{		
+		string nextframe = pattern + (frame+1).ToString();
+		if(!nameList.Contains(nextframe))
+		{
+			frame = isLoop ? 0 : frame;
+			return spriteName;
+		}
+		frame++;
 		return nextframe;
 	}
 	
@@ -89,7 +100,8 @@ public class AnimationParameter
 	{
 		if(!nameList.Contains(newPattern + "0"))return "";
 		
-		pattern = newPattern + "0";
-		return pattern;
+		frame = 0;
+		pattern = newPattern;
+		return spriteName;
 	}
 }

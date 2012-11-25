@@ -12,6 +12,8 @@ public class CharaParameterPrint : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		label.text = chara.parameter.stamina.quantity.ToString("f1");
+		label.text = chara.parameter.stamina.quantity.ToString("f1") + "\n"
+			+ chara.animation.sprite.spriteName;
+
 	}
 }

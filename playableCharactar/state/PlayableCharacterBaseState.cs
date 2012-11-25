@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharaBaseState : BaseState
+public class PlayableCharacterBaseState : BaseState
 {
 	protected PlayableCharacter character
 	{
@@ -13,7 +13,7 @@ public class PlayableCharaBaseState : BaseState
 		get { return character.parameter; }
 		set { character.parameter = value; }
 	}
-	public PlayableCharaBaseState(PlayableCharacter parent):base(parent)
+	public PlayableCharacterBaseState(PlayableCharacter parent):base(parent)
 	{
 		character = parent;
 	}
