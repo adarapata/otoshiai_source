@@ -16,31 +16,32 @@ public class PlayableCharacterDashMoveState : PlayableCharacterBaseState
 		animation = stateParent.animation as CharacterAnimationController;
 	}
 	
-	public override void Update()
+	public override IState Update()
 	{
-		CheckOfKey();
+		IState newState = CheckOfKey();
 		
 		DashMove();
 		
 		StaminaUse();
 		
 		AnimationFrameUpdate();
+		
+		return newState;
 	}
 	
-	private void CheckOfKey()
+	private IState CheckOfKey()
 	{
 		Stick st = gamepad.pushStick;
 		
-		if(st == Stick.None)
-		{
-			stateParent.state = new PlayableCharacterStayState(character, gamepad);
-			return;
-		}
+		if(st == Stick.None)return new PlayableCharacterStayState(character, gamepad);
 			
 		stateParent.baseParameter.moveParameter.direction = (int)st;
 		animation.SetPatternByStick(st);
 		
-		if(!gamepad.IsPush(Button.D) || parameter.stamina.quantity < CONSUMPTION)stateParent.state = new PlayableCharacterMoveState(character, gamepad);
+		if(!gamepad.IsPush(Button.D) || parameter.stamina.quantity < CONSUMPTION)
+			return new PlayableCharacterMoveState(character, gamepad);
+		
+		return null;
 	}
 	
 	private void DashMove()

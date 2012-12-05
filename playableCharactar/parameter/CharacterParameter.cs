@@ -25,6 +25,12 @@ public class CharacterParameter
 		get;
 		set;
 	}
+	
+	public Charge charge
+	{
+		get;
+		set;
+	}
 }
 
 public class Stamina
@@ -64,17 +70,15 @@ public class Stamina
 
 public class Charge
 {
-	public const float MAX =100F;
+	private const float MAX =100F;
 	
-	public float quantity
+	public float quantity { set;private get; }
+	public float speed { set;private get; }
+	public bool isMax { get { return quantity >= MAX; }}
+	public void Charging()
 	{
-		get;
-		set;
-	}
-	public float speed
-	{
-		get;
-		set;
+		quantity += speed;
+		if(quantity > MAX)quantity = MAX;
 	}
 }
 
