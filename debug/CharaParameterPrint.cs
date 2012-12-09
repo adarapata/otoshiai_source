@@ -7,7 +7,7 @@ public class CharaParameterPrint : MonoBehaviour {
 	public PlayableCharacter chara;
 	// Use this for initialization
 	void Start () {
-	
+		
 	}
 	
 	// Update is called once per frame
@@ -16,5 +16,6 @@ public class CharaParameterPrint : MonoBehaviour {
 			+ chara.animation.sprite.spriteName + "\n"
 			+ chara.parameter.charge.quantity.ToString();
 
+		if(Input.GetKeyDown(KeyCode.Q)){chara.ChangeFallState();}
 	}
 }
