@@ -1,35 +1,55 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharacterChargeState : PlayableCharacterBaseState
+public class PlayableCharacterChargeState : PlayableCharacterMoveState
 {
 	private const float MAX = 100F;
-	private IGamePad gamepad;
+	private readonly string pushButton;
 	
 	private Charge charge
 	{
 		get;
 		set;
 	}
-	public PlayableCharacterChargeState(PlayableCharacter parent, IGamePad pad):base(parent)
+	
+	public PlayableCharacterChargeState(PlayableCharacter parent, IGamePad pad, string push):base(parent,pad)
 	{
 		charge = parent.parameter.charge;
-		gamepad = pad;
+		pushButton = push;
+		charge = new Charge();
+	}
+	
+	protected override void Init()
+	{
+		framecounter = new FrameCounter(16);
+		fix = new MoveFix(0.5F);
 	}
 	
 	public override IState Update()
 	{
-		charge.Charging();
+		IState st = CheckOfKey();
 		
-		return null;
+		charge.Charging();
+				
+		return st;
 	}
 	
-	private void CheckKey()
+	protected override IState CheckOfKey()
 	{
 		Stick st = gamepad.pushStick;
 		
+		if(gamepad.IsUp(pushButton))
+		{
+			return new PlayableCharacterStayState(character,gamepad);
+		}
 		
-		if(st == Stick.None){}
+		if(st != Stick.None){
+			SetDirectionByStick(st);
+			Move();
+			AnimationFrameUpdate();
+		}
+		
+		return null;
 	}
 }
 
