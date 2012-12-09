@@ -72,13 +72,18 @@ public class Charge
 {
 	private const float MAX =100F;
 	
-	public float quantity { set;private get; }
-	public float speed { set;private get; }
+	public float quantity { private set; get; }
+	public float speed { set; get; }
 	public bool isMax { get { return quantity >= MAX; }}
 	public void Charging()
 	{
 		quantity += speed;
 		if(quantity > MAX)quantity = MAX;
+	}
+	
+	public void Clear()
+	{
+		quantity = 0;
 	}
 }
 

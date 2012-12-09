@@ -16,7 +16,7 @@ public class PlayableCharacterChargeState : PlayableCharacterMoveState
 	{
 		charge = parent.parameter.charge;
 		pushButton = push;
-		charge = new Charge();
+		charge = parameter.charge;
 	}
 	
 	protected override void Init()
