@@ -149,3 +149,22 @@ public class FrameCounter
 		count++;
 	}
 }
+
+public class Damage
+{
+	public int hitStop
+	{
+		get;
+		set;
+	}
+	public float quantity
+	{
+		get;
+		set;
+	}
+	public int direction
+	{
+		get;
+		set;
+	}
+}
