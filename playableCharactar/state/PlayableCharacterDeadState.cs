@@ -8,7 +8,7 @@ public class PlayableCharacterDeadState : PlayableCharacterBaseState
 
 	}
 	
-	public override IState Update()
+	public override System.Type Update()
 	{
 		return null;
 	}

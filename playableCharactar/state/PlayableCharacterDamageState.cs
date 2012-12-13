@@ -14,16 +14,16 @@ public class PlayableCharacterDamageState : PlayableCharacterBaseState
 		parameter.DamageCalculate(character.parameter);
 	}
 	
-	public override IState Update()
+	public override System.Type Update()
 	{
-		IState state = BlowOffDamage();
+		var state = BlowOffDamage();
 		return state;
 	}
 	
-	private IState BlowOffDamage()
+	private System.Type BlowOffDamage()
 	{
 		character.transform.localPosition += parameter.velocity;
-		if(parameter.damage < 0) { typeof(PlayableCharacterStayState).GetType();}
+		if(parameter.damage < 0) { return typeof(PlayableCharacterStayState); }
 		
 		return null;
 	}

@@ -17,9 +17,9 @@ public class PlayableCharacterDashMoveState : PlayableCharacterMoveState
 		fix = new MoveFix(2F);
 	}
 	
-	public override IState Update()
+	public override System.Type Update()
 	{
-		IState newState = CheckOfKey();
+		var newState = CheckOfKey();
 		
 		Move();
 		
@@ -30,19 +30,19 @@ public class PlayableCharacterDashMoveState : PlayableCharacterMoveState
 		return newState;
 	}
 	
-	protected override IState CheckOfKey()
+	protected override System.Type CheckOfKey()
 	{
 		Stick st = gamepad.pushStick;
 		
-		if(st == Stick.None)return new PlayableCharacterStayState(character, gamepad);
+		if(st == Stick.None)return typeof(PlayableCharacterStayState);
 			
-		if(gamepad.IsPush(Button.A))return new PlayableCharacterChargeState(character, gamepad, Button.A);
-		if(gamepad.IsPush(Button.B))return new PlayableCharacterChargeState(character, gamepad, Button.B);
+		if(gamepad.IsPush(Button.A))return typeof(PlayableCharacterChargeState);
+		if(gamepad.IsPush(Button.B))return typeof(PlayableCharacterChargeState);
 		
 		SetDirectionByStick(st);
 		
 		if(!gamepad.IsPush(Button.D) || parameter.stamina.quantity < CONSUMPTION)
-			return new PlayableCharacterMoveState(character, gamepad);
+			return typeof(PlayableCharacterMoveState);
 		
 		return null;
 	}

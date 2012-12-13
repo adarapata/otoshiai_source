@@ -9,9 +9,9 @@ public class PlayableCharacterFallState : PlayableCharacterBaseState
 		framecounter = new FrameCounter(60);
 	}
 	
-	public override IState Update()
+	public override System.Type Update()
 	{
-		IState state = FrameUpdate();
+		var state = FrameUpdate();
 		
 		Falling();
 		
@@ -25,11 +25,11 @@ public class PlayableCharacterFallState : PlayableCharacterBaseState
 	  	character.transform.localScale = fall;
 	}
 	
-	private IState FrameUpdate()
+	private System.Type FrameUpdate()
 	{
 		framecounter.Update();
 		
-		return framecounter.IsCall ? new PlayableCharacterDeadState(character) : null;
+		return framecounter.IsCall ? typeof(PlayableCharacterDeadState) : null;
 	}
 }
 

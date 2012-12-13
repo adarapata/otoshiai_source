@@ -25,22 +25,22 @@ public class PlayableCharacterChargeState : PlayableCharacterMoveState
 		fix = new MoveFix(0.5F);
 	}
 	
-	public override IState Update()
+	public override System.Type Update()
 	{
-		IState st = CheckOfKey();
+		var st = CheckOfKey();
 		
 		charge.Charging();
 				
 		return st;
 	}
 	
-	protected override IState CheckOfKey()
+	protected override System.Type CheckOfKey()
 	{
 		Stick st = gamepad.pushStick;
 		
 		if(gamepad.IsUp(pushButton))
 		{
-			return new PlayableCharacterStayState(character,gamepad);
+			return typeof(PlayableCharacterStayState);
 		}
 		
 		if(st != Stick.None){

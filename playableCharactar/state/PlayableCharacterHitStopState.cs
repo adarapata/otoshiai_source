@@ -20,10 +20,10 @@ public class PlayableCharacterHitStopState : PlayableCharacterBaseState
 		this.damage = damage;
 	}
 	
-	public override IState Update()
+	public override System.Type Update()
 	{
 		hitstop.Update();
-		if(hitstop.isEnd){return new PlayableCharacterDamageState(character, damage.damageParameter);}
+		if(hitstop.isEnd){return typeof(PlayableCharacterDamageState);}
 		
 		return null;
 	}
