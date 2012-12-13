@@ -152,19 +152,77 @@ public class FrameCounter
 
 public class Damage
 {
-	public int hitStop
+	public bool isAddDamage
 	{
 		get;
 		set;
 	}
-	public float quantity
+	
+	public HitStop hitStop
 	{
 		get;
 		set;
 	}
-	public int direction
+	public DamageParameter damageParameter
 	{
 		get;
 		set;
+	}
+	
+	public void AddDamage(DamageParameter oldParameter)
+	{
+		damageParameter.damage += oldParameter.damage;
+	}
+}
+
+public class DamageParameter
+{
+	private MoveParameter moveParameter
+	{
+		get;
+		set;
+	}
+	
+	public bool isIgnoreDeffence
+	{
+		get;
+		set;
+	}
+	
+	public float damage
+	{
+		get { return moveParameter.speed; }
+		set { moveParameter.speed = value; }
+	}
+	
+	public void DamageCalculate(CharacterParameter character)
+	{
+		float deffence = isIgnoreDeffence ? 1F : character.diffence.quantity;
+		
+		damage = damage * deffence * (Weight.MIDDLE / character.weight.quantity);
+	}
+	
+	public Vector3 velocity
+	{
+		get { return moveParameter.velocity; }
+	}
+}
+
+public class HitStop
+{
+	public int quantity
+	{
+		get;
+		set;
+	}
+	
+	public void Update()
+	{
+		quantity--;
+	}
+	
+	public bool isEnd
+	{
+		get{return quantity <= 0;}
 	}
 }
