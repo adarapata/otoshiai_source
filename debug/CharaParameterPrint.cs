@@ -4,7 +4,7 @@ using System.Collections;
 public class CharaParameterPrint : MonoBehaviour {
 	
 	public UILabel label;
-	public PlayableCharacter chara;
+	public Character chara;
 	// Use this for initialization
 	void Start () {
 		

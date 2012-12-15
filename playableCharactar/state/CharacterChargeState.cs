@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharacterChargeState : PlayableCharacterMoveState
+public class CharacterChargeState : CharacterMoveState
 {
 	private const float MAX = 100F;
 	private readonly string pushButton;
@@ -12,7 +12,7 @@ public class PlayableCharacterChargeState : PlayableCharacterMoveState
 		set;
 	}
 	
-	public PlayableCharacterChargeState(PlayableCharacter parent, IGamePad pad, string push):base(parent,pad)
+	public CharacterChargeState(Character parent, IGamePad pad, string push):base(parent,pad)
 	{
 		charge = parent.parameter.charge;
 		pushButton = push;
@@ -40,7 +40,7 @@ public class PlayableCharacterChargeState : PlayableCharacterMoveState
 		
 		if(gamepad.IsUp(pushButton))
 		{
-			return typeof(PlayableCharacterStayState);
+			return typeof(CharacterStayState);
 		}
 		
 		if(st != Stick.None){

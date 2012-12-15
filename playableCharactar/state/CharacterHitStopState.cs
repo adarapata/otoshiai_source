@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharacterHitStopState : PlayableCharacterBaseState
+public class CharacterHitStopState : CharacterBaseState
 {
 	private IGamePad gamepad;
 	private Damage damage
@@ -14,7 +14,7 @@ public class PlayableCharacterHitStopState : PlayableCharacterBaseState
 		get { return damage.hitStop; }
 	}
 	
-	public PlayableCharacterHitStopState(PlayableCharacter parent,IGamePad pad, Damage damage):base(parent)
+	public CharacterHitStopState(Character parent,IGamePad pad, Damage damage):base(parent)
 	{
 		gamepad = pad;
 		this.damage = damage;
@@ -23,7 +23,7 @@ public class PlayableCharacterHitStopState : PlayableCharacterBaseState
 	public override System.Type Update()
 	{
 		hitstop.Update();
-		if(hitstop.isEnd){return typeof(PlayableCharacterDamageState);}
+		if(hitstop.isEnd){return typeof(CharacterDamageState);}
 		
 		return null;
 	}

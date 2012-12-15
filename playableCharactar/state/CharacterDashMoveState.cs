@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharacterDashMoveState : PlayableCharacterMoveState
+public class CharacterDashMoveState : CharacterMoveState
 {
 	private const float PARMIT_STAMINA = 5F; 
 	private const float CONSUMPTION = 0.5F;
 	
-	public PlayableCharacterDashMoveState(PlayableCharacter parent, IGamePad pad):base(parent,pad)
+	public CharacterDashMoveState(Character parent, IGamePad pad):base(parent,pad)
 	{
 
 	}
@@ -34,15 +34,15 @@ public class PlayableCharacterDashMoveState : PlayableCharacterMoveState
 	{
 		Stick st = gamepad.pushStick;
 		
-		if(st == Stick.None)return typeof(PlayableCharacterStayState);
+		if(st == Stick.None)return typeof(CharacterStayState);
 			
-		if(gamepad.IsPush(Button.A))return typeof(PlayableCharacterChargeState);
-		if(gamepad.IsPush(Button.B))return typeof(PlayableCharacterChargeState);
+		if(gamepad.IsPush(Button.A))return typeof(CharacterChargeState);
+		if(gamepad.IsPush(Button.B))return typeof(CharacterChargeState);
 		
 		SetDirectionByStick(st);
 		
 		if(!gamepad.IsPush(Button.D) || parameter.stamina.quantity < CONSUMPTION)
-			return typeof(PlayableCharacterMoveState);
+			return typeof(CharacterMoveState);
 		
 		return null;
 	}

@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharacterFallState : PlayableCharacterBaseState
+public class CharacterFallState : CharacterBaseState
 {
 	private float scale = 0.95F;
-	public PlayableCharacterFallState(PlayableCharacter parent):base(parent)
+	public CharacterFallState(Character parent):base(parent)
 	{
 		framecounter = new FrameCounter(60);
 	}
@@ -29,7 +29,7 @@ public class PlayableCharacterFallState : PlayableCharacterBaseState
 	{
 		framecounter.Update();
 		
-		return framecounter.IsCall ? typeof(PlayableCharacterDeadState) : null;
+		return framecounter.IsCall ? typeof(CharacterDeadState) : null;
 	}
 }
 

@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayableCharacterBaseState : BaseState
+public class CharacterBaseState : BaseState
 {
-	protected PlayableCharacter character
+	protected Character character
 	{
 		get;
 		set;
 	}
-	new protected PlayableCharacter stateParent
+	new protected Character stateParent
 	{
 		get {return character;}
 		set {character = value;}
@@ -24,7 +24,7 @@ public class PlayableCharacterBaseState : BaseState
 		get;
 		set;
 	}
-	public PlayableCharacterBaseState(PlayableCharacter parent):base(parent)
+	public CharacterBaseState(Character parent):base(parent)
 	{
 		character = parent;
 	}
