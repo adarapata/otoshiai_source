@@ -25,12 +25,12 @@ public class CharacterParameter
 		get;
 		set;
 	}
-	
-	public Charge charge
-	{
-		get;
-		set;
-	}
+
+    public Damage damage
+    {
+        get;
+        set;
+    }
 }
 
 public class Stamina
