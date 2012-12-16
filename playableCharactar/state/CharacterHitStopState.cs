@@ -14,14 +14,16 @@ public class CharacterHitStopState : CharacterBaseState
 		get { return damage.hitStop; }
 	}
 	
-	public CharacterHitStopState(Character parent,IGamePad pad, Damage damage):base(parent)
+	public CharacterHitStopState(Character parent,IGamePad pad, Damage damages):base(parent)
 	{
+        Debug.Log(damages);
 		gamepad = pad;
-		this.damage = damage;
+        this.damage = damages;
 	}
 	
 	public override System.Type Update()
 	{
+        Debug.Log(damage);
 		hitstop.Update();
 		if(hitstop.isEnd){return typeof(CharacterDamageState);}
 		

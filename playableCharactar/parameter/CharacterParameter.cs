@@ -3,29 +3,42 @@ using System.Collections;
 
 public class CharacterParameter
 {
+    /// <summary>
+    /// キャラの攻撃力
+    /// </summary>
 	public Power power
 	{
 		get;
 		set;
 	}
+    /// <summary>
+    /// 防御力
+    /// </summary>
 	public Diffence diffence
 	{
 		get;
 		set;
 	}
-	
+	/// <summary>
+	/// 体重
+	/// </summary>
 	public Weight weight
 	{
 		get;
 		set;
 	}
-	
+	/// <summary>
+	/// スタミナ
+	/// </summary>
 	public Stamina stamina
 	{
 		get;
 		set;
 	}
 
+    /// <summary>
+    /// 所有ダメージ
+    /// </summary>
     public Damage damage
     {
         get;
@@ -55,7 +68,10 @@ public class Stamina
 		get;
 		set;
 	}
-	
+	/// <summary>
+	/// スタミナ回復
+	/// </summary>
+	/// <param name="rate"></param>
 	public void Recovery(float rate)
 	{
 		quantity += rate;
@@ -152,26 +168,52 @@ public class FrameCounter
 
 public class Damage
 {
-	public bool isAddDamage
+    /// <summary>
+    /// ダメージの重ねがけができるか
+    /// </summary>
+	private bool isAddDamage
 	{
 		get;
 		set;
 	}
 	
+    /// <summary>
+    /// 停止時間
+    /// </summary>
 	public HitStop hitStop
 	{
 		get;
 		set;
 	}
+
+    /// <summary>
+    /// ダメージのパラメータ
+    /// </summary>
 	public DamageParameter damageParameter
 	{
 		get;
 		set;
 	}
-	
-	public void AddDamage(DamageParameter oldParameter)
+
+    public Damage(int hitstop, bool addDamage, float damage, int direction, bool ignoreDeffence)
+    {
+        hitStop = new HitStop(hitstop);
+        isAddDamage = addDamage;
+        damageParameter = new DamageParameter(direction, damage, ignoreDeffence);
+    }
+    
+    /// <summary>
+    /// ダメージの値を重ねがけする
+    /// </summary>
+    /// <param name="oldParameter"></param>
+	public Damage AddDamage(Damage oldDamage)
 	{
-		damageParameter.damage += oldParameter.damage;
+        if (isAddDamage)
+        {
+            damageParameter.damage += oldDamage.damageParameter.damage;
+            return this;
+        }
+        return oldDamage;
 	}
 }
 
@@ -183,18 +225,43 @@ public class DamageParameter
 		set;
 	}
 	
-	public bool isIgnoreDeffence
+    /// <summary>
+    /// 防御力を無視するか
+    /// </summary>
+	private bool isIgnoreDeffence
 	{
 		get;
 		set;
 	}
 	
+    /// <summary>
+    /// ダメージ量
+    /// </summary>
 	public float damage
 	{
 		get { return moveParameter.speed; }
 		set { moveParameter.speed = value; }
 	}
-	
+
+    /// <summary>
+    /// ダメージの方向
+    /// </summary>
+    public int direction
+    {
+        get { return moveParameter.direction; }
+        set { moveParameter.direction = value; }
+    }
+
+    public DamageParameter(int dir, float damage, bool ignoreDeffence)
+    {
+        moveParameter = new MoveParameter(dir, damage);
+        isIgnoreDeffence = ignoreDeffence;
+    }
+
+    /// <summary>
+    /// キャラのパラメータを元にダメージ計算
+    /// </summary>
+    /// <param name="character"></param>
 	public void DamageCalculate(CharacterParameter character)
 	{
 		float deffence = isIgnoreDeffence ? 1F : character.diffence.quantity;
@@ -215,7 +282,12 @@ public class HitStop
 		get;
 		set;
 	}
-	
+
+    public HitStop(int stopTime)
+    {
+        quantity = stopTime;
+    }
+
 	public void Update()
 	{
 		quantity--;

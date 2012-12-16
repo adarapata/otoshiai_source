@@ -23,7 +23,12 @@ public class CharacterDamageState : CharacterBaseState
 	private System.Type BlowOffDamage()
 	{
 		character.transform.localPosition += parameter.velocity;
-		if(parameter.damage < 0) { return typeof(CharacterStayState); }
+        parameter.damage--;
+		if(parameter.damage < 0) 
+        {
+            character.parameter.damage = null;
+            return typeof(CharacterStayState); 
+        }
 		
 		return null;
 	}
