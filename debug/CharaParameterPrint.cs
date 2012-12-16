@@ -18,7 +18,6 @@ public class CharaParameterPrint : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q)) { chara.ChangeFallState(); }
         if (Input.GetKeyDown(KeyCode.W)) {
             Damage dmg = new Damage(30, false, 10, (int)Stick.Right, false);
-            Debug.Log(dmg);
             chara.ChangeHitState(dmg); 
         }
 	}

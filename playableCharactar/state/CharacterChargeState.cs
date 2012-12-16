@@ -37,10 +37,8 @@ public class CharacterChargeState : CharacterMoveState
 	{
 		Stick st = gamepad.pushStick;
 		
-		if(gamepad.IsUp(pushButton))
-		{
-			return typeof(CharacterStayState);
-		}
+		if(gamepad.IsUp(pushButton))return typeof(CharacterStayState);
+		
 		
 		if(st != Stick.None){
 			SetDirectionByStick(st);
