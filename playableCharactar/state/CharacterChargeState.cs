@@ -14,9 +14,8 @@ public class CharacterChargeState : CharacterMoveState
 	
 	public CharacterChargeState(Character parent, IGamePad pad, string push):base(parent,pad)
 	{
-		charge = parent.parameter.charge;
+        charge = new Charge();
 		pushButton = push;
-		charge = parameter.charge;
 	}
 	
 	protected override void Init()
