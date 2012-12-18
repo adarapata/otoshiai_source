@@ -14,8 +14,8 @@ public class CharacterChargeState : CharacterMoveState
 	
 	public CharacterChargeState(Character parent, IGamePad pad, string push):base(parent,pad)
 	{
-        charge = new Charge();
-		pushButton = push;
+        pushButton = push;
+        charge = push == Button.A ? parameter.attackCharge : parameter.skillCharge;
 	}
 	
 	protected override void Init()
@@ -36,9 +36,11 @@ public class CharacterChargeState : CharacterMoveState
 	protected override System.Type CheckOfKey()
 	{
 		Stick st = gamepad.pushStick;
-		
-		if(gamepad.IsUp(pushButton))return typeof(CharacterStayState);
-		
+
+        if (gamepad.IsUp(pushButton))
+        {
+            return GetNextState();
+        }
 		
 		if(st != Stick.None){
 			SetDirectionByStick(st);
@@ -48,5 +50,13 @@ public class CharacterChargeState : CharacterMoveState
 		
 		return null;
 	}
+
+    private System.Type GetNextState()
+    {
+        if (pushButton == Button.A)
+            return charge.isMax ? typeof(CharacterChargeBlowState) : typeof(CharacterBlowState);
+
+        return charge.isMax ? typeof(CharacterChargeSkillState) : typeof(CharacterSkillState);
+    }
 }
 

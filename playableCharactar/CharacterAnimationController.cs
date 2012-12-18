@@ -23,6 +23,12 @@ public class CharacterAnimationController : IAnimationController
 	}
 	
 	private AnimationParameter parameter;
+
+    public int frontDirection
+    {
+        get;
+        set;
+    }
 	
 	public CharacterAnimationController(UISprite targetSprite)
 	{	
@@ -61,7 +67,8 @@ public class CharacterAnimationController : IAnimationController
 			case Stick.LeftUp:newPattern = Animations.UPLEFT;break;
 			case Stick.LeftDOwn:newPattern = Animations.DOWNLEFT;break;
 		}
-		
+
+        frontDirection = (int)st;
 		if(parameter.pattern == newPattern)return;
 		ChangePattern(newPattern);
 	}
