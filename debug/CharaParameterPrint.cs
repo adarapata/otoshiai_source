@@ -13,7 +13,9 @@ public class CharaParameterPrint : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         label.text = chara.parameter.stamina.quantity.ToString("f1") + "\n"
-            + chara.animation.sprite.spriteName + "\n";
+            + chara.animation.sprite.spriteName + "\n"
+            + chara.parameter.attackCharge.quantity.ToString("f1") + "\n"
+            + chara.parameter.skillCharge.quantity.ToString("f1") + "\n";
 
         if (Input.GetKeyDown(KeyCode.Q)) { chara.ChangeFallState(); }
         if (Input.GetKeyDown(KeyCode.W)) {
