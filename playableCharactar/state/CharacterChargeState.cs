@@ -37,7 +37,7 @@ public class CharacterChargeState : CharacterMoveState
 	{
 		Stick st = gamepad.pushStick;
 
-        if (gamepad.IsUp(pushButton))
+        if (!gamepad.IsPush(pushButton))
         {
             return GetNextState();
         }
