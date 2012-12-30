@@ -23,5 +23,12 @@ public class CharaParameterPrint : MonoBehaviour {
             Damage dmg = new Damage(30, false, 10, (int)Stick.Right, false);
             chara.ChangeHitState(dmg); 
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            var x = MapPosition.MapData.CaluclateScreenPositionX(1);
+            var y = MapPosition.MapData.CaluclateScreenPositionY(14);
+            Vector3 v = new Vector3(x, y, 0F);
+            chara.transform.localPosition = v;
+        }
 	}
 }

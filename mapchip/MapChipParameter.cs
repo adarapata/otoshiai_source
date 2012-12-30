@@ -66,11 +66,21 @@ public class MapPosition {
         public const int CHIP_HEIGHT = 32;
         public const int ERROR_CODE = -1;
 
+        /// <summary>
+        /// スクリーン座標からマップ座標を返す
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         public static int CaluclatePositionX(float x)
         {
             return CheckMapPosition(x, LEFT, RIGHT, CHIP_WIDTH, MAX_X);
         }
 
+        /// <summary>
+        /// スクリーン座標からマップ座標を返す
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public static int CaluclatePositionY(float y)
         {
             return CheckMapPosition(y, BOTTUM, TOP, CHIP_HEIGHT, MAX_Y);
@@ -87,18 +97,49 @@ public class MapPosition {
 
             return ERROR_CODE;
         }
+
+        /// <summary>
+        /// マップ座標からスクリーン座標を返す
+        /// </summary>
+        /// <param name="mapPositionX"></param>
+        /// <returns></returns>
+        public static float CaluclateScreenPositionX(int mapPositionX)
+        {
+            return ConvertMapPositionToScreen(mapPositionX, LEFT, CHIP_WIDTH);
+        }
+        /// <summary>
+        /// マップ座標からスクリーン座標を返す
+        /// </summary>
+        /// <param name="mapPositionY"></param>
+        /// <returns></returns>
+        public static float CaluclateScreenPositionY(int mapPositionY)
+        {
+            return ConvertMapPositionToScreen(mapPositionY, BOTTUM, CHIP_HEIGHT);
+        }
+
+        /// <summary>
+        /// マップ座標を元にスクリーン座標を返す
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="min"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        private static float ConvertMapPositionToScreen(int val, int min, int size)
+        {
+            return min + size * val;
+        }
     }
 
     public int X
     {
         get;
-        set;
+        private set;
     }
 
     public int Y
     {
         get;
-        set;
+        private set;
     }
 
     /// <summary>
