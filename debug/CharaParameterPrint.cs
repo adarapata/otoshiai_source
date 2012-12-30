@@ -26,7 +26,7 @@ public class CharaParameterPrint : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E))
         {
             var x = MapPosition.MapData.CaluclateScreenPositionX(1);
-            var y = MapPosition.MapData.CaluclateScreenPositionY(14);
+            var y = MapPosition.MapData.CaluclateScreenPositionY(13);
             Vector3 v = new Vector3(x, y, 0F);
             chara.transform.localPosition = v;
         }

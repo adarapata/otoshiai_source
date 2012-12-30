@@ -83,7 +83,9 @@ public class MapPosition {
         /// <returns></returns>
         public static int CaluclatePositionY(float y)
         {
-            return CheckMapPosition(y, BOTTUM, TOP, CHIP_HEIGHT, MAX_Y);
+            var val = CheckMapPosition(y, BOTTUM, TOP, CHIP_HEIGHT, MAX_Y);
+            //上下反転しているので、スクリーン上が0になるように変換する
+            return val == ERROR_CODE ? ERROR_CODE : Mathf.Abs(MAX_Y - 1 - val);
         }
 
         private static int CheckMapPosition(float val, int min, int max, int size, int length)
@@ -114,6 +116,8 @@ public class MapPosition {
         /// <returns></returns>
         public static float CaluclateScreenPositionY(int mapPositionY)
         {
+            //上下反転しているので、マップ座標を反転させる
+            mapPositionY = Mathf.Abs(MAX_Y - 1 - mapPositionY);
             return ConvertMapPositionToScreen(mapPositionY, BOTTUM, CHIP_HEIGHT);
         }
 
@@ -126,7 +130,7 @@ public class MapPosition {
         /// <returns></returns>
         private static float ConvertMapPositionToScreen(int val, int min, int size)
         {
-            return min + size * val;
+            return (min + size * val) + size / 2;
         }
     }
 
