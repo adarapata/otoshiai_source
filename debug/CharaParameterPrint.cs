@@ -15,7 +15,8 @@ public class CharaParameterPrint : MonoBehaviour {
         label.text = chara.parameter.stamina.quantity.ToString("f1") + "\n"
             + chara.animation.sprite.spriteName + "\n"
             + chara.parameter.attackCharge.quantity.ToString("f1") + "\n"
-            + chara.parameter.skillCharge.quantity.ToString("f1") + "\n";
+            + chara.parameter.skillCharge.quantity.ToString("f1") + "\n"
+            + chara.baseParameter.mapPosition.X.ToString() + ":" + chara.baseParameter.mapPosition.Y.ToString();
 
         if (Input.GetKeyDown(KeyCode.Q)) { chara.ChangeFallState(); }
         if (Input.GetKeyDown(KeyCode.W)) {
