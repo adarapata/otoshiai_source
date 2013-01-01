@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// MapChipクラスが持つパラメータ
+/// </summary>
 public class MapChipParameter {
 
     public MapChipHP hp
@@ -31,18 +34,53 @@ public class MapChipParameter {
     }
 }
 
+/// <summary>
+/// マップチップの体力
+/// </summary>
 public class MapChipHP {
 
+    /// <summary>
+    /// 耐久値
+    /// </summary>
     public float strength
     {
         get;
         set;
     }
 
+    /// <summary>
+    /// １フレーム辺りの自然減少量
+    /// </summary>
     public float autoDeduct
     {
         get;
         set;
+    }
+
+    /// <summary>
+    /// 自然減少するかどうか
+    /// </summary>
+    public bool isAutoDeduct
+    {
+        get;
+        set;
+    }
+
+    public bool isLive
+    {
+        get { return strength < 0; }
+    }
+
+    public void Damage(float damage)
+    {
+        strength -= damage;
+    }
+
+    public bool Update()
+    {
+        if (isAutoDeduct) Damage(autoDeduct);
+
+        return isLive;
     }
 }
 
