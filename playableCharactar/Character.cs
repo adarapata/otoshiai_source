@@ -84,7 +84,11 @@ public class Character : BaseCharacter {
             skillCharge = new Charge(0.5F)
         };
 
-        baseParameter.mapPosition = new MapPosition();
+        baseParameter.mapPosition = new MapPosition(1, 1);
+        var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
+        transform.localPosition = new Vector3(screenPos.x,
+                                                screenPos.y,
+                                                  transform.localPosition.z);
 	}
 	// Update is called once per frame
 	void Update () {
@@ -99,7 +103,7 @@ public class Character : BaseCharacter {
         }
 		ParameterCheckOnState();
 
-        baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
+        CheckMaps();
 	}
 	
 	virtual protected IState ChangeState(Type newState)
@@ -164,4 +168,10 @@ public class Character : BaseCharacter {
 	{
 		
 	}
+
+    private void CheckMaps()
+    {
+        bool isInside = baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
+        if (!isInside) { ChangeFallState(); }
+    }
 }

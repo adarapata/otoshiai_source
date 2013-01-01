@@ -161,5 +161,28 @@ public class MapPosition {
 
         return true;
     }
+
+    /// <summary>
+    /// コンストラクタでスクリーン座標を設定する
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="localPosition"></param>
+    public MapPosition(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+
+    /// <summary>
+    /// 自分のマップ座標を元にスクリーン座標を返す
+    /// </summary>
+    /// <returns>マップ範囲外に出ていたらfalseが返る</returns>
+    public Vector2 GetScreenPositionByMapPosition()
+    {
+        float x = MapData.CaluclateScreenPositionX(X);
+        float y = MapData.CaluclateScreenPositionY(Y);
+        return new Vector2(x, y);
+    }
 }
 
