@@ -21,8 +21,12 @@ public class CharacterAnimationController : IAnimationController
 		get;
 		set;
 	}
-	
-	private AnimationParameter parameter;
+
+    private AnimationParameter parameter
+    {
+        get;
+        set;
+    }
 
     public int frontDirection
     {
@@ -72,6 +76,19 @@ public class CharacterAnimationController : IAnimationController
 		if(parameter.pattern == newPattern)return;
 		ChangePattern(newPattern);
 	}
+
+
+    AnimationParameter IAnimationController.parameter
+    {
+        get
+        {
+            throw new System.NotImplementedException();
+        }
+        set
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }
 
 public class AnimationParameter
