@@ -6,11 +6,19 @@ using System.Collections;
 /// </summary>
 public class MapManager : MonoBehaviour {
 
+    private const int NONE_CHIP = 0;
     public GameObject template_chip;
     private MapChip[,] mapchips = new MapChip[MapPosition.MapData.MAX_X, MapPosition.MapData.MAX_Y];
+    public MapParameter mapParameter
+    {
+        get;
+        set;
+    }
 
 	// Use this for initialization
 	void Start () {
+
+        mapParameter = new MapParameter("stage_ice");
         int max_x = MapPosition.MapData.MAX_X;
         int max_y = MapPosition.MapData.MAX_Y;
 
@@ -18,6 +26,9 @@ public class MapManager : MonoBehaviour {
         {
             for (int j = 0; j < max_y; j++)
             {
+                int val = mapParameter.GetMapChipNumber(i, j);
+                if (val == NONE_CHIP) { mapchips[i, j] = null; continue; }
+
                 var chip = GameObject.Instantiate(template_chip) as GameObject;
 
                 chip.transform.parent = transform;
