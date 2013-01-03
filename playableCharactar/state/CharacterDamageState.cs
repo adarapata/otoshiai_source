@@ -3,15 +3,15 @@ using System.Collections;
 
 public class CharacterDamageState : CharacterBaseState
 {
-	private DamageParameter parameter
+	private DamageParameter damageParameter
 	{
 		get;
 		set;
 	}
-	public CharacterDamageState(Character parent,DamageParameter parameter):base(parent)
+	public CharacterDamageState(Character parent,DamageParameter dParameter):base(parent)
 	{
-		this.parameter = parameter;
-		parameter.DamageCalculate(character.parameter);
+		damageParameter = dParameter;
+		damageParameter.DamageCalculate(character.parameter);
 	}
 	
 	public override System.Type Update()
@@ -20,11 +20,15 @@ public class CharacterDamageState : CharacterBaseState
 		return state;
 	}
 	
+    /// <summary>
+    /// ‚Á”ò‚Ñˆ—
+    /// </summary>
+    /// <returns></returns>
 	private System.Type BlowOffDamage()
 	{
-		character.transform.localPosition += parameter.velocity;
-        parameter.damage--;
-		if(parameter.damage < 0) 
+		character.transform.localPosition += damageParameter.velocity;
+        damageParameter.damage--;
+		if(damageParameter.damage < 0) 
         {
             character.parameter.damage = null;
             return typeof(CharacterStayState); 
