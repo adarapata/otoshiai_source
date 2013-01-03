@@ -37,7 +37,7 @@ public class MapChipHP
 
     public bool isLive
     {
-        get { return strength < 0; }
+        get { return strength > 0; }
     }
 
     /// <summary>

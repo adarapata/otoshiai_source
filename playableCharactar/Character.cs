@@ -17,7 +17,9 @@ public class Character : BaseCharacter {
 		get;
 		set;
 	}
-   
+
+    private MapManager mapManager;
+
     /// <summary>
     /// キャラクターの向いてる方向を返す
     /// </summary>
@@ -62,6 +64,8 @@ public class Character : BaseCharacter {
 		animation = new CharacterAnimationController(sprite);
 		
 		InitParameter();
+
+        mapManager = GameObject.Find("map_manager").GetComponent<MapManager>();
 	}
 	private void InitParameter()
 	{
@@ -169,9 +173,20 @@ public class Character : BaseCharacter {
 		
 	}
 
+    /// <summary>
+    /// マップを調べて落下判定のチェック
+    /// </summary>
     private void CheckMaps()
     {
+        //マップの範囲外にいたら落下
         bool isInside = baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
-        if (!isInside) { ChangeFallState(); }
+        if (!isInside) { ChangeFallState(); return;}
+
+        //乗っているマップがnullもしくは壊れているなら落下
+        var onMapChip = mapManager.GetMapChip(baseParameter.mapPosition);
+        if (onMapChip == null || !onMapChip.isLive) { ChangeFallState(); return; }
+
+        //乗っているマップにダメージを与える
+        onMapChip.SetDamage(0.5F);
     }
 }

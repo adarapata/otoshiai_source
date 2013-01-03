@@ -20,6 +20,11 @@ public class MapChip : BaseCharacter
     }
     private MAPCHIPSTATE mapchipState;
 
+    public bool isLive
+    {
+        get { return parameter.hp.isLive; }
+    }
+
     /// <summary>
     /// マップチップ座標の設定
     /// </summary>
