@@ -62,12 +62,13 @@ public class Character : BaseCharacter {
 		baseParameter.moveParameter = new MoveParameter(45,1F);
 		
 		animation = new CharacterAnimationController(sprite);
-		
-		InitParameter();
 
         mapManager = GameObject.Find("map_manager").GetComponent<MapManager>();
+		InitParameter();
+
+
 	}
-	private void InitParameter()
+	protected void InitParameter()
 	{
         parameter = new CharacterParameter
         {
@@ -88,7 +89,7 @@ public class Character : BaseCharacter {
             skillCharge = new Charge(0.5F)
         };
 
-        baseParameter.mapPosition = new MapPosition(1, 1);
+        baseParameter.mapPosition = mapManager.mapParameter.GetFirstPosition(0);
         var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
         transform.localPosition = new Vector3(screenPos.x,
                                                 screenPos.y,
@@ -170,7 +171,7 @@ public class Character : BaseCharacter {
 	}
 	virtual protected void MoveStateCheck()
 	{
-		
+        
 	}
 
     /// <summary>
