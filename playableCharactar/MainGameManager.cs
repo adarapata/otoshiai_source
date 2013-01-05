@@ -27,5 +27,6 @@ public class MainGameManager : MonoBehaviour
         var chara = GameObject.Instantiate(charas.reimu) as GameObject;
         chara.transform.parent = mainPanel.transform;
         chara.transform.localScale = new Vector3(1F, 1F, 1F);
+        
     }
 }
