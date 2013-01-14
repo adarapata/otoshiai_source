@@ -54,7 +54,7 @@ public class Character : BaseCharacter {
     // Use this for initialization
 	void Start () {
 		// 本来はここで設定しないがまだPlayerクラスがあまりできてないからここで作成する
-		parent = new PlayerOfHuman();
+		parent = new PlayerOfHuman(0);
 		parent.operationObject = this;
 	
 		state = new CharacterStayState(this, parent.gamepad);
@@ -128,7 +128,6 @@ public class Character : BaseCharacter {
         return null;
 	}
 	
-	
 	public void ChangeHitState(Damage damage)
 	{
         state = CreateHitStopState(damage);
@@ -189,5 +188,15 @@ public class Character : BaseCharacter {
 
         //乗っているマップにダメージを与える
         onMapChip.SetDamage(0.5F);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log("あたってるあたってる");
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("aaa");
     }
 }
