@@ -38,7 +38,7 @@ public class MapChip : BaseCharacter
         var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
         transform.localPosition = new Vector3(screenPos.x,
                                                 screenPos.y,
-                                                  1F);
+                                                  0F);
 
     }
 
