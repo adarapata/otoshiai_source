@@ -4,18 +4,20 @@ using System.Collections;
 
 public class MainGameManager : MonoBehaviour
 {
-    public CharacterLibrary charas;
-    public GameObject mainPanel, mapChipPanel;
+    public GameObject mapChipPanel;
     private MainGameParameter parameter;
     public GameObject[] parameterWindows;
+    public GameObject[] teamPanels;
     // Use this for initialization
     void Start()
     {
         parameter = MainGameParameter.instance;
-        parameter.players = new BetterList<Player>();
-        parameter.players.Add(new Player());
-        parameter.players[0].character = charas.reimu;
-        CraeteCharacter(parameter.players[0]);
+        parameter.CreateTemplateData();
+        foreach (var player in parameter.players)
+        {
+            CraeteCharacter(player);
+        }
+
     }
 
     // Update is called once per frame
@@ -30,10 +32,12 @@ public class MainGameManager : MonoBehaviour
     private void CraeteCharacter(Player player)
     {
         var chara = GameObject.Instantiate(player.character) as GameObject;
-        chara.transform.parent = mainPanel.transform;
-        chara.transform.localScale = new Vector3(1F, 1F, 1F);
-        chara.layer = 0;
+        var script = chara.GetComponent<Character>();
+        script.parent = player;
+        script.SendMessage("Start");
+        chara.transform.parent = teamPanels[(int)script.baseParameter.team.name].transform;
+        chara.transform.localScale = Vector3.one;
 
-        parameterWindows[0].GetComponent<CharacterParameterWindow>().Init(chara.GetComponent<Character>(), 0);
+        parameterWindows[player.number].GetComponent<CharacterParameterWindow>().Init(script, player.number);
     }
 }

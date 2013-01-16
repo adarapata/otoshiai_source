@@ -53,9 +53,7 @@ public class Character : BaseCharacter {
 
     // Use this for initialization
 	void Start () {
-		// –{—ˆ‚Í‚±‚±‚Åİ’è‚µ‚È‚¢‚ª‚Ü‚¾PlayerƒNƒ‰ƒX‚ª‚ ‚Ü‚è‚Å‚«‚Ä‚È‚¢‚©‚ç‚±‚±‚Åì¬‚·‚é
-		parent = new PlayerOfHuman(0);
-		parent.operationObject = this;
+
 	
 		state = new CharacterStayState(this, parent.gamepad);
 		baseParameter = new BaseParameter();
@@ -68,6 +66,7 @@ public class Character : BaseCharacter {
 
 
 	}
+
 	protected void InitParameter()
 	{
         parameter = new CharacterParameter
@@ -89,7 +88,9 @@ public class Character : BaseCharacter {
             skillCharge = new Charge(0.5F)
         };
 
-        baseParameter.mapPosition = mapManager.mapParameter.GetFirstPosition(0);
+        baseParameter.team = new Team(parent.team.name);
+        baseParameter.mapPosition = mapManager.mapParameter.GetFirstPosition(parent.number);
+
         var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
         transform.localPosition = new Vector3(screenPos.x,
                                                 screenPos.y,
@@ -190,13 +191,10 @@ public class Character : BaseCharacter {
         onMapChip.SetDamage(0.5F);
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        Debug.Log("‚ ‚½‚Á‚Ä‚é‚ ‚½‚Á‚Ä‚é");
-    }
 
     private void OnTriggerStay(Collider other)
     {
+        if (transform.parent.Equals(other.gameObject.transform.parent)) return;
         Debug.Log("aaa");
     }
 }
