@@ -36,20 +36,67 @@ public class MainGameParameter  {
         set;
     }
 
+    /// <summary>
+    /// デバッグ用にとりあえずデータをでっち上げる
+    /// </summary>
+    public void CreateTemplateData()
+    {
+        CharacterLibrary lib = GameObject.Find("Library").GetComponent<CharacterLibrary>();
+        players = new BetterList<Player>();
+
+        for (int i = 0; i < 4; i++)
+        {
+            Player p = new Player(i);
+            GameObject chara = lib.reimu;
+            p.character = chara;
+            GamePad pad = new GamePad(i);
+            p.gamepad = pad;
+            p.team = new Team((TEAMCODE)i);
+            players.Add(p);
+        }
+    }
 
 }
 
-public class Player
+public class Player : IObjectOperator
 {
-    public IGamePad gamePad
+    public IGamePad gamepad
     {
         get;
         set;
     }
+
+    public BaseCharacter operationObject
+    {
+        get 
+        {
+            return character.GetComponent<Character>();
+        }
+    }
+
 
     public GameObject character
     {
         get;
         set;
     }
+
+    public int number
+    {
+        get;
+        set;
+    }
+
+    public Team team
+    {
+        get;
+        set;
+    }
+
+    public Player(int num)
+    {
+        number = num;
+    }
+    public void Update()
+    { }
 }
