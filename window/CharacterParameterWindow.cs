@@ -18,10 +18,10 @@ public class TeamColor
     /// </summary>
     /// <param name="layer"></param>
     /// <returns></returns>
-    static public string GetLayerName(int layer)
+    static public string GetLayerName(TEAMCODE teamCode)
     {
         if (layer_names == null) { layer_names = new string[] { RED, BLUE, YELLOW, GREEN, NONE }; }
-        return layer_names[layer];
+        return layer_names[(int)teamCode];
     }
 }
 
@@ -56,6 +56,6 @@ public class CharacterParameterWindow : MonoBehaviour {
         icon.spriteName = character.tag;
 
         //キャラのレイヤー番号からチームカラー名を取得
-        teamColor.spriteName = TeamColor.GetLayerName(character.gameObject.layer);
+        teamColor.spriteName = TeamColor.GetLayerName(character.baseParameter.team.name);
     }
 }
