@@ -194,7 +194,6 @@ public class Character : BaseCharacter {
 
     private void OnTriggerStay(Collider other)
     {
-        if (transform.parent.Equals(other.gameObject.transform.parent)) return;
-        Debug.Log("aaa");
+        if (IsCheckSameTeam(other)) return;
     }
 }
