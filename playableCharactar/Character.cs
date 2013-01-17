@@ -53,42 +53,43 @@ public class Character : BaseCharacter {
 
     // Use this for initialization
 	void Start () {
-
-	
-		state = new CharacterStayState(this, parent.gamepad);
-		baseParameter = new BaseParameter();
-		baseParameter.moveParameter = new MoveParameter(45,1F);
-		
-		animation = new CharacterAnimationController(sprite);
-
-        mapManager = GameObject.Find("map_manager").GetComponent<MapManager>();
-		InitParameter();
-
-
+        InitParameter(Weight.MIDDLE, 0.2F, 1F, 1F, 0.5F, 3F);
 	}
 
-	protected void InitParameter()
+	protected void InitParameter(float _weight, float _recoveryRate,float _diffence, float _attackCh, float _skillCh, float _speed)
 	{
+        mapManager = GameObject.Find("map_manager").GetComponent<MapManager>();
+
+        state = new CharacterStayState(this, parent.gamepad);
+        baseParameter = new BaseParameter();
+        baseParameter.moveParameter = new MoveParameter(0, _speed);
+
+        animation = new CharacterAnimationController(sprite);
+
+        #region パラメータ設定
         parameter = new CharacterParameter
         {
             weight = new Weight
             {
-                quantity = 25F
+                quantity = _weight
             },
             stamina = new Stamina
             {
                 quantity = 100F,
-                recoveryRate = 0.2F
+                recoveryRate = _recoveryRate
             },
             diffence = new Diffence
             {
-                quantity = 1.0F
+                quantity = _diffence
             },
-            attackCharge = new Charge(1F),
-            skillCharge = new Charge(0.5F)
+            attackCharge = new Charge(_attackCh),
+            skillCharge = new Charge(_skillCh)
         };
+        #endregion
 
+        //チーム設定
         baseParameter.team = new Team(parent.team.name);
+        //初期ポジション設定
         baseParameter.mapPosition = mapManager.mapParameter.GetFirstPosition(parent.number);
 
         var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
