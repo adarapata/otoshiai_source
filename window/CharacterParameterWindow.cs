@@ -56,6 +56,6 @@ public class CharacterParameterWindow : MonoBehaviour {
         icon.spriteName = character.tag;
 
         //キャラのレイヤー番号からチームカラー名を取得
-        teamColor.spriteName = TeamColor.GetLayerName(character.baseParameter.team.name);
+        teamColor.spriteName = TeamColor.GetLayerName(character.parent.team.name);
     }
 }
