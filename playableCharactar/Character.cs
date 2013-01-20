@@ -6,19 +6,28 @@ using System;
 /// </summary>
 public class Character : BaseCharacter {
 	
+    /// <summary>
+    /// 操作元のプレイヤー
+    /// </summary>
 	public IObjectOperator parent
 	{
 		get;
 		set;
 	}
 	
+    /// <summary>
+    /// パラメータ
+    /// </summary>
 	public CharacterParameter parameter
 	{
 		get;
 		set;
 	}
 
-    private MapManager mapManager;
+    /// <summary>
+    /// マップデータ
+    /// </summary>
+    protected MapManager mapManager;
 
     /// <summary>
     /// キャラクターの向いてる方向を返す
@@ -51,21 +60,49 @@ public class Character : BaseCharacter {
     virtual protected IState CreateChargeSkillState() { return new CharacterChargeSkillState(this); }
     #endregion
 
+    void Awake()
+    {
+        InitCharacterParameter(Weight.MIDDLE, 0.2F, 1F, 1F, 0.5F, 3F);
+    }
     // Use this for initialization
 	void Start () {
-        InitParameter(Weight.MIDDLE, 0.2F, 1F, 1F, 0.5F, 3F);
+        InitData();
 	}
 
-	protected void InitParameter(float _weight, float _recoveryRate,float _diffence, float _attackCh, float _skillCh, float _speed)
+    /// <summary>
+    /// 外部のオブジェクトを参照するデータの初期化
+    /// </summary>
+	protected void InitData()
 	{
         mapManager = GameObject.Find("map_manager").GetComponent<MapManager>();
 
         state = new CharacterStayState(this, parent.gamepad);
-        baseParameter = new BaseParameter();
-        baseParameter.moveParameter = new MoveParameter(0, _speed);
+
 
         animation = new CharacterAnimationController(sprite);
 
+        //チーム設定
+        baseParameter.team = new Team(parent.team.name);
+        //初期ポジション設定
+        baseParameter.mapPosition = mapManager.mapParameter.GetFirstPosition(parent.number);
+
+        var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
+        transform.localPosition = new Vector3(screenPos.x,
+                                                screenPos.y,
+                                                  transform.localPosition.z);
+	}
+
+    /// <summary>
+    /// パラメータの初期化
+    /// </summary>
+    /// <param name="_weight"></param>
+    /// <param name="_recoveryRate"></param>
+    /// <param name="_diffence"></param>
+    /// <param name="_attackCh"></param>
+    /// <param name="_skillCh"></param>
+    /// <param name="_speed"></param>
+    protected void InitCharacterParameter(float _weight, float _recoveryRate, float _diffence, float _attackCh, float _skillCh, float _speed)
+    {
         #region パラメータ設定
         parameter = new CharacterParameter
         {
@@ -87,32 +124,30 @@ public class Character : BaseCharacter {
         };
         #endregion
 
-        //チーム設定
-        baseParameter.team = new Team(parent.team.name);
-        //初期ポジション設定
-        baseParameter.mapPosition = mapManager.mapParameter.GetFirstPosition(parent.number);
-
-        var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();
-        transform.localPosition = new Vector3(screenPos.x,
-                                                screenPos.y,
-                                                  transform.localPosition.z);
-	}
-	// Update is called once per frame
+        baseParameter = new BaseParameter(sprite);
+        baseParameter.moveParameter = new MoveParameter(0, _speed);
+    }
+	
+    // Update is called once per frame
 	void Update () {
-		
-		parent.gamepad.Update();
-		
-		Type newState = state.Update();
+        ScriptUpdate();
+	}
+
+    virtual protected void ScriptUpdate()
+    {
+        parent.gamepad.Update();
+
+        Type newState = state.Update();
 
         if (newState != null)
         {
-           state = ChangeState(newState);
+            state = ChangeState(newState);
         }
-		ParameterCheckOnState();
+        ParameterCheckOnState();
 
         CheckMaps();
-	}
-	
+    }
+
 	virtual protected IState ChangeState(Type newState)
 	{
         if (newState == typeof(CharacterStayState)) return CreateStayState();
@@ -130,8 +165,14 @@ public class Character : BaseCharacter {
         return null;
 	}
 	
+    /// <summary>
+    /// Hit状態に移行させる
+    /// </summary>
+    /// <param name="damage"></param>
 	public void ChangeHitState(Damage damage)
 	{
+        //無敵状態なら受け付けない
+        if (parameter.invincibly.flag) return;
         state = CreateHitStopState(damage);
 	}
 	
@@ -147,7 +188,7 @@ public class Character : BaseCharacter {
 		transform.localPosition += fixVelocity;
 	}
 	
-	private void ParameterCheckOnState()
+	protected void ParameterCheckOnState()
 	{
 		if(!(state is CharacterChargeState))
 		{
@@ -178,7 +219,7 @@ public class Character : BaseCharacter {
     /// <summary>
     /// マップを調べて落下判定のチェック
     /// </summary>
-    private void CheckMaps()
+    protected void CheckMaps()
     {
         //マップの範囲外にいたら落下
         bool isInside = baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
@@ -191,7 +232,6 @@ public class Character : BaseCharacter {
         //乗っているマップにダメージを与える
         onMapChip.SetDamage(0.5F);
     }
-
 
     private void OnTriggerStay(Collider other)
     {

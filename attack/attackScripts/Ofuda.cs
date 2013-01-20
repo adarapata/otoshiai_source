@@ -6,7 +6,6 @@ public class Ofuda : BaseAttack {
 
     void Awake()
     {
-        baseParameter = new BaseParameter();
         attackParameter = new AttackParameter
         {
             attackLevel = new AttackLevel(3, false)
@@ -14,6 +13,7 @@ public class Ofuda : BaseAttack {
     }
 	// Use this for initialization
 	void Start () {
+        baseParameter = new BaseParameter(sprite);
         state = new MoveState(this);
 	}
 
