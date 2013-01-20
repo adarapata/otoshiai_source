@@ -32,7 +32,7 @@ public class MapChip : BaseCharacter
     /// <param name="y"></param>
     public void SetMapPosition(int x, int y)
     {
-        baseParameter = new BaseParameter();
+        baseParameter = new BaseParameter(sprite);
         baseParameter.mapPosition = new MapPosition(x, y);
 
         var screenPos = baseParameter.mapPosition.GetScreenPositionByMapPosition();

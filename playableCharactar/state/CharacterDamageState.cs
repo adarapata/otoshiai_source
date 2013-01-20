@@ -30,11 +30,22 @@ public class CharacterDamageState : CharacterBaseState
         damageParameter.damage--;
 		if(damageParameter.damage < 0) 
         {
+            CreateBlinkAndInvincibly(60);
             character.parameter.damage = null;
             return typeof(CharacterStayState); 
         }
 		
 		return null;
 	}
+
+    /// <summary>
+    /// ダメージ終了後の無敵状態＆点滅の設定
+    /// </summary>
+    /// <param name="time"></param>
+    private void CreateBlinkAndInvincibly(int time)
+    {
+        character.baseParameter.blinkParameter.Start(time, false);        parameter.invincibly.Start(time, false);
+        
+    }
 }
 

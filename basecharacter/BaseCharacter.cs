@@ -37,10 +37,10 @@ public class BaseCharacter : MonoBehaviour {
 	
 
 	// Use this for initialization
-	void Start () {
+	void Start () {		
+        sprite = GetComponent<UISprite>();
 		state = new BaseState(this);
-		baseParameter = new BaseParameter();
-		sprite = GetComponent<UISprite>();
+		baseParameter = new BaseParameter(sprite);
 	}
 	
 	// Update is called once per frame
