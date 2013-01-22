@@ -16,6 +16,8 @@ public class CharacterChargeState : CharacterMoveState
 	{
         pushButton = push;
         charge = push == Button.A ? parameter.attackCharge : parameter.skillCharge;
+        //チャージゲージウィンドウを呼び出す
+        character.parameterWindow.CreateChargeParameterWindow(charge);
 	}
 	
 	protected override void Init()
