@@ -44,8 +44,8 @@ public class CharacterDamageState : CharacterBaseState
     /// <param name="time"></param>
     private void CreateBlinkAndInvincibly(int time)
     {
-        character.baseParameter.blinkParameter.Start(time, false);        parameter.invincibly.Start(time, false);
-        
+        character.baseParameter.blinkParameter.Start(time, false);      
+        parameter.invincibly.Start(time, false);
     }
 }
 

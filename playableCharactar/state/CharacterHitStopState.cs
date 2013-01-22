@@ -23,9 +23,20 @@ public class CharacterHitStopState : CharacterBaseState
 	public override System.Type Update()
 	{
 		hitstop.Update();
-		if(hitstop.isEnd){return typeof(CharacterDamageState);}
-		
+		if(hitstop.isEnd){ return typeof(CharacterDamageState);}
+
+        CharacterShake();
 		return null;
 	}
+
+    /// <summary>
+    /// 左右に揺らしてダメージっぽいエフェクトをかける
+    /// </summary>
+    private void CharacterShake()
+    {
+        var pos = character.transform.localPosition;
+        pos.x += hitstop.quantity % 2 == 0 ? 2 : -2;
+        character.transform.localPosition = pos;
+    }
 }
 
