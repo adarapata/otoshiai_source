@@ -53,8 +53,7 @@ public class CharacterChargeState : CharacterMoveState
 
     private System.Type GetNextState()
     {
-        if (pushButton == Button.A)
-            return charge.isMax ? typeof(CharacterChargeBlowState) : typeof(CharacterBlowState);
+        if (pushButton == Button.A) return charge.isMax ? typeof(CharacterChargeBlowState) : typeof(CharacterBlowState);
 
         return charge.isMax ? typeof(CharacterChargeSkillState) : typeof(CharacterSkillState);
     }
