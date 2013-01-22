@@ -34,8 +34,7 @@ public class MainGameManager : MonoBehaviour
         var chara = GameObject.Instantiate(player.character) as GameObject;
         var script = chara.GetComponent<Character>();
         script.parent = player;
-        chara.transform.parent = teamPanels[(int)player.team.name].transform;
-        chara.transform.localScale = Vector3.one;
+        script.SetTeamTransform(player.team, teamPanels[(int)player.team.name].transform);
 
         parameterWindows[player.number].GetComponent<CharacterParameterWindow>().Init(script, player.number);
     }

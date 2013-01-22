@@ -35,7 +35,6 @@ public class BaseCharacter : MonoBehaviour {
 		set;
 	}
 	
-
 	// Use this for initialization
 	void Start () {		
         sprite = GetComponent<UISprite>();
@@ -56,6 +55,13 @@ public class BaseCharacter : MonoBehaviour {
     protected bool IsCheckSameTeam(Collider other)
     {
         return transform.parent.Equals(other.gameObject.transform.parent);
+    }
+
+    public void SetTeamTransform(Team _team, Transform parent)
+    {
+        baseParameter.team = _team;
+        transform.parent = parent;
+        transform.localScale = Vector3.one;
     }
 }
 
