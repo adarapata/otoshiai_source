@@ -25,6 +25,14 @@ public class Character : BaseCharacter {
 	}
 
     /// <summary>
+    /// パラメータウィンドウ
+    /// </summary>
+    public CharacterParameterWindow parameterWindow
+    {
+        get;
+        set;
+    }
+    /// <summary>
     /// マップデータ
     /// </summary>
     protected MapManager mapManager;

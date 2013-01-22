@@ -27,6 +27,7 @@ public class TeamColor
 
 public class CharacterParameterWindow : MonoBehaviour {
 
+    public GameObject chargeMeter;
     public UISprite teamColor, icon;
 
     public Character character
@@ -57,5 +58,21 @@ public class CharacterParameterWindow : MonoBehaviour {
 
         //キャラのレイヤー番号からチームカラー名を取得
         teamColor.spriteName = TeamColor.GetLayerName(character.parent.team.name);
+
+        //キャラのパラメータウィンドウに自分を入れる
+        chara.parameterWindow = this;
+    }
+
+    /// <summary>
+    /// チャージメーターを作成
+    /// </summary>
+    public void CreateChargeParameterWindow(Charge targetCharge)
+    {
+        var chargeW = (Instantiate(chargeMeter) as GameObject).GetComponent<ChargeGaugeCreator>();
+        chargeW.parent = character;
+        chargeW.transform.parent = transform.parent;
+        chargeW.transform.localPosition = character.transform.localPosition;
+        chargeW.transform.localScale = Vector3.one;
+        chargeW.charge = targetCharge;
     }
 }
