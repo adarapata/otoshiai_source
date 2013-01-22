@@ -10,11 +10,16 @@ public class Ofuda : BaseAttack {
         {
             attackLevel = new AttackLevel(3, false)
         };
+        baseParameter = new BaseParameter(sprite);
     }
 	// Use this for initialization
 	void Start () {
-        baseParameter = new BaseParameter(sprite);
+
         state = new MoveState(this);
+        var angle = sprite.gameObject.transform.localEulerAngles;
+        angle = new Vector3(0, 0, baseParameter.moveParameter.direction - 90);
+        sprite.gameObject.transform.localEulerAngles = angle;
+
 	}
 
 	// Update is called once per frame
