@@ -120,7 +120,8 @@ public class Character : BaseCharacter {
                 quantity = _diffence
             },
             attackCharge = new Charge(_attackCh),
-            skillCharge = new Charge(_skillCh)
+            skillCharge = new Charge(_skillCh),
+            invincibly = new Invincibly()
         };
         #endregion
 
@@ -141,8 +142,12 @@ public class Character : BaseCharacter {
 
         if (newState != null)
         {
+            Debug.Log(newState);
             state = ChangeState(newState);
         }
+        baseParameter.Update();
+        parameter.Update();
+
         ParameterCheckOnState();
 
         CheckMaps();

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class CharacterSkillState : CharacterBaseState {
-    
+
     public CharacterSkillState(Character parent):base(parent)
 	{
 
