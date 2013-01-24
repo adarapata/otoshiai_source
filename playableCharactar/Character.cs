@@ -196,7 +196,11 @@ public class Character : BaseCharacter {
 	
 	public void ChangeFallState()
 	{
+        //死亡及び落下中なら何もしない
+        if (state is CharacterFallState) return;
+        if (state is CharacterDeadState) return;
         state = CreateFallState();
+        SoundManager.Play(SoundManager.fall);
 	}
 	
 	public void MovePosition(CharacterMoveState.MoveFix fix)
@@ -248,7 +252,7 @@ public class Character : BaseCharacter {
         if (onMapChip == null || !onMapChip.isLive) { ChangeFallState(); return; }
 
         //乗っているマップにダメージを与える
-        onMapChip.SetDamage(0.5F);
+        onMapChip.SetDamage(parameter.weight.DamageToMapChip());
     }
 
     private void OnTriggerStay(Collider other)

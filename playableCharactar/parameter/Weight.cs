@@ -17,5 +17,17 @@ public class Weight
     {
         return param.velocity * (Weight.MIDDLE / weight.quantity);
     }
+
+    /// <summary>
+    /// 自身の体重を元にマップチップに与えるダメージを計算する
+    /// </summary>
+    /// <returns></returns>
+    public float DamageToMapChip()
+    {
+        //乗っている人の体重が並以下なら変化なし
+        if (quantity <= MIDDLE) { return 0; }
+
+        return quantity / MIDDLE;
+    }
 }
 
