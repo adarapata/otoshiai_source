@@ -37,8 +37,12 @@ public class MapChipParameter {
     {
         var beforeState = chipState;
         chipState = hp.GetNewState();
+
+        //‘O‰ñ‚Æó‘Ô‚ªˆá‚¤=Š„‚ê‚½
         if (chipState != beforeState)
         {
+            //‚Ğ‚ÑŠ„‚ê‰¹‚ğÄ¶
+            SoundManager.Play(SoundManager.map[(int)beforeState]);
             parent.animation.ChangeFrame(false);
         }
     }

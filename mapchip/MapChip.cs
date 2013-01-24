@@ -47,6 +47,9 @@ public class MapChip : BaseCharacter
     /// </summary>
     protected void InitParameter()
     {
+        //チップごとに乱数で若干のバラつきを
+        hp += Random.Range(-300, 300);
+
          parameter = new MapChipParameter(this,
             isAutoDeduct ? new MapChipHP(hp, autoDeduct) : new MapChipHP(hp)
         );
