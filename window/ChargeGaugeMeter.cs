@@ -8,25 +8,28 @@ using System.Collections;
 public class ChargeGaugeMeter : MonoBehaviour {
 
     private const int INFINITY = int.MaxValue;
-    public UISprite white;
+    public UISprite white, black;
     private BlinkParameter blink;
 	// Use this for initialization
 	void Start () {
+        meter = false;
+        //black.color = new Color(1, 1, 1, 0.6F);
         blink = new BlinkParameter(white);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
         if (blink.flag) blink.Update();
-	}
+    }
 
     /// <summary>
     /// âÊñ Ç…ï\é¶Ç∑ÇÈÇ©Ç«Ç§Ç©ÇÃê›íË
     /// </summary>
     public bool meter
     {
-        get { return white.enabled; }
-        set { white.enabled = value; }
+        get { return white.enabled && black.enabled; }
+        set { white.enabled = black.enabled = value; }
     }
 
     /// <summary>
