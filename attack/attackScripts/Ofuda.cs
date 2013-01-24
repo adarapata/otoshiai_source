@@ -25,6 +25,8 @@ public class Ofuda : BaseAttack {
 	// Update is called once per frame
 	void Update () {
         state.Update();
+
+        CheckOutLine();
 	}
 
     private void OnTriggerEnter(Collider other)

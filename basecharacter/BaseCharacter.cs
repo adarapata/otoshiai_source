@@ -63,5 +63,17 @@ public class BaseCharacter : MonoBehaviour {
         transform.parent = parent;
         transform.localScale = Vector3.one;
     }
+
+    /// <summary>
+    /// 画面外にいるかチェック。いたら自分を消去
+    /// </summary>
+    protected void CheckOutLine()
+    {
+        if (transform.localPosition.x < -600 || transform.localPosition.x > 600
+            || transform.localPosition.y < -500 || transform.localPosition.y > 500)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
 
