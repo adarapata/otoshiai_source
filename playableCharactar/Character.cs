@@ -5,7 +5,12 @@ using System;
 /// プレイヤーから操作できるキャラクター
 /// </summary>
 public class Character : BaseCharacter {
-	
+
+    /// <summary>
+    /// 初期パラメータ
+    /// </summary>
+    public ParameterList parameterList;
+
     /// <summary>
     /// 操作元のプレイヤー
     /// </summary>
@@ -70,7 +75,7 @@ public class Character : BaseCharacter {
 
     void Awake()
     {
-        InitCharacterParameter(Weight.MIDDLE, 0.2F, 1F, 1F, 0.5F, 3F);
+        InitCharacterParameter();
     }
     // Use this for initialization
 	void Start () {
@@ -109,32 +114,32 @@ public class Character : BaseCharacter {
     /// <param name="_attackCh"></param>
     /// <param name="_skillCh"></param>
     /// <param name="_speed"></param>
-    protected void InitCharacterParameter(float _weight, float _recoveryRate, float _diffence, float _attackCh, float _skillCh, float _speed)
+    protected void InitCharacterParameter()
     {
         #region パラメータ設定
         parameter = new CharacterParameter
         {
             weight = new Weight
             {
-                quantity = _weight
+                quantity = parameterList.weight
             },
             stamina = new Stamina
             {
                 quantity = 100F,
-                recoveryRate = _recoveryRate
+                recoveryRate = parameterList.staminaRecoverySpeed
             },
             diffence = new Diffence
             {
-                quantity = _diffence
+                quantity = parameterList.deffence
             },
-            attackCharge = new Charge(_attackCh),
-            skillCharge = new Charge(_skillCh),
+            attackCharge = new Charge(parameterList.blowChargeSpeed),
+            skillCharge = new Charge(parameterList.skillChargeSpeed),
             invincibly = new Invincibly()
         };
         #endregion
 
         baseParameter = new BaseParameter(sprite);
-        baseParameter.moveParameter = new MoveParameter(0, _speed);
+        baseParameter.moveParameter = new MoveParameter(0, parameterList.speed);
     }
 	
     // Update is called once per frame
