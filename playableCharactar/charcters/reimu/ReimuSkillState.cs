@@ -26,5 +26,7 @@ public class ReimuSkillState : CharacterSkillState {
         ofuda.attackParameter.damage = new Damage(30, false, 10, character.frontDirection, false);
         ofuda.transform.localPosition = stateParent.transform.localPosition;
         ofuda.baseParameter.moveParameter = new MoveParameter(character.frontDirection, 5F);
+
+        SoundManager.Play(SoundManager.shot1);
     }
 }
