@@ -10,7 +10,7 @@ public class Reimu : Character {
 
     void Awake()
     {
-        InitCharacterParameter(Weight.MIDDLE, 0.2F, 1F, 1F, 0.5F, 3F);
+        InitCharacterParameter();
     }
     // Use this for initialization
     void Start()
