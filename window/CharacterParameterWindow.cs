@@ -27,8 +27,9 @@ public class TeamColor
 
 public class CharacterParameterWindow : MonoBehaviour {
 
-    public GameObject chargeMeter;
+    public GameObject chargeMeter, stamina;
     public UISprite teamColor, icon;
+    private StaminaGaugeController staminaGauge;
 
     public Character character
     {
@@ -45,6 +46,8 @@ public class CharacterParameterWindow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (character == null) Destroy(gameObject);
+
+        staminaGauge.Update();
 	}
 
     /// <summary>
@@ -61,6 +64,8 @@ public class CharacterParameterWindow : MonoBehaviour {
 
         //キャラのパラメータウィンドウに自分を入れる
         chara.parameterWindow = this;
+
+        staminaGauge = new StaminaGaugeController(stamina, chara.parameter.stamina);
     }
 
     /// <summary>
