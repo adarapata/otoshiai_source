@@ -23,6 +23,12 @@ public class Stamina
         get;
         set;
     }
+
+    public Stamina(float recoveryrate)
+    {
+        recoveryRate = recoveryrate;
+        quantity = MAX;
+    }
     /// <summary>
     /// スタミナ回復
     /// </summary>

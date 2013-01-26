@@ -119,15 +119,10 @@ public class Character : BaseCharacter {
         #region ƒpƒ‰ƒ[ƒ^İ’è
         parameter = new CharacterParameter
         {
-            weight = new Weight
-            {
-                quantity = parameterList.weight
-            },
-            stamina = new Stamina
-            {
-                quantity = 100F,
-                recoveryRate = parameterList.staminaRecoverySpeed
-            },
+            weight = new Weight(parameterList.weight),
+           
+            stamina = new Stamina(parameterList.staminaRecoverySpeed),
+
             diffence = new Diffence
             {
                 quantity = parameterList.deffence
@@ -155,7 +150,7 @@ public class Character : BaseCharacter {
 
         if (newState != null)
         {
-            Debug.Log(newState);
+            //Debug.Log(newState);
             state = ChangeState(newState);
         }
         baseParameter.Update();
