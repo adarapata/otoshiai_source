@@ -30,6 +30,7 @@ public class CharacterParameterWindow : MonoBehaviour {
     public GameObject chargeMeter, stamina;
     public UISprite teamColor, icon;
     public StaminaGaugeController staminaGauge;
+    public IconScaleController iconScale;
 
     public Character character
     {
@@ -65,6 +66,8 @@ public class CharacterParameterWindow : MonoBehaviour {
         chara.parameterWindow = this;
 
         staminaGauge.stamina = character.parameter.stamina;
+
+        iconScale.weight = character.parameter.weight;
     }
 
     /// <summary>
