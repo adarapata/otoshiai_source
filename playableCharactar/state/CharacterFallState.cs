@@ -28,7 +28,7 @@ public class CharacterFallState : CharacterBaseState
 	private System.Type FrameUpdate()
 	{
 		framecounter.Update();
-		
+        if (framecounter.IsCall) { SoundManager.Play(SoundManager.death); }
 		return framecounter.IsCall ? typeof(CharacterDeadState) : null;
 	}
 }

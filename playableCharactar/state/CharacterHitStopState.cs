@@ -18,6 +18,9 @@ public class CharacterHitStopState : CharacterBaseState
 	{
 		gamepad = pad;
         this.damage = damages;
+
+        if (damage.damageParameter.damage >= 20F) SoundManager.Play(SoundManager.hitHeavy);
+        else SoundManager.Play(SoundManager.hitLight);
 	}
 	
 	public override System.Type Update()
