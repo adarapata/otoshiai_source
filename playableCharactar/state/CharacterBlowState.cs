@@ -6,17 +6,19 @@ public class CharacterBlowState : CharacterBaseState {
     private NormalBlow blow;
     private MoveParameter move;
     private bool isReturn;
+    private BlowLogic logic;
 	public CharacterBlowState(Character parent):base(parent)
 	{
         framecounter = new FrameCounter(7);
         move = new MoveParameter(character.frontDirection, 5F);
-
         blow = (GameObject.Instantiate(AttackLibrary.GetInstance.blow) as GameObject)
             .GetComponent<NormalBlow>();
 
         blow.parent = character;
         blow.syncCounter = framecounter;
         SoundManager.Play(SoundManager.attackLight);
+
+        logic = new BlowLogic(move, blow.gameObject, framecounter);
 	}
 	
 	public override System.Type Update()
@@ -26,6 +28,32 @@ public class CharacterBlowState : CharacterBaseState {
 
         CharacterMove();
 
+        return logic.Update();
+    }
+
+    private void CharacterMove()
+    {
+        character.transform.localPosition += move.velocity;
+    }
+}
+
+public class BlowLogic
+{
+    private GameObject blow;
+    private MoveParameter move;
+    private bool isReturn;
+    FrameCounter framecounter;
+	public BlowLogic(MoveParameter m, GameObject target, FrameCounter sync)
+	{
+        move = m;
+
+        blow = target;
+
+        framecounter = sync;
+	}
+	
+	public System.Type Update()
+	{
         if (IsChangeTiming())
         {
             System.Type nextState = isReturn ? typeof(CharacterStayState) : null;
@@ -39,10 +67,6 @@ public class CharacterBlowState : CharacterBaseState {
     private void CheckCall()
     {
         if (!isReturn) ChangeDirection();
-    }
-    private void CharacterMove()
-    {
-        character.transform.localPosition += move.velocity;
     }
 
     private bool IsChangeTiming()
@@ -61,8 +85,7 @@ public class CharacterBlowState : CharacterBaseState {
         isReturn = true;
         if (blow == null)
         {
-            framecounter = new FrameCounter(framecounter.count);
+            framecounter.ChangeCallTiming(framecounter.count);
         }
     }
 }
-
