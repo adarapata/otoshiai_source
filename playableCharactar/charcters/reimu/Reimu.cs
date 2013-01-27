@@ -7,6 +7,10 @@ public class Reimu : Character {
     {
         return new ReimuSkillState(this); 
     }
+    protected override IState CreateChargeSkillState()
+    {
+        return new ReimuChargeSkillState(this);
+    }
 
     void Awake()
     {
