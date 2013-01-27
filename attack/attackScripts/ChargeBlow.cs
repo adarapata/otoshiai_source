@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class NormalBlow : BaseAttack {
-
+public class ChargeBlow : BaseAttack {
 
     public FrameCounter syncCounter
     {
@@ -17,7 +16,7 @@ public class NormalBlow : BaseAttack {
     {
         attackParameter = new AttackParameter
         {
-            attackLevel = new AttackLevel(4, true)
+            attackLevel = new AttackLevel(5, true)
         };
         baseParameter = new BaseParameter(null);
     }
@@ -25,14 +24,14 @@ public class NormalBlow : BaseAttack {
     void Start()
     {
         Init();
-        attackParameter.damage = new Damage(20, false, parent.parameter.power.quantity, parent.frontDirection, false);
+        attackParameter.damage = new Damage(20, false, parent.parameter.power.quantity*2, parent.frontDirection, false);
         baseParameter.moveParameter = new MoveParameter(parent.frontDirection, 5F);
     }
 
     void Update()
     {
         transform.localPosition = parent.transform.localPosition + baseParameter.moveParameter.velocity;
-        if (syncCounter.IsCall || !(parent.state is CharacterBlowState)) SelfDestroy();
+        if (syncCounter.IsCall || !(parent.state is CharacterChargeBlowState)) SelfDestroy();
     }
 
     void OnTriggerEnter(Collider other)

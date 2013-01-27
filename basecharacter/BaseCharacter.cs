@@ -13,7 +13,7 @@ public class BaseCharacter : MonoBehaviour {
 	/// <value>
 	/// The state.
 	/// </value>
-	protected IState state {
+	public IState state {
 		get;
 		set;
 	}
