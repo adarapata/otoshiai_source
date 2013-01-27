@@ -8,6 +8,8 @@ public class ReimuSkillState : CharacterSkillState {
 	{
         framecounter = new FrameCounter(10);
         CreateBullet();
+        parameter.weight.quantity++;
+        parameter.stamina.quantity -= 10;
 	}
 	
 	public override System.Type Update()
@@ -22,10 +24,7 @@ public class ReimuSkillState : CharacterSkillState {
     {
         var list = AttackLibrary.GetInstance;
         ofuda = (GameObject.Instantiate(list.ofuda) as GameObject).GetComponent<Ofuda>();
-        ofuda.SetTeamTransform(stateParent.baseParameter.team, stateParent.transform.parent);
-        ofuda.attackParameter.damage = new Damage(30, false, 10, character.frontDirection, false);
-        ofuda.transform.localPosition = stateParent.transform.localPosition;
-        ofuda.baseParameter.moveParameter = new MoveParameter(character.frontDirection, 5F);
+        ofuda.parent = character;
 
         SoundManager.Play(SoundManager.shot1);
     }

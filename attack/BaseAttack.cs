@@ -3,12 +3,22 @@ using System.Collections;
 
 public class BaseAttack : BaseCharacter {
 
+    /// <summary>
+    /// パラメータ
+    /// </summary>
     public AttackParameter attackParameter
     {
         get;
         set;
     }
-
+    /// <summary>
+    /// オブジェクトの親キャラ
+    /// </summary>
+    public Character parent
+    {
+        get;
+        set;
+    }
 	// Use this for initialization
 	void Start () {
 
@@ -35,6 +45,13 @@ public class BaseAttack : BaseCharacter {
 
         if (enemy is BaseAttack) { ColliedAttack(enemy as BaseAttack); return; }
         if (enemy is Character) { ColliedCharacter(enemy as Character); return; }
+    }
+
+
+    virtual protected void Init()
+    {
+        SetTeamTransform(parent.baseParameter.team, parent.transform.parent);
+        transform.localPosition = parent.transform.localPosition;
     }
     /// <summary>
     /// Attackオブジェクトと接触した時の処理

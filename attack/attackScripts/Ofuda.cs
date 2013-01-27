@@ -8,17 +8,20 @@ public class Ofuda : BaseAttack {
     {
         attackParameter = new AttackParameter
         {
-            attackLevel = new AttackLevel(3, false)
+            attackLevel = new AttackLevel(3, true)
         };
         baseParameter = new BaseParameter(sprite);
     }
 	// Use this for initialization
 	void Start () {
 
+        Init();
+        attackParameter.damage = new Damage(30, false, 10, parent.frontDirection, false);
+        baseParameter.moveParameter = new MoveParameter(parent.frontDirection, 5F);
+
+
         state = new MoveState(this);
-        var angle = sprite.gameObject.transform.localEulerAngles;
-        angle = new Vector3(0, 0, baseParameter.moveParameter.direction - 90);
-        sprite.gameObject.transform.localEulerAngles = angle;
+        PolarCoordinates.RotateAngles(sprite.gameObject.transform, baseParameter.moveParameter.direction);
 
 	}
 
