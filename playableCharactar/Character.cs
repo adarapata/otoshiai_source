@@ -252,8 +252,27 @@ public class Character : BaseCharacter {
         onMapChip.SetDamage(parameter.weight.DamageToMapChip());
     }
 
-    private void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
+    {
+        ColliedCheck(other);
+    }
+
+    virtual protected void ColliedCheck(Collider other)
     {
         if (IsCheckSameTeam(other)) return;
+
+        var enemy = other.GetComponent<BaseCharacter>();
+        if (enemy is Character) CheckColliedByCharacter(enemy as Character);
+    }
+
+    protected void CheckColliedByCharacter(Character enemy)
+    {
+        if (state is CharacterDamageState)
+        {
+            var d = parameter.damage;
+            Damage damageToEnemy = new Damage(10, false, d.damageParameter.damage, d.damageParameter.direction, false);
+            enemy.ChangeHitState(damageToEnemy);
+            d.damageParameter.damage = 1;
+        }
     }
 }
