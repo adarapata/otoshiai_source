@@ -6,5 +6,5 @@ using System.Collections;
 /// </summary>
 [System.Serializable]
 public class ParameterList  {
-    public float weight, deffence, speed, blowChargeSpeed, skillChargeSpeed, staminaRecoverySpeed;
+    public float power,weight, deffence, speed, blowChargeSpeed, skillChargeSpeed, staminaRecoverySpeed;
 }

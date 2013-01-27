@@ -119,8 +119,10 @@ public class Character : BaseCharacter {
         #region ƒpƒ‰ƒ[ƒ^İ’è
         parameter = new CharacterParameter
         {
+            power = new Power { quantity = parameterList.power },
+
             weight = new Weight(parameterList.weight),
-           
+
             stamina = new Stamina(parameterList.staminaRecoverySpeed),
 
             diffence = new Diffence
