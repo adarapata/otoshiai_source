@@ -8,7 +8,6 @@ public class ReimuSkillState : CharacterSkillState {
 	{
         framecounter = new FrameCounter(10);
         CreateBullet();
-        parameter.weight.quantity++;
         parameter.stamina.quantity -= 10;
 	}
 	

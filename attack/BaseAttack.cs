@@ -40,7 +40,6 @@ public class BaseAttack : BaseCharacter {
     virtual protected void ColliedCheck(Collider other)
     {
         if (IsCheckSameTeam(other)) return;
-
         var enemy = other.GetComponent<BaseCharacter>();
 
         if (enemy is BaseAttack) { ColliedAttack(enemy as BaseAttack); return; }

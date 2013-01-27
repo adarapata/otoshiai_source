@@ -44,7 +44,7 @@ public class MainGameParameter  {
         CharacterLibrary lib = GameObject.Find("Library").GetComponent<CharacterLibrary>();
         players = new BetterList<Player>();
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             Player p = new Player(i);
             GameObject chara = lib.reimu;

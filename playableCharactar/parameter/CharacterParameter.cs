@@ -110,4 +110,10 @@ public class Invincibly
     {
         flag = time-- > 0;
     }
+
+    public void End()
+    {
+        flag = false;
+        time = 0;
+    }
 }

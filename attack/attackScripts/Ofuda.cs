@@ -8,7 +8,7 @@ public class Ofuda : BaseAttack {
     {
         attackParameter = new AttackParameter
         {
-            attackLevel = new AttackLevel(3, true)
+            attackLevel = new AttackLevel(3, false)
         };
         baseParameter = new BaseParameter(sprite);
     }

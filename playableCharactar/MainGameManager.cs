@@ -31,6 +31,8 @@ public class MainGameManager : MonoBehaviour
     /// </summary>
     private void CraeteCharacter(Player player)
     {
+        if (player.number > parameterWindows.Length-1) return;
+
         var chara = GameObject.Instantiate(player.character) as GameObject;
         var script = chara.GetComponent<Character>();
         script.parent = player;
