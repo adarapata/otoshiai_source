@@ -3,15 +3,12 @@ using System.Collections;
 
 public class CharacterBlowState : CharacterBaseState {
 
-    private NormalBlow blow;
-    private MoveParameter move;
-    private bool isReturn;
     private BlowLogic logic;
 	public CharacterBlowState(Character parent):base(parent)
 	{
         framecounter = new FrameCounter(7);
-        move = new MoveParameter(character.frontDirection, 5F);
-        blow = (GameObject.Instantiate(AttackLibrary.GetInstance.blow) as GameObject)
+        var move = new MoveParameter(character.frontDirection, 5F);
+        var blow = (GameObject.Instantiate(AttackLibrary.GetInstance.blow) as GameObject)
             .GetComponent<NormalBlow>();
 
         blow.parent = character;
@@ -23,7 +20,6 @@ public class CharacterBlowState : CharacterBaseState {
 	
 	public override System.Type Update()
 	{
-
         framecounter.Update();
 
         CharacterMove();
@@ -33,14 +29,18 @@ public class CharacterBlowState : CharacterBaseState {
 
     private void CharacterMove()
     {
-        character.transform.localPosition += move.velocity;
+        character.transform.localPosition += logic.move.velocity;
     }
 }
 
 public class BlowLogic
 {
     private GameObject blow;
-    private MoveParameter move;
+    public MoveParameter move
+    {
+        get;
+        set;
+    }
     private bool isReturn;
     FrameCounter framecounter;
 	public BlowLogic(MoveParameter m, GameObject target, FrameCounter sync)
