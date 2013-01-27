@@ -25,7 +25,7 @@ public class ChargeBlow : BaseAttack {
     {
         Init();
         attackParameter.damage = new Damage(20, false, parent.parameter.power.quantity*2, parent.frontDirection, false);
-        baseParameter.moveParameter = new MoveParameter(parent.frontDirection, 5F);
+        baseParameter.moveParameter = new MoveParameter(parent.frontDirection, 10F);
     }
 
     void Update()
