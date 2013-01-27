@@ -34,4 +34,15 @@ public class FrameCounter
     {
         count = 0;
     }
+
+    /// <summary>
+    /// 呼び出すタイミングを再設定する。カウントも初期化される
+    /// </summary>
+    /// <param name="timing"></param>
+    public void ChangeCallTiming(int newTiming)
+    {
+        callTiming = newTiming;
+        Clear();
+    }
+    
 }
