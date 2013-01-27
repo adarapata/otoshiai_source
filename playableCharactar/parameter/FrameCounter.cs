@@ -26,4 +26,12 @@ public class FrameCounter
     {
         count++;
     }
+
+    /// <summary>
+    /// ƒJƒEƒ“ƒg‚ğ‰Šú‰»‚·‚é
+    /// </summary>
+    public void Clear()
+    {
+        count = 0;
+    }
 }
