@@ -61,7 +61,7 @@ public class BaseAttack : BaseCharacter {
     {
         if (!attackParameter.attackLevel.CheckLevel(enemy.attackParameter.attackLevel))
         {
-            Destroy(gameObject);
+            SelfDestroy();
         }
     }
 
@@ -72,6 +72,14 @@ public class BaseAttack : BaseCharacter {
     virtual protected void ColliedCharacter(Character enemy)
     {
         enemy.ChangeHitState(attackParameter.damage);
+        SelfDestroy();
+    }
+
+    /// <summary>
+    /// 自身を削除する。オーバーライド可
+    /// </summary>
+    virtual protected void SelfDestroy()
+    {
         Destroy(gameObject);
     }
 }
