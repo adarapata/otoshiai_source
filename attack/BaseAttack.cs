@@ -44,6 +44,8 @@ public class BaseAttack : BaseCharacter {
 
         if (enemy is BaseAttack) { ColliedAttack(enemy as BaseAttack); return; }
         if (enemy is Character) { ColliedCharacter(enemy as Character); return; }
+        if (enemy is BaseBox) { ColliedBox(enemy as BaseBox); return; }
+
     }
 
 
@@ -75,10 +77,12 @@ public class BaseAttack : BaseCharacter {
     }
 
     /// <summary>
-    /// 自身を削除する。オーバーライド可
+    /// 箱と衝突した場合の処理
     /// </summary>
-    virtual protected void SelfDestroy()
+    /// <param name="box"></param>
+    virtual protected void ColliedBox(BaseBox box)
     {
-        Destroy(gameObject);
+        box.Crash();
+        SelfDestroy();
     }
 }

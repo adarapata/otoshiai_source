@@ -75,5 +75,13 @@ public class BaseCharacter : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    /// <summary>
+    /// 自身を削除する。オーバーライド可
+    /// </summary>
+    virtual protected void SelfDestroy()
+    {
+        Destroy(gameObject);
+    }
 }
 
