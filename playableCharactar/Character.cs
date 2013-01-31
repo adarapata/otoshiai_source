@@ -150,6 +150,8 @@ public class Character : BaseCharacter {
 
     virtual protected void ScriptUpdate()
     {
+        if (MainGameParameter.instance.Pause) return;
+
         parent.gamepad.Update();
 
         Type newState = state.Update();

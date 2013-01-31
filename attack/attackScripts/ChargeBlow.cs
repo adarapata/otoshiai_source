@@ -30,6 +30,7 @@ public class ChargeBlow : BaseAttack {
 
     void Update()
     {
+        if (MainGameParameter.instance.Pause) return;
         transform.localPosition = parent.transform.localPosition + baseParameter.moveParameter.velocity;
         if (syncCounter.IsCall || !(parent.state is CharacterChargeBlowState)) SelfDestroy();
     }

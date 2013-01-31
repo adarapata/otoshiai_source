@@ -27,6 +27,8 @@ public class Ofuda : BaseAttack {
 
 	// Update is called once per frame
 	void Update () {
+        if (MainGameParameter.instance.Pause) return;
+
         state.Update();
 
         CheckOutLine();

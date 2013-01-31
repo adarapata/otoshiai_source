@@ -63,6 +63,7 @@ public class MapChip : BaseCharacter
 	
 	// Update is called once per frame
 	void Update () {
+        if (MainGameParameter.instance.Pause) return;
         parameter.Update();
 	}
 

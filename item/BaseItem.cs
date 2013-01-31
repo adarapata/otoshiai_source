@@ -24,6 +24,8 @@ public class BaseItem : BaseCharacter {
     }
     virtual protected void ScriptUpdate()
     {
+        if (MainGameParameter.instance.Pause) return;
+
         framecounter.Update();
 
         if (framecounter.count == 420)

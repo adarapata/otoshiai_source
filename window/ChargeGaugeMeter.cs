@@ -20,6 +20,7 @@ public class ChargeGaugeMeter : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
+        if (MainGameParameter.instance.Pause) return;
         if (blink.flag) blink.Update();
     }
 

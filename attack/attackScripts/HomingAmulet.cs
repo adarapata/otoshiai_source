@@ -37,6 +37,7 @@ public class HomingAmulet : BaseAttack {
 	
 	// Update is called once per frame
 	void Update () {
+        if (MainGameParameter.instance.Pause) return;
 
         sprite.transform.localEulerAngles += new Vector3(0, 0, 5);
         

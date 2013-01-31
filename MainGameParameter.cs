@@ -36,6 +36,12 @@ public class MainGameParameter  {
         set;
     }
 
+    public bool Pause
+    {
+        get;
+        set;
+    }
+
     /// <summary>
     /// デバッグ用にとりあえずデータをでっち上げる
     /// </summary>

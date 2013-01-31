@@ -27,6 +27,8 @@ public class BaseBox : BaseCharacter {
 
     virtual protected void ScriptUpdate()
     {
+        if (MainGameParameter.instance.Pause) return;
+
         var nextSate = state.Update();
         if (nextSate != null) { Destroy(gameObject); }
 

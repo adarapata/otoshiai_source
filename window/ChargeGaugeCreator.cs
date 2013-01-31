@@ -42,6 +42,7 @@ public class ChargeGaugeCreator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (MainGameParameter.instance.Pause) return;
 
         if (!charge.isCharging) { Delete(); return; }
 

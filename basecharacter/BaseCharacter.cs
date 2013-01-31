@@ -5,7 +5,7 @@ using System.Collections;
 /// ゲーム中のオブジェクトの基盤クラス
 /// </summary>
 public class BaseCharacter : MonoBehaviour {
-	
+
 	public UISprite sprite;
 	/// <summary>
 	/// 状態　　　get;set;
@@ -46,7 +46,7 @@ public class BaseCharacter : MonoBehaviour {
 	void Update () {
 		state.Update();
 	}
-
+    
     /// <summary>
     /// 同じチームかどうかを返す
     /// </summary>

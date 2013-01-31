@@ -30,6 +30,8 @@ public class StaminaGaugeController : MonoBehaviour {
 
     void Update()
     {
+        if (MainGameParameter.instance.Pause) return;
+
         var scale = sprite.gameObject.transform.localScale;
         scale.y = ONE_SIZE * stamina.quantity;
 

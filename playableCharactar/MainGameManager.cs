@@ -23,7 +23,11 @@ public class MainGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.O)) 
+        {
+            var param = MainGameParameter.instance;
+            param.Pause = !param.Pause;
+        }
     }
 
     /// <summary>

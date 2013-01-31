@@ -25,6 +25,8 @@ public class IconScaleController:MonoBehaviour {
 
     void Update()
     {
+        if (MainGameParameter.instance.Pause) return;
+
         var scale = transform.localScale;
         scale.x = defaultScaleX * (weight.quantity / weight.defaultWeight);
         transform.localScale = scale;
