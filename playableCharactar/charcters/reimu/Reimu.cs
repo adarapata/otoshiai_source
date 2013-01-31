@@ -28,8 +28,14 @@ public class Reimu : Character {
         ScriptUpdate();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (IsCheckSameTeam(other)) return;
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        var enemy = other.GetComponent<BaseCharacter>();
+        if (enemy is BaseBox) CheckColliedingBox(enemy as BaseBox);
     }
 }

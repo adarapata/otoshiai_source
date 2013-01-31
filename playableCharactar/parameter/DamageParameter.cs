@@ -24,7 +24,12 @@ public class DamageParameter
     public float damage
     {
         get { return moveParameter.speed; }
-        set { moveParameter.speed = value; }
+        set 
+        {
+            moveParameter.speed = value; 
+            //ダメージの限界値は60
+            if (moveParameter.speed > 60) moveParameter.speed = 60;
+        }
     }
 
     /// <summary>
