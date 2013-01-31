@@ -16,6 +16,7 @@ public class CharacterChargeBlowState : CharacterBaseState {
         SoundManager.Play(SoundManager.attackHeavy);
 
         logic = new BlowLogic(move, blow.gameObject, framecounter);
+        parameter.invincibly.Start(7, false);
 	}
 	
 	public override System.Type Update()
