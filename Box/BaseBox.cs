@@ -38,6 +38,7 @@ public class BaseBox : BaseCharacter {
     /// </summary>
     virtual public void Crash()
     {
+        SoundManager.Play(SoundManager.hitLight);
         SelfDestroy();
     }
 
@@ -50,6 +51,8 @@ public class BaseBox : BaseCharacter {
         //ˆÚ“®ó‘Ô‚É‘JˆÚ
         baseParameter.moveParameter = new MoveParameter(dir, power);
         state = new MoveState(this);
+
+        SoundManager.Play(SoundManager.attackLight);
     }
 
     void OnTriggerEnter(Collider other)
