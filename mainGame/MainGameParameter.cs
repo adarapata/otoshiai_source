@@ -6,14 +6,20 @@ public class MainGameParameter  {
     private static MainGameParameter m_instance;
 
     private MainGameParameter()
-    { 
+    {
+        TeamwinCount = new int[4];
+        winCount = 3;
     }
 
     static public MainGameParameter instance
     {
         get 
         {
-            if (m_instance == null) m_instance = new MainGameParameter();
+            if (m_instance == null)
+            {
+                m_instance = new MainGameParameter();
+                m_instance.players = new BetterList<Player>();
+            }
             return m_instance;
         }
     }
@@ -30,6 +36,9 @@ public class MainGameParameter  {
         set;
     }
 
+    /// <summary>
+    /// ゲームクリアに必要な勝利数
+    /// </summary>
     public int winCount
     {
         get;
@@ -40,6 +49,35 @@ public class MainGameParameter  {
     {
         get;
         set;
+    }
+
+    private int[] TeamwinCount { get; set; }
+
+    /// <summary>
+    /// 指定したチームの勝利数を１増やす
+    /// それにより勝利数が条件を満たしたらtrueが買える
+    /// </summary>
+    /// <param name="code"></param>
+    public bool AddWincount(TEAMCODE code)
+    {
+        TeamwinCount[(int)code]++;
+        return TeamwinCount[(int)code] >= winCount;
+    }
+    public int GetWinCount(TEAMCODE code)
+    {
+        return TeamwinCount[(int)code];
+    }
+
+    /// <summary>
+    /// 初期化
+    /// </summary>
+    public void Reflesh()
+    {
+        players.Clear();
+        for (int i = 0; i < TeamwinCount.Length; i++)
+        {
+            TeamwinCount[i] = 0;
+        }
     }
 
     /// <summary>

@@ -31,6 +31,7 @@ public class CharacterParameterWindow : MonoBehaviour {
     public UISprite teamColor, icon;
     public StaminaGaugeController staminaGauge;
     public IconScaleController iconScale;
+    public WinCountWindow winCountWindow;
 
     public Character character
     {
@@ -68,6 +69,10 @@ public class CharacterParameterWindow : MonoBehaviour {
         staminaGauge.stamina = character.parameter.stamina;
 
         iconScale.weight = character.parameter.weight;
+
+        iconScale.SetDefault();
+
+        winCountWindow.Init(chara.sprite, chara.parent.team.name);
     }
 
     /// <summary>
@@ -81,5 +86,13 @@ public class CharacterParameterWindow : MonoBehaviour {
         chargeW.transform.localPosition = character.transform.localPosition;
         chargeW.transform.localScale = Vector3.one;
         chargeW.charge = targetCharge;
+    }
+
+    /// <summary>
+    /// ÅôÇí«â¡Ç∑ÇÈ
+    /// </summary>
+    public void AddStar()
+    {
+        winCountWindow.CreateAnimationStar();
     }
 }

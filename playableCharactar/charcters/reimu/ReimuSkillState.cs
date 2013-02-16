@@ -24,7 +24,8 @@ public class ReimuSkillState : CharacterSkillState {
         var list = AttackLibrary.GetInstance;
         ofuda = (GameObject.Instantiate(list.ofuda) as GameObject).GetComponent<Ofuda>();
         ofuda.parent = character;
-
+        ofuda.Init();
+        ofuda.SetTransformParent();
         SoundManager.Play(SoundManager.shot1);
     }
 }

@@ -1,8 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Ofuda : BaseAttack {
-
+public class Oodama : BaseAttack {
 
     void Awake()
     {
@@ -12,26 +11,25 @@ public class Ofuda : BaseAttack {
         };
         baseParameter = new BaseParameter(sprite);
     }
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
-        attackParameter.damage = new Damage(30, false, 10, parent.frontDirection, false);
-        baseParameter.moveParameter = new MoveParameter(parent.frontDirection, 5F);
-
+        Init();
 
         state = new MoveState(this);
         PolarCoordinates.RotateAngles(sprite.gameObject.transform, baseParameter.moveParameter.direction);
+    }
 
-	}
-
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
         if (MainGameParameter.instance.Pause) return;
 
         state.Update();
 
         CheckOutLine();
-	}
+    }
 
     private void OnTriggerEnter(Collider other)
     {

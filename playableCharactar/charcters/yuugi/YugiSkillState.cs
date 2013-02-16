@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class ReimuChargeSkillState : CharacterChargeSkillState {
+public class YugiSkillState  : CharacterSkillState {
 
-    private HomingAmulet amulet;
-    public ReimuChargeSkillState(Character parent):base(parent)
+    private Ikaring ika;
+    public YugiSkillState(Character parent):base(parent)
 	{
         framecounter = new FrameCounter(10);
         CreateBullet();
@@ -22,10 +22,10 @@ public class ReimuChargeSkillState : CharacterChargeSkillState {
     private void CreateBullet()
     {
         var list = AttackLibrary.GetInstance;
-        amulet = (GameObject.Instantiate(list.amuret) as GameObject).GetComponent<HomingAmulet>();
-        amulet.parent = character;
-        amulet.Init();
-        amulet.SetTransformParent();
-        SoundManager.Play(SoundManager.amulet);
+        ika = (GameObject.Instantiate(list.ikaring) as GameObject).GetComponent<Ikaring>();
+        ika.parent = character;
+        ika.Init();
+        ika.SetTransformParent();
+        SoundManager.Play(SoundManager.shot1);
     }
 }

@@ -26,12 +26,14 @@ public class CharacterDamageState : CharacterBaseState
     /// <returns></returns>
 	private System.Type BlowOffDamage()
 	{
+        character.collider.enabled = false;
 		character.transform.localPosition += damageParameter.velocity;
         damageParameter.damage--;
 		if(damageParameter.damage < 0) 
         {
             CreateBlinkAndInvincibly(60);
             character.parameter.damage = null;
+            character.collider.enabled = true;
             return typeof(CharacterStayState); 
         }
 		

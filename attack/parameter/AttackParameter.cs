@@ -19,6 +19,8 @@ public class AttackParameter {
         get;
         set;
     }
+
+
 }
 
 /// <summary>

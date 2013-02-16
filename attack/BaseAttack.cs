@@ -39,7 +39,7 @@ public class BaseAttack : BaseCharacter {
     /// <param name="other"></param>
     virtual protected void ColliedCheck(Collider other)
     {
-        if (IsCheckSameTeam(other)) return;
+        if (IsCheckSameTeam(other)) { return; }
         var enemy = other.GetComponent<BaseCharacter>();
 
         if (enemy is BaseAttack) { ColliedAttack(enemy as BaseAttack); return; }
@@ -49,9 +49,16 @@ public class BaseAttack : BaseCharacter {
     }
 
 
-    virtual protected void Init()
+    virtual public void Init()
     {
         SetTeamTransform(parent.baseParameter.team, parent.transform.parent);
+    }
+
+    /// <summary>
+    /// e‚ÌÀ•W
+    /// </summary>
+    public void SetTransformParent()
+    {
         transform.localPosition = parent.transform.localPosition;
     }
     /// <summary>
@@ -84,5 +91,16 @@ public class BaseAttack : BaseCharacter {
     {
         box.Crash();
         SelfDestroy();
+    }
+    
+    /// <summary>
+    /// ŠO•”‚©‚çŒü‚«‚ğİ’è‚·‚é
+    /// </summary>
+    /// <param name="param"></param>
+    /// <param name="damage"></param>
+    public void SetMoveDirection(MoveParameter param, Damage damage)
+    {
+        attackParameter.damage = damage;
+        baseParameter.moveParameter = param;
     }
 }

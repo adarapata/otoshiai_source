@@ -14,7 +14,6 @@ public class HomingAmulet : BaseAttack {
     }
 	// Use this for initialization
 	void Start () {
-        Init();
      
         TargetSearch();
 

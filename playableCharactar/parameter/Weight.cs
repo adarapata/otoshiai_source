@@ -29,6 +29,12 @@ public class Weight
         quantity = defaultWeight;
     }
 
+    /// <summary>
+    /// ‘Ìd•â³‚ğ‚©‚¯‚½ˆÚ“®’l‚ğ•Ô‚·
+    /// </summary>
+    /// <param name="param"></param>
+    /// <param name="weight"></param>
+    /// <returns></returns>
     static public Vector3 CalculateVelocityByWeight(MoveParameter param, Weight weight)
     {
         return param.velocity * (Weight.MIDDLE / weight.quantity);

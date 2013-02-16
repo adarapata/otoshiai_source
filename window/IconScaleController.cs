@@ -1,10 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class IconScaleController:MonoBehaviour {
+public class IconScaleController : MonoBehaviour
+{
 
     /// <summary>
-    /// スタミナ値
+    /// 体重
     /// </summary>
     public Weight weight
     {
@@ -19,7 +20,13 @@ public class IconScaleController:MonoBehaviour {
 
     void Start()
     {
+
+    }
+
+    public void SetDefault()
+    {
         sprite = GetComponent<UISprite>();
+        transform.localScale = new Vector2(sprite.sprite.inner.width, sprite.sprite.inner.height);
         defaultScaleX = transform.localScale.x;
     }
 

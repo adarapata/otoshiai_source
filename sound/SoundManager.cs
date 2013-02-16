@@ -5,7 +5,7 @@ public class SoundManager :MonoBehaviour {
 
     static public AudioSet[] map = new AudioSet[3];
     static public AudioSet shot1, amulet, fall, attackLight, attackHeavy, death,
-        hitLight, hitHeavy, item;
+        hitLight, hitHeavy, item, gameStart, cursor1, cursor2, charge, shot2;
 
     void Start()
     {
@@ -23,6 +23,11 @@ public class SoundManager :MonoBehaviour {
         hitLight = new AudioSet("hitLight", gameObject);
         hitHeavy = new AudioSet("hitHeavy", gameObject);
         item = new AudioSet("item", gameObject);
+        gameStart = new AudioSet("gameStart", gameObject);
+        cursor1 = new AudioSet("cursor1", gameObject);
+        cursor2 = new AudioSet("cursor2", gameObject);
+        charge = new AudioSet("charge", gameObject);
+        shot2 = new AudioSet("shot2", gameObject);
     }
 
     public static void Play(AudioSet audio)

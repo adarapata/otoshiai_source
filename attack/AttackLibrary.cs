@@ -9,7 +9,11 @@ public class AttackLibrary : MonoBehaviour {
         blow,
         chargeBlow,
         ofuda,
-        amuret;
+        amuret,
+        oodama,
+        ikaring,
+        shibuki,
+        ikari;
 	// Use this for initialization
 	void Start () {
         activeLibrary = this;
