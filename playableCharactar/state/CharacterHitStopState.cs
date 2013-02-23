@@ -24,13 +24,13 @@ public class CharacterHitStopState : CharacterBaseState
         else SoundManager.Play(SoundManager.hitLight);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
 		hitstop.Update();
-		if(hitstop.isEnd){ return typeof(CharacterDamageState);}
+        if (hitstop.isEnd) { return (int)Character.STATENAME.Damage; }
 
         CharacterShake();
-		return null;
+        return (int)Character.STATENAME.Changeless;
 	}
 
     /// <summary>

@@ -9,13 +9,13 @@ public class CharacterFallState : CharacterBaseState
 		framecounter = new FrameCounter(60);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
 		var state = FrameUpdate();
 		
 		Falling();
 		
-		return state;
+		return (int)state;
 	}
 	
 	private void Falling()
@@ -25,11 +25,11 @@ public class CharacterFallState : CharacterBaseState
 	  	character.transform.localScale = fall;
 	}
 	
-	private System.Type FrameUpdate()
+	private Character.STATENAME FrameUpdate()
 	{
 		framecounter.Update();
         if (framecounter.IsCall) { SoundManager.Play(SoundManager.death); }
-		return framecounter.IsCall ? typeof(CharacterDeadState) : null;
+		return framecounter.IsCall ? Character.STATENAME.Dead : Character.STATENAME.Changeless;
 	}
 }
 

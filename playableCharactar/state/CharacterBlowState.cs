@@ -19,13 +19,13 @@ public class CharacterBlowState : CharacterBaseState {
         parameter.invincibly.Start(7, false);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
         framecounter.Update();
 
         CharacterMove();
 
-        return logic.Update();
+        return (int)logic.Update();
     }
 
     private void CharacterMove()
@@ -53,16 +53,16 @@ public class BlowLogic
         framecounter = sync;
 	}
 	
-	public System.Type Update()
+	public Character.STATENAME Update()
 	{
         if (IsChangeTiming())
         {
-            System.Type nextState = isReturn ? typeof(CharacterStayState) : null;
+            var nextState = isReturn ? Character.STATENAME.Stay : Character.STATENAME.Changeless;
             CheckCall();
             return nextState;
         }
 
-        return null;
+        return Character.STATENAME.Changeless;
 	}
 
     private void CheckCall()

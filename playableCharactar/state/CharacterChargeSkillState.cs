@@ -8,8 +8,8 @@ public class CharacterChargeSkillState : CharacterBaseState {
 
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
-        return typeof(CharacterStayState);
+        return (int)Character.STATENAME.Stay;
 	}
 }

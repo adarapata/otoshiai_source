@@ -12,9 +12,9 @@ public class CharacterDeadState : CharacterBaseState
 
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
-		return null;
+        return (int)Character.STATENAME.Changeless;
 	}
 }
 
