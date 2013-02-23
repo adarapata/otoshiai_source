@@ -9,6 +9,12 @@ public class CharacterHitStopState : CharacterBaseState
 		get;
 		set;
 	}
+
+    public int name
+    {
+        get { return (int)Character.STATENAME.HitStop; }
+    }
+
 	private HitStop hitstop
 	{
 		get { return damage.hitStop; }

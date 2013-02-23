@@ -5,7 +5,12 @@ public class CharacterChargeState : CharacterMoveState
 {
 	private const float MAX = 100F;
 	private readonly string pushButton;
-	
+
+    public int name
+    {
+        get { return (int)Character.STATENAME.Charge; }
+    }
+
 	private Charge charge
 	{
 		get;

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class CharacterBaseState : BaseState
 {
+    public int name
+    {
+        get { return 0; }
+    }
 
 	protected Character character
 	{

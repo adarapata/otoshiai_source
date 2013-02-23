@@ -3,6 +3,11 @@ using System.Collections;
 
 public class CharacterSkillState : CharacterBaseState {
 
+    public int name
+    {
+        get { return (int)Character.STATENAME.Skill; }
+    }
+
     public CharacterSkillState(Character parent):base(parent)
 	{
 

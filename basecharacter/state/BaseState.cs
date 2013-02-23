@@ -5,6 +5,9 @@ using System.Collections;
 /// 状態クラスの基盤クラス
 /// </summary>
 public class BaseState :IState {
+
+    public int name { get { return 0; } }
+
 	/// <summary>
 	/// この状態を持つオブジェクト
 	/// </summary>
@@ -27,6 +30,6 @@ public class BaseState :IState {
 	
 	virtual public int Update()
 	{
-		return 0;
+        return 0;
 	}
 }

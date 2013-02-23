@@ -4,6 +4,12 @@ using System.Collections;
 public class CharacterFallState : CharacterBaseState
 {
 	private float scale = 0.95F;
+
+    public int name
+    {
+        get { return (int)Character.STATENAME.Fall; }
+    }
+
 	public CharacterFallState(Character parent):base(parent)
 	{
 		framecounter = new FrameCounter(60);

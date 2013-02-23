@@ -3,6 +3,10 @@ using System.Collections;
 
 public class CharacterDeadState : CharacterBaseState
 {
+    public int name
+    {
+        get { return (int)Character.STATENAME.Dead; }
+    }
     /// <summary>
     /// コンストラクタ
     /// </summary>
