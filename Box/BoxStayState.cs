@@ -10,10 +10,10 @@ public class BoxStayState : BaseState {
         counter = new FrameCounter(10000);
     }
 
-    public override System.Type Update()
+    public override int Update()
     {
         counter.Update();
-
-        return counter.IsCall ? typeof(BaseState) : null;
+        
+        return (int)(counter.IsCall ? BaseBox.STATENAME.Stay : BaseBox.STATENAME.Changeless);
     }
 }
