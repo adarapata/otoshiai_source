@@ -104,7 +104,7 @@ public class TeamList {
 
             foreach (var mem in member[i])
             {
-                if (!(mem.state is CharacterDeadState))
+                if (mem.state.name != (int)Character.STATENAME.Dead)
                 {
                     persistTeam.Add(mem.baseParameter.team.name);
                     break;

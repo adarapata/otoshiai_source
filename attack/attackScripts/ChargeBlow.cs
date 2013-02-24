@@ -32,7 +32,7 @@ public class ChargeBlow : BaseAttack {
     {
         if (MainGameParameter.instance.Pause) return;
         transform.localPosition = parent.transform.localPosition + baseParameter.moveParameter.velocity;
-        if (syncCounter.IsCall || !(parent.state is CharacterChargeBlowState)) SelfDestroy();
+        if (syncCounter.IsCall || parent.state.name != (int)Character.STATENAME.ChargeBlow) SelfDestroy();
     }
 
     void OnTriggerEnter(Collider other)
