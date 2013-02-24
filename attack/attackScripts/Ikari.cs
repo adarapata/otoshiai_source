@@ -6,7 +6,7 @@ public class Ikari : BaseAttack
     public enum STATENAME
     {
         Move = 0,
-        Rerutn,
+        Return,
         Changeless = GENERICATTACKSTATENAME.Changeless
     }
 
@@ -64,7 +64,8 @@ public class Ikari : BaseAttack
 
     public void ChangeNextState(STATENAME next)
     {
-        if (next == STATENAME.Rerutn) { state = new IkariReturnState(this, parent as Murasa); }
+        if (next == STATENAME.Return) 
+        { state = new IkariReturnState(this, parent as Murasa); }
     }
     /// <summary>
     /// マップを調べて落下判定のチェック
