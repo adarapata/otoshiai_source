@@ -3,6 +3,13 @@ using System.Collections;
 
 public class Ikari : BaseAttack
 {
+    public enum STATENAME
+    {
+        Move = 0,
+        Rerutn,
+        Changeless = GENERICATTACKSTATENAME.Changeless
+    }
+
     private MapManager mapManager;
     public bool IsOutMap
     {

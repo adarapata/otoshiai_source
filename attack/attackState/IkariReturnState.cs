@@ -3,11 +3,17 @@ using System.Collections;
 
 public class IkariReturnState : BaseState {
 
-   protected MoveParameter moveParameter;
+    protected MoveParameter moveParameter;
 
     private float accel;
     private Ikari ikari;
     private Murasa returntarget;
+
+    public int name
+    {
+        get { return (int)Ikari.STATENAME.Rerutn; }
+    }
+
 	public IkariReturnState(Ikari parent,Murasa target):base(parent)
 	{
         ikari = parent;
@@ -17,7 +23,7 @@ public class IkariReturnState : BaseState {
         returntarget = target;
 	}
 	
-	public override System.Type Update()
+	public int Update()
 	{
         Homing();
 
@@ -27,7 +33,7 @@ public class IkariReturnState : BaseState {
             GameObject.Destroy(stateParent.gameObject);
         }
 
-		return null;
+        return (int)Ikari.STATENAME.Changeless;
 	}
 
     private void Homing()
