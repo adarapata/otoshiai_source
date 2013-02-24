@@ -62,9 +62,9 @@ public class Ikari : BaseAttack
         enemy.ChangeHitState(attackParameter.damage);
     }
 
-    public void ChangeNextState(System.Type next)
+    public void ChangeNextState(STATENAME next)
     {
-        if (next == typeof(IkariReturnState)) { state = new IkariReturnState(this, parent as Murasa); }
+        if (next == STATENAME.Rerutn) { state = new IkariReturnState(this, parent as Murasa); }
     }
     /// <summary>
     /// マップを調べて落下判定のチェック

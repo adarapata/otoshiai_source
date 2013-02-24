@@ -22,7 +22,7 @@ public class IkariMoveState : BaseState{
         moveParameter.speed = accel;
         accel += 0.1F;
 
-        if (ikari.IsOutMap) { ikari.ChangeNextState(typeof(IkariReturnState)); }
+        if (ikari.IsOutMap) { ikari.ChangeNextState(Ikari.STATENAME.Rerutn); }
 
 		return (int)Ikari.STATENAME.Changeless;
 	}
