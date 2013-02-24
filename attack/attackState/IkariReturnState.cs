@@ -9,9 +9,9 @@ public class IkariReturnState : BaseState {
     private Ikari ikari;
     private Murasa returntarget;
 
-    public int name
+    public override int name
     {
-        get { return (int)Ikari.STATENAME.Rerutn; }
+        get { return (int)Ikari.STATENAME.Return; }
     }
 
 	public IkariReturnState(Ikari parent,Murasa target):base(parent)
@@ -23,8 +23,8 @@ public class IkariReturnState : BaseState {
         returntarget = target;
 	}
 	
-	public int Update()
-	{
+	public override int Update()
+	{   
         Homing();
 
         if (Mathf.Abs(
@@ -38,6 +38,7 @@ public class IkariReturnState : BaseState {
 
     private void Homing()
     {
+
         int dir = GetHoming();
         moveParameter.direction += dir;
 

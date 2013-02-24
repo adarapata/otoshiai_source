@@ -191,7 +191,6 @@ public class Character : BaseCharacter {
         ParameterCheckOnState();
 
         CheckMaps();
-
     }
 
 	virtual protected IState ChangeState(STATENAME newState)
@@ -295,6 +294,10 @@ public class Character : BaseCharacter {
     /// </summary>
     protected void CheckMaps()
     {
+        //Ž€–S‹y‚Ñ—Ž‰º’†‚È‚ç‰½‚à‚µ‚È‚¢
+        if (state.name == (int)STATENAME.Fall ||
+            state.name == (int)STATENAME.Dead) { return; }
+
         //ƒ}ƒbƒv‚Ì”ÍˆÍŠO‚É‚¢‚½‚ç—Ž‰º
         bool isInside = baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
         if (!isInside) { ChangeFallState(); return;}

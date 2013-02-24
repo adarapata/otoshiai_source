@@ -11,6 +11,14 @@ public class YugiChargeSkillState : CharacterChargeSkillState {
 
     class WaitState : BaseState
     {
+        public override int name
+        {
+            get
+            {
+                return (int)SUBSTATENAME.Wait;
+            }
+        }
+
         FrameCounter frame;
         YugiChargeSkillState parent;
         public WaitState(BaseCharacter parent,YugiChargeSkillState parentState)
@@ -30,6 +38,14 @@ public class YugiChargeSkillState : CharacterChargeSkillState {
     }
     class ShotState : BaseState
     {
+        public override int name
+        {
+            get
+            {
+                return (int)SUBSTATENAME.Shot;
+            }
+        }
+
         FrameCounter frame, shotInterval;
         YugiChargeSkillState parent;
         public ShotState(BaseCharacter parent, YugiChargeSkillState parentState)
@@ -74,7 +90,7 @@ public class YugiChargeSkillState : CharacterChargeSkillState {
 	{
         var nextState = childState.Update();
         
-        if (nextState != null) { return (int)Character.STATENAME.Stay; }
+        if (nextState != (int)SUBSTATENAME.Changeless) { return (int)Character.STATENAME.Stay; }
 
         return (int)Character.STATENAME.Changeless;
 	}

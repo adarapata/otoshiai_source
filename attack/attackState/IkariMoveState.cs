@@ -7,7 +7,7 @@ public class IkariMoveState : BaseState{
     private float accel;
     private Ikari ikari;
 
-    public int name { get { return (int)Ikari.STATENAME.Move; } }
+    public override int name { get { return (int)Ikari.STATENAME.Move; } }
 
 	public IkariMoveState(Ikari parent):base(parent)
 	{
@@ -22,7 +22,7 @@ public class IkariMoveState : BaseState{
         moveParameter.speed = accel;
         accel += 0.1F;
 
-        if (ikari.IsOutMap) { ikari.ChangeNextState(Ikari.STATENAME.Rerutn); }
+        if (ikari.IsOutMap) { ikari.ChangeNextState(Ikari.STATENAME.Return); }
 
 		return (int)Ikari.STATENAME.Changeless;
 	}
