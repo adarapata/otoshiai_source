@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class BaseState :IState {
 
-    public int name { get { return 0; } }
+    virtual public int name { get { return 4; } }
 
 	/// <summary>
 	/// この状態を持つオブジェクト
