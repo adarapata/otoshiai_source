@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterChargeBlowState : CharacterBaseState {
 
-    public int name
+    public override int name
     {
         get { return (int)Character.STATENAME.ChargeBlow; }
     }

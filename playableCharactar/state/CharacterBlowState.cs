@@ -3,6 +3,10 @@ using System.Collections;
 
 public class CharacterBlowState : CharacterBaseState {
 
+    public override int name
+    {
+        get { return (int)Character.STATENAME.Blow; }
+    }
     private BlowLogic logic;
 	public CharacterBlowState(Character parent):base(parent)
 	{

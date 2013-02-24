@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterDamageState : CharacterBaseState
 {
-    public int name
+    public override int name
     {
         get { return (int)Character.STATENAME.Damage; }
     }

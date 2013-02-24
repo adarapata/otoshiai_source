@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CharacterBaseState : BaseState
 {
-    public int name
+    public override int name
     {
-        get { return 0; }
+        get { return 5; }
     }
 
 	protected Character character

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CharacterChargeSkillState : CharacterBaseState {
 
-    public int name
+    public override int name
     {
         get { return (int)Character.STATENAME.ChargeSkill; }
     }

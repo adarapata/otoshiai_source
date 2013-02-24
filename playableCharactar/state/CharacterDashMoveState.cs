@@ -6,7 +6,7 @@ public class CharacterDashMoveState : CharacterMoveState
 	private const float PARMIT_STAMINA = 5F; 
 	private const float CONSUMPTION = 0.5F;
 
-    public int name
+    public override int name
     {
         get { return (int)Character.STATENAME.DashMove; }
     }

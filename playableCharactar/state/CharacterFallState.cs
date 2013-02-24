@@ -5,7 +5,7 @@ public class CharacterFallState : CharacterBaseState
 {
 	private float scale = 0.95F;
 
-    public int name
+    public override int name
     {
         get { return (int)Character.STATENAME.Fall; }
     }

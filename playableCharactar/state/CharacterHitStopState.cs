@@ -10,7 +10,7 @@ public class CharacterHitStopState : CharacterBaseState
 		set;
 	}
 
-    public int name
+    public override int name
     {
         get { return (int)Character.STATENAME.HitStop; }
     }
