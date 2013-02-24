@@ -7,6 +7,13 @@ using System;
 /// </summary>
 public partial class Character : BaseCharacter {
 
+    public override OBJECTTYPE Type
+    {
+        get
+        {
+            return OBJECTTYPE.Character;
+        }
+    }
     /// <summary>
     /// Character‚ª‚Âó‘Ô‚Ì—ñ‹“‘Ì
     /// </summary>

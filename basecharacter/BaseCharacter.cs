@@ -6,6 +6,17 @@ using System.Collections;
 /// </summary>
 public class BaseCharacter : MonoBehaviour {
 
+    /// <summary>
+    /// オブジェクトの種類
+    /// </summary>
+    public enum OBJECTTYPE
+    {
+        Character = 0,
+        Attack,
+        Box,
+        Base
+    }
+
 	public UISprite sprite;
 	/// <summary>
 	/// 状態　　　get;set;
@@ -17,6 +28,11 @@ public class BaseCharacter : MonoBehaviour {
 		get;
 		set;
 	}
+
+    virtual public OBJECTTYPE Type
+    {
+        get { return OBJECTTYPE.Base; }
+    }
 	
 	public IAnimationController animation
 	{

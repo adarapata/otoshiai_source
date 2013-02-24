@@ -11,6 +11,14 @@ public class BaseBox : BaseCharacter {
         Changeless = GENERICSTATENAME.Changeless
     }
     protected MapManager mapManager;
+
+    public override BaseCharacter.OBJECTTYPE Type
+    {
+        get
+        {
+            return OBJECTTYPE.Box;
+        }
+    }
 	// Use this for initialization
 	void Start () {
         Init();

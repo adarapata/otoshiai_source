@@ -3,6 +3,13 @@ using System.Collections;
 
 public class BaseAttack : BaseCharacter {
 
+    public override BaseCharacter.OBJECTTYPE Type
+    {
+        get
+        {
+            return OBJECTTYPE.Attack;
+        }
+    }
     /// <summary>
     /// ƒpƒ‰ƒ[ƒ^
     /// </summary>
