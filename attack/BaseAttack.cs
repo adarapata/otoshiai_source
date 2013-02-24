@@ -49,10 +49,18 @@ public class BaseAttack : BaseCharacter {
         if (IsCheckSameTeam(other)) { return; }
         var enemy = other.GetComponent<BaseCharacter>();
 
-        if (enemy is BaseAttack) { ColliedAttack(enemy as BaseAttack); return; }
-        if (enemy is Character) { ColliedCharacter(enemy as Character); return; }
-        if (enemy is BaseBox) { ColliedBox(enemy as BaseBox); return; }
-
+        switch (enemy.Type)
+        {
+            case OBJECTTYPE.Attack:
+                ColliedAttack(enemy as BaseAttack);
+                break;
+            case OBJECTTYPE.Box:
+                ColliedBox(enemy as BaseBox);
+                break;
+            case OBJECTTYPE.Character:
+                ColliedCharacter(enemy as Character);
+                break;
+        }
     }
 
 

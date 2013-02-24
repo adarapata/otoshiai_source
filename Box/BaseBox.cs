@@ -86,7 +86,7 @@ public class BaseBox : BaseCharacter {
         if (state.name != (int)STATENAME.Move) return;
 
         var enemy = other.GetComponent<BaseCharacter>();
-        if (enemy is Character)
+        if (enemy.Type == OBJECTTYPE.Character)
         {
             ColliedCharacter(enemy as Character);
         }
