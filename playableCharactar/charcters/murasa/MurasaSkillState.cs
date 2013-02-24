@@ -1,25 +1,29 @@
 using UnityEngine;
 using System.Collections;
 
-public class MurasaSkillState: CharacterSkillState {
+
+public class MurasaSkillState : CharacterSkillState
+{
 
     private Shibuki shibuki;
-    public MurasaSkillState(Character parent):base(parent)
-	{
+    public int name { get { return (int)Character.STATENAME.Skill; } }
+    public MurasaSkillState(Character parent)
+        : base(parent)
+    {
         framecounter = new FrameCounter(20);
         parameter.stamina.quantity -= 10;
-	}
-	
-	public override System.Type Update()
-	{
+    }
+
+    public override int Update()
+    {
 
         framecounter.Update();
 
         if (framecounter.count % 3 == 0) { CreateBullet(); }
 
 
-        return framecounter.IsCall ? typeof(CharacterStayState) : null;
-	}
+        return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
+    }
 
     private void CreateBullet()
     {
