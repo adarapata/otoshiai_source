@@ -252,7 +252,7 @@ public partial class Character : BaseCharacter {
         SoundManager.Play(SoundManager.fall);
 	}
 	
-	public void MovePosition(CharacterMoveState.MoveFix fix)
+	public void MovePosition(MoveFix fix)
 	{
 		var fixVelocity = Weight.CalculateVelocityByWeight(baseParameter.moveParameter,
 																parameter.weight) * fix.quantity;
