@@ -29,6 +29,8 @@ public class PlayingState : IState{
         get { return result != EndResult.NotEnd; }
     }
 
+    public int name { get { return (int)MainGameManager.STATENAME.Playing; } }
+
     private MainGameManager parent;
     private TeamList teams;
     private EndResult result;
@@ -38,7 +40,7 @@ public class PlayingState : IState{
         teams = new TeamList(characters);
     }
 
-    public System.Type Update()
+    public int Update()
     {
         result = teams.Update();
 
@@ -47,10 +49,9 @@ public class PlayingState : IState{
             parent.AddScore(teams.winTeam);
             var count = MainGameParameter.instance.GetWinCount(teams.winTeam);
 
-            parent.SetNextState(count >= 3 ? typeof(EndState) : typeof(ResultState));
+            parent.SetNextState(count >= 3 ? MainGameManager.STATENAME.End : MainGameManager.STATENAME.Result);
         }
-
-        return null;
+        return (int)MainGameManager.STATENAME.Changeless;
     }
 }
 

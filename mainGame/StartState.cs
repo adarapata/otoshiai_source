@@ -6,6 +6,9 @@ public class StartState : IState
     private MainGameManager parent;
     //「開始」の文字
     private GameObject startWord;
+
+    public int name { get { return (int)MainGameManager.STATENAME.Start; } }
+
     public StartState(MainGameManager manager)
     {
         parent = manager;
@@ -14,9 +17,9 @@ public class StartState : IState
         startWord = Resources.Load("Objects/word/StartWord") as GameObject;
     }
 
-    public System.Type Update()
+    public int Update()
     {
-        return null;
+        return (int)MainGameManager.STATENAME.Changeless;
     }
 
     /// <summary>
@@ -36,7 +39,7 @@ public class StartState : IState
 
         GameObject.Destroy(coopys);
 
-        parent.SetNextState(typeof(PlayingState));
+        parent.SetNextState(MainGameManager.STATENAME.Playing);
 
         MainGameParameter.instance.Pause = false;
     }
