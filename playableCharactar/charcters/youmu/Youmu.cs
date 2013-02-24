@@ -5,11 +5,11 @@ public class Youmu : Character {
 
     protected override IState CreateSkillState()
     {
-        return new ReimuSkillState(this);
+        return null;
     }
     protected override IState CreateChargeSkillState()
     {
-        return new ReimuChargeSkillState(this);
+        return null;
     }
 
     void Awake()
