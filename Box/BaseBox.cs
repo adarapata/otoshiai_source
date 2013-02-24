@@ -3,6 +3,13 @@ using System.Collections;
 
 public class BaseBox : BaseCharacter {
 
+    public enum STATENAME : int
+    {
+        Stay = 0,
+        Move = GENERICSTATENAME.Move,
+        Fall = GENERICSTATENAME.Fall,
+        Changeless = GENERICSTATENAME.Changeless
+    }
     protected MapManager mapManager;
 	// Use this for initialization
 	void Start () {
@@ -30,7 +37,7 @@ public class BaseBox : BaseCharacter {
         if (MainGameParameter.instance.Pause) return;
 
         var nextSate = state.Update();
-        if (nextSate != null) { Destroy(gameObject); }
+        if (nextSate != (int)STATENAME.Changeless) { Destroy(gameObject); }
 
         if (CheckMaps()) { ChangeFallState(); }
     }
@@ -68,7 +75,7 @@ public class BaseBox : BaseCharacter {
     /// <param name="other"></param>
     protected void ColliedOnMoveState(Collider other)
     {
-        if (!(state is MoveState)) return;
+        if (state.name != (int)STATENAME.Move) return;
 
         var enemy = other.GetComponent<BaseCharacter>();
         if (enemy is Character)
@@ -79,7 +86,7 @@ public class BaseBox : BaseCharacter {
 
     protected bool CheckMaps()
     {
-        if (state is FallState) return false;
+        if (state.name == (int)STATENAME.Fall) return false;
         //マップの範囲外にいたら落下
         bool isInside = baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
         if (!isInside) { return true; }

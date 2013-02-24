@@ -5,7 +5,12 @@ public class CharacterChargeState : CharacterMoveState
 {
 	private const float MAX = 100F;
 	private readonly string pushButton;
-	
+
+    public override int name
+    {
+        get { return (int)Character.STATENAME.Charge; }
+    }
+
 	private Charge charge
 	{
 		get;
@@ -26,16 +31,16 @@ public class CharacterChargeState : CharacterMoveState
 		fix = new MoveFix(0.5F);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
 		var st = CheckOfKey();
 		
 		charge.Charging();
 				
-		return st;
+		return (int)st;
 	}
 	
-	protected override System.Type CheckOfKey()
+	protected override Character.STATENAME CheckOfKey()
 	{
 		Stick st = gamepad.pushStick;
 
@@ -49,15 +54,15 @@ public class CharacterChargeState : CharacterMoveState
 			Move();
 			AnimationFrameUpdate();
 		}
-		
-		return null;
+
+        return Character.STATENAME.Changeless;
 	}
 
-    private System.Type GetNextState()
+    private Character.STATENAME GetNextState()
     {
-        if (pushButton == Button.A) return charge.isMax ? typeof(CharacterChargeBlowState) : typeof(CharacterBlowState);
+        if (pushButton == Button.A) return charge.isMax ? Character.STATENAME.ChargeBlow : Character.STATENAME.Blow;
 
-        return charge.isMax ? typeof(CharacterChargeSkillState) : typeof(CharacterSkillState);
+        return charge.isMax ? Character.STATENAME.ChargeSkill : Character.STATENAME.Skill;
     }
 }
 

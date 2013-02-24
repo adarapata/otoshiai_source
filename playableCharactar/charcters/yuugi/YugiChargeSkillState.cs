@@ -2,8 +2,23 @@ using UnityEngine;
 using System.Collections;
 
 public class YugiChargeSkillState : CharacterChargeSkillState {
+    public enum SUBSTATENAME
+    {
+        Wait = 0,
+        Shot,
+        Changeless = GENERICSTATENAME.Changeless
+    }
+
     class WaitState : BaseState
     {
+        public override int name
+        {
+            get
+            {
+                return (int)SUBSTATENAME.Wait;
+            }
+        }
+
         FrameCounter frame;
         YugiChargeSkillState parent;
         public WaitState(BaseCharacter parent,YugiChargeSkillState parentState)
@@ -13,16 +28,24 @@ public class YugiChargeSkillState : CharacterChargeSkillState {
             this.parent = parentState;
         }
 
-        public override System.Type Update()
+        public override int Update()
         {
             frame.Update();
 
-            if (frame.IsCall) { parent.ChangeState(typeof(ShotState)); }
-            return null;
+            if (frame.IsCall) { parent.ChangeState(SUBSTATENAME.Shot); }
+            return (int)SUBSTATENAME.Changeless;
         }
     }
     class ShotState : BaseState
     {
+        public override int name
+        {
+            get
+            {
+                return (int)SUBSTATENAME.Shot;
+            }
+        }
+
         FrameCounter frame, shotInterval;
         YugiChargeSkillState parent;
         public ShotState(BaseCharacter parent, YugiChargeSkillState parentState)
@@ -33,14 +56,14 @@ public class YugiChargeSkillState : CharacterChargeSkillState {
             shotInterval = new FrameCounter(3);
         }
 
-        public override System.Type Update()
+        public override int Update()
         {
             frame.Update();
             shotInterval.Update();
 
             if (shotInterval.IsCall) { parent.CreateBullet(); }
 
-            return frame.IsCall ? typeof(BaseState) : null;
+            return (int)(frame.IsCall ? SUBSTATENAME.Shot : SUBSTATENAME.Changeless);
         }
     }
 
@@ -63,18 +86,18 @@ public class YugiChargeSkillState : CharacterChargeSkillState {
         SoundManager.Play(SoundManager.charge);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
         var nextState = childState.Update();
         
-        if (nextState != null) { return typeof(CharacterStayState); }
-      
-        return null;
+        if (nextState != (int)SUBSTATENAME.Changeless) { return (int)Character.STATENAME.Stay; }
+
+        return (int)Character.STATENAME.Changeless;
 	}
 
-    public void ChangeState(System.Type nextState)
+    public void ChangeState(SUBSTATENAME nextState)
     {
-        if (nextState == typeof(ShotState)) 
+        if (nextState == SUBSTATENAME.Shot) 
         {
             childState = new ShotState(stateParent, this);
             character.parameter.invincibly.Start(180, false);

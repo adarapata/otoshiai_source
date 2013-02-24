@@ -3,6 +3,11 @@ using System.Collections;
 
 public class CharacterBaseState : BaseState
 {
+    public override int name
+    {
+        get { return 5; }
+    }
+
 	protected Character character
 	{
 		get;

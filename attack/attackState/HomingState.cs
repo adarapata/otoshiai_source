@@ -32,12 +32,12 @@ public class HomingState : BaseState {
         interval = option.interval;
     }
 
-    public override System.Type Update()
+    public override int Update()
     {
         framecount.Update();
         Move();
 
-        return framecount.IsCall ? typeof(BaseState) : null;
+        return (int)(framecount.IsCall ? GENERICATTACKSTATENAME.Homing : GENERICATTACKSTATENAME.Changeless);
     }
 
     private void Move()

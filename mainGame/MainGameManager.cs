@@ -4,6 +4,16 @@ using System.Collections;
 
 public class MainGameManager : MonoBehaviour
 {
+    public enum STATENAME
+    {
+        Start = 0,
+        Playing,
+        Result,
+        End,
+        Pause,
+        Changeless = GENERICSTATENAME.Changeless
+    }
+
     public GameObject mapChipPanel;
     private MainGameParameter parameter;
     public GameObject[] parameterWindows;
@@ -15,6 +25,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     IState state;
+
     // Use this for initialization
     void Start()
     {
@@ -90,12 +101,20 @@ public class MainGameManager : MonoBehaviour
 
     }
 
-    public void SetNextState(System.Type next)
+    public void SetNextState(STATENAME next)
     {
-        if (next == typeof(PlayingState)) { state = new PlayingState(characters, this); }
-        if (next == typeof(ResultState)) { state = new ResultState(this); }
-        if (next == typeof(EndState)) { state = new EndState(this); }
-
+        switch (next)
+        {
+            case STATENAME.Playing:
+                state = new PlayingState(characters, this);
+                break;
+            case STATENAME.Result:
+                state = new ResultState(this);
+                break;
+            case STATENAME.End:
+                state = new EndState(this);
+                break;
+        }
     }
 
     /// <summary>

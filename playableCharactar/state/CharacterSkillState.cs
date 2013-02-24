@@ -3,13 +3,18 @@ using System.Collections;
 
 public class CharacterSkillState : CharacterBaseState {
 
+    public override int name
+    {
+        get { return (int)Character.STATENAME.Skill; }
+    }
+
     public CharacterSkillState(Character parent):base(parent)
 	{
 
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
-        return typeof(CharacterStayState);
+        return (int)Character.STATENAME.Stay;
 	}
 }

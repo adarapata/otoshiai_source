@@ -14,6 +14,7 @@ public class Reimu : Character {
 
     void Awake()
     {
+        
         InitCharacterParameter();
     }
     // Use this for initialization
