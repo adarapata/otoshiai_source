@@ -6,7 +6,7 @@ public partial class Cursol : BaseCharacter
     /// <summary>
     /// ‘I‘ğó‘Ô
     /// </summary>
-    public class SelectingState : BaseState
+    protected class SelectingState : BaseState
     {
         private Cursol cursol;
         private Player player;
