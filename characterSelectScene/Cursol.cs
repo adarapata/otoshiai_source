@@ -6,6 +6,14 @@ using System.Collections;
 /// </summary>
 public class Cursol : BaseCharacter {
 
+    public enum STATENAME
+    {
+        Selecting = 0,
+        NotJoin,
+        Decide,
+        Changeless = GENERICSTATENAME.Changeless
+    }
+
     /// <summary>
     /// 選択状態
     /// </summary>
@@ -14,6 +22,8 @@ public class Cursol : BaseCharacter {
         private Cursol cursol;
         private Player player;
         private Vector3 velocity;
+
+        public int name { get { return (int)STATENAME.Selecting; } }
 
         public SelectingState(Cursol parent, Player p)
             : base(parent)
@@ -27,7 +37,7 @@ public class Cursol : BaseCharacter {
         }
 
         // Update is called once per frame
-        public override System.Type Update()
+        public override int Update()
         {
             if (player.gamepad.IsPushStick(Stick.Right)) { MoveRight(); }
             if (player.gamepad.IsPushStick(Stick.Left)) { MoveLeft(); }
@@ -36,12 +46,12 @@ public class Cursol : BaseCharacter {
             {
                 SoundManager.Play(SoundManager.cursor1);
                 SettingCollieder();
-                return typeof(DecideState);
+                return (int)STATENAME.Decide;
             }
 
-            if (player.gamepad.IsDown(Button.D)) { return Leave(); }
+            if (player.gamepad.IsDown(Button.D)) { return (int)Leave(); }
 
-            return null;
+            return (int)STATENAME.Changeless;
         }
 
         private void MoveLeft()
@@ -85,12 +95,12 @@ public class Cursol : BaseCharacter {
         /// <summary>
         /// ゲームに不参加とする
         /// </summary>
-        private System.Type Leave()
+        private STATENAME Leave()
         {
             SoundManager.Play(SoundManager.cursor2);
             cursol.RejectScaling();
             WipePanel();
-            return typeof(NotJoinState);
+            return STATENAME.NotJoin;
         }
 
         private void WipePanel()
@@ -105,22 +115,26 @@ public class Cursol : BaseCharacter {
     public class NotJoinState : BaseState
     {
         GamePad gamePad;
+
+        public int name { get { return (int)STATENAME.NotJoin; } }
+
+
         public NotJoinState(Cursol parent, GamePad pad)
             : base(parent)
         {
             gamePad = pad;
         }
 
-        public override System.Type Update()
+        public override int Update()
         {
             if (gamePad.IsDown(Button.A) || gamePad.IsDown(Button.Start))
             {
                 WipePanel();
                 SoundManager.Play(SoundManager.cursor1);
-                return typeof(SelectingState);
+                return (int)STATENAME.Selecting;
             }
 
-            return null;
+            return (int)STATENAME.Changeless;
         }
 
         private void WipePanel()
@@ -135,19 +149,22 @@ public class Cursol : BaseCharacter {
     public class DecideState : BaseState
     {
         private Player player;
+
+        public int name { get { return (int)STATENAME.Decide; } }
+
         public DecideState(Cursol parent, Player p)
             : base(parent)
         {
             player = p;
         }
 
-        public override System.Type Update()
+        public override int Update()
         {
             if (player.gamepad.IsDown(Button.D))
             {
                 MainGameParameter.instance.players.Remove(player);
                 SoundManager.Play(SoundManager.cursor2);
-                return typeof(SelectingState);
+                return (int)STATENAME.Selecting;
             }
 
             if (player.gamepad.IsDown(Button.A) || player.gamepad.IsDown(Button.Start))
@@ -159,7 +176,7 @@ public class Cursol : BaseCharacter {
                 }
             }
 
-            return null;
+            return (int)STATENAME.Changeless;
         }
     }
 
@@ -188,16 +205,22 @@ public class Cursol : BaseCharacter {
 
         var nextState = state.Update();
 
-        if (nextState != null) { state = ChangeState(nextState); }
+        if (nextState != (int)STATENAME.Changeless) { state = ChangeState((STATENAME)nextState); }
 
 
 	}
 
-    private BaseState ChangeState(System.Type next)
+    private BaseState ChangeState(STATENAME next)
     {
-        if (next == typeof(NotJoinState)) { return new NotJoinState(this, pad); }
-        if (next == typeof(SelectingState)) { return new SelectingState(this, parent); }
-        if (next == typeof(DecideState)) { return new DecideState(this,parent); }
+        switch (next)
+        {
+            case STATENAME.NotJoin:
+                return new NotJoinState(this, pad);
+            case STATENAME.Selecting:
+                return new SelectingState(this, parent);
+            case STATENAME.Decide:
+                return new DecideState(this,parent);
+        }
 
         return null;
     }
