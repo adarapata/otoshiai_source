@@ -3,71 +3,13 @@ using System.Collections;
 
 public partial class Yugi : Character
 {
-    protected class YugiChargeSkillState : CharacterChargeSkillState
+    protected partial class YugiChargeSkillState : CharacterChargeSkillState
     {
         public enum SUBSTATENAME
         {
             Wait = 0,
             Shot,
             Changeless = GENERICSTATENAME.Changeless
-        }
-
-        class WaitState : BaseState
-        {
-            public override int name
-            {
-                get
-                {
-                    return (int)SUBSTATENAME.Wait;
-                }
-            }
-
-            FrameCounter frame;
-            YugiChargeSkillState parent;
-            public WaitState(BaseCharacter parent, YugiChargeSkillState parentState)
-                : base(parent)
-            {
-                frame = new FrameCounter(180);
-                this.parent = parentState;
-            }
-
-            public override int Update()
-            {
-                frame.Update();
-
-                if (frame.IsCall) { parent.ChangeState(SUBSTATENAME.Shot); }
-                return (int)SUBSTATENAME.Changeless;
-            }
-        }
-        class ShotState : BaseState
-        {
-            public override int name
-            {
-                get
-                {
-                    return (int)SUBSTATENAME.Shot;
-                }
-            }
-
-            FrameCounter frame, shotInterval;
-            YugiChargeSkillState parent;
-            public ShotState(BaseCharacter parent, YugiChargeSkillState parentState)
-                : base(parent)
-            {
-                this.parent = parentState;
-                frame = new FrameCounter(180);
-                shotInterval = new FrameCounter(3);
-            }
-
-            public override int Update()
-            {
-                frame.Update();
-                shotInterval.Update();
-
-                if (shotInterval.IsCall) { parent.CreateBullet(); }
-
-                return (int)(frame.IsCall ? SUBSTATENAME.Shot : SUBSTATENAME.Changeless);
-            }
         }
 
         private GameObject circle;
