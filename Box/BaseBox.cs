@@ -11,6 +11,14 @@ public class BaseBox : BaseCharacter {
         Changeless = GENERICSTATENAME.Changeless
     }
     protected MapManager mapManager;
+
+    public override BaseCharacter.OBJECTTYPE Type
+    {
+        get
+        {
+            return OBJECTTYPE.Box;
+        }
+    }
 	// Use this for initialization
 	void Start () {
         Init();
@@ -78,7 +86,7 @@ public class BaseBox : BaseCharacter {
         if (state.name != (int)STATENAME.Move) return;
 
         var enemy = other.GetComponent<BaseCharacter>();
-        if (enemy is Character)
+        if (enemy.Type == OBJECTTYPE.Character)
         {
             ColliedCharacter(enemy as Character);
         }

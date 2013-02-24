@@ -7,6 +7,13 @@ using System;
 /// </summary>
 public partial class Character : BaseCharacter {
 
+    public override OBJECTTYPE Type
+    {
+        get
+        {
+            return OBJECTTYPE.Character;
+        }
+    }
     /// <summary>
     /// Character‚ª‚Âó‘Ô‚Ì—ñ‹“‘Ì
     /// </summary>
@@ -316,7 +323,7 @@ public partial class Character : BaseCharacter {
     void OnTriggerStay(Collider other)
     {
         var enemy = other.GetComponent<BaseCharacter>();
-        if (enemy is BaseBox) CheckColliedingBox(enemy as BaseBox);
+        if (enemy.Type == OBJECTTYPE.Box) CheckColliedingBox(enemy as BaseBox);
     }
 
     virtual protected void ColliedCheck(Collider other)
@@ -324,7 +331,7 @@ public partial class Character : BaseCharacter {
         if (IsCheckSameTeam(other)) return;
 
         var enemy = other.GetComponent<BaseCharacter>();
-        if (enemy is Character) CheckColliedByCharacter(enemy as Character);
+        if (enemy.Type == OBJECTTYPE.Character) CheckColliedByCharacter(enemy as Character);
     }
 
     /// <summary>
