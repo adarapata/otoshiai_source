@@ -27,7 +27,7 @@ public class Character : BaseCharacter {
         /// <summary>
         /// ïœçXÇµÇ»Ç¢
         /// </summary>
-        Changeless
+        Changeless = GENERICSTATENAME.Changeless
     }
 
 
