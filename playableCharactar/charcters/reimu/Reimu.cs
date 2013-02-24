@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Reimu : Character {
+public partial class Reimu : Character {
 
     protected override IState CreateSkillState() 
     {

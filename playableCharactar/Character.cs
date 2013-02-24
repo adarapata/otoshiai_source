@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// プレイヤーから操作できるキャラクター
 /// </summary>
-public class Character : BaseCharacter {
+public partial class Character : BaseCharacter {
 
     /// <summary>
     /// Characterが持つ状態の列挙体
@@ -29,7 +29,6 @@ public class Character : BaseCharacter {
         /// </summary>
         Changeless = GENERICSTATENAME.Changeless
     }
-
 
     /// <summary>
     /// 初期パラメータ
@@ -253,7 +252,7 @@ public class Character : BaseCharacter {
         SoundManager.Play(SoundManager.fall);
 	}
 	
-	public void MovePosition(CharacterMoveState.MoveFix fix)
+	public void MovePosition(MoveFix fix)
 	{
 		var fixVelocity = Weight.CalculateVelocityByWeight(baseParameter.moveParameter,
 																parameter.weight) * fix.quantity;

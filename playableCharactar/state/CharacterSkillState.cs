@@ -1,20 +1,25 @@
 using UnityEngine;
 using System.Collections;
 
-public class CharacterSkillState : CharacterBaseState {
-
-    public override int name
+public partial class Character : BaseCharacter
+{
+    protected class CharacterSkillState : CharacterBaseState
     {
-        get { return (int)Character.STATENAME.Skill; }
+
+        public override int name
+        {
+            get { return (int)STATENAME.Skill; }
+        }
+
+        public CharacterSkillState(Character parent)
+            : base(parent)
+        {
+
+        }
+
+        public override int Update()
+        {
+            return (int)STATENAME.Stay;
+        }
     }
-
-    public CharacterSkillState(Character parent):base(parent)
-	{
-
-	}
-	
-	public override int Update()
-	{
-        return (int)Character.STATENAME.Stay;
-	}
 }

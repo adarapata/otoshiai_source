@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 
-public class MainGameManager : MonoBehaviour
+public partial class MainGameManager : MonoBehaviour
 {
     public enum STATENAME
     {
