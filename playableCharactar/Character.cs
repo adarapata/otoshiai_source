@@ -327,9 +327,13 @@ public partial class Character : BaseCharacter {
         if (enemy is Character) CheckColliedByCharacter(enemy as Character);
     }
 
+    /// <summary>
+    /// ƒLƒƒƒ‰‚ÆÕ“Ë‚µ‚½ê‡‚Ì”»’è
+    /// </summary>
+    /// <param name="enemy"></param>
     protected void CheckColliedByCharacter(Character enemy)
     {
-        if (state is CharacterDamageState)
+        if (state.name == (int)STATENAME.Damage)
         {
             var d = parameter.damage;
             Damage damageToEnemy = new Damage(10, false, d.damageParameter.damage, d.damageParameter.direction, false);
@@ -344,7 +348,7 @@ public partial class Character : BaseCharacter {
     /// <param name="box"></param>
     protected void CheckColliedingBox(BaseBox box)
     {
-        if (state is CharacterDamageState) 
+        if (state.name == (int)STATENAME.Damage) 
         {
             box.Crash();
             parameter.damage.damageParameter.damage = 1;
