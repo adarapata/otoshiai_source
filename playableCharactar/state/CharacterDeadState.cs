@@ -3,6 +3,10 @@ using System.Collections;
 
 public class CharacterDeadState : CharacterBaseState
 {
+    public override int name
+    {
+        get { return (int)Character.STATENAME.Dead; }
+    }
     /// <summary>
     /// コンストラクタ
     /// </summary>
@@ -12,9 +16,9 @@ public class CharacterDeadState : CharacterBaseState
 
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
-		return null;
+        return (int)Character.STATENAME.Changeless;
 	}
 }
 

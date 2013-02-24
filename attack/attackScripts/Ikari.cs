@@ -3,6 +3,13 @@ using System.Collections;
 
 public class Ikari : BaseAttack
 {
+    public enum STATENAME
+    {
+        Move = 0,
+        Return,
+        Changeless = GENERICATTACKSTATENAME.Changeless
+    }
+
     private MapManager mapManager;
     public bool IsOutMap
     {
@@ -55,9 +62,10 @@ public class Ikari : BaseAttack
         enemy.ChangeHitState(attackParameter.damage);
     }
 
-    public void ChangeNextState(System.Type next)
+    public void ChangeNextState(STATENAME next)
     {
-        if (next == typeof(IkariReturnState)) { state = new IkariReturnState(this, parent as Murasa); }
+        if (next == STATENAME.Return) 
+        { state = new IkariReturnState(this, parent as Murasa); }
     }
     /// <summary>
     /// マップを調べて落下判定のチェック

@@ -3,6 +3,10 @@ using System.Collections;
 
 public class CharacterChargeBlowState : CharacterBaseState {
 
+    public override int name
+    {
+        get { return (int)Character.STATENAME.ChargeBlow; }
+    }
     private BlowLogic logic;
 	public CharacterChargeBlowState(Character parent):base(parent)
 	{
@@ -19,13 +23,13 @@ public class CharacterChargeBlowState : CharacterBaseState {
         parameter.invincibly.Start(7, false);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
         framecounter.Update();
 
         CharacterMove();
 
-        return logic.Update();
+        return (int)logic.Update();
     }
 
     private void CharacterMove()

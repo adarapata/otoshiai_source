@@ -3,6 +3,11 @@ using System.Collections;
 
 public class HomingAmulet : BaseAttack {
 
+    public enum STATENAME
+    {
+        Homing = GENERICATTACKSTATENAME.Homing,
+        Changeless = GENERICATTACKSTATENAME.Changeless
+    }
     private Character target;
     void Awake()
     {
@@ -40,9 +45,9 @@ public class HomingAmulet : BaseAttack {
 
         sprite.transform.localEulerAngles += new Vector3(0, 0, 5);
         
-        System.Type type = state.Update();
+        var type = state.Update();
         
-        if (type != null) SelfDestroy();
+        if (type != (int)STATENAME.Changeless) SelfDestroy();
 
         CheckOutLine();
 

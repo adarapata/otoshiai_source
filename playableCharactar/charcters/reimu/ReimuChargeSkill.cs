@@ -11,12 +11,12 @@ public class ReimuChargeSkillState : CharacterChargeSkillState {
         parameter.stamina.quantity -= 10;
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
 
         framecounter.Update();
 
-        return framecounter.IsCall ? typeof(CharacterStayState) : null;
+        return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
 	}
 
     private void CreateBullet()

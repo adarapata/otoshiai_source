@@ -1,10 +1,35 @@
 using UnityEngine;
 using System.Collections;
 using System;
+
 /// <summary>
 /// プレイヤーから操作できるキャラクター
 /// </summary>
 public class Character : BaseCharacter {
+
+    /// <summary>
+    /// Characterが持つ状態の列挙体
+    /// </summary>
+    public enum STATENAME : int
+    {
+        Stay = 0,
+        Blow,
+        ChargeBlow,
+        ChargeSkill,
+        Charge,
+        Damage,
+        DashMove,
+        Dead,
+        Fall,
+        HitStop,
+        Move,
+        Skill,
+        /// <summary>
+        /// 変更しない
+        /// </summary>
+        Changeless = GENERICSTATENAME.Changeless
+    }
+
 
     /// <summary>
     /// 初期パラメータ
@@ -154,12 +179,11 @@ public class Character : BaseCharacter {
 
         parent.gamepad.Update();
 
-        Type newState = state.Update();
+        var nextState = state.Update();
 
-        if (newState != null)
+        if (nextState != (int)STATENAME.Changeless)
         {
-            //Debug.Log(newState);
-            state = ChangeState(newState);
+            state = ChangeState((STATENAME)nextState);
         }
         baseParameter.Update();
         parameter.Update();
@@ -167,22 +191,35 @@ public class Character : BaseCharacter {
         ParameterCheckOnState();
 
         CheckMaps();
-
     }
 
-	virtual protected IState ChangeState(Type newState)
+	virtual protected IState ChangeState(STATENAME newState)
 	{
-        if (newState == typeof(CharacterStayState)) return CreateStayState();
-        if (newState == typeof(CharacterMoveState)) return CreateMoveState();
-        if (newState == typeof(CharacterDashMoveState)) return CreateDashState();
-        if (newState == typeof(CharacterChargeState)) return CreateChargeState(parent.gamepad.GetChargeButton);
-        if (newState == typeof(CharacterFallState)) return CreateFallState();
-        if (newState == typeof(CharacterDeadState)) return CreateDeadState();
-        if (newState == typeof(CharacterDamageState)) return CreateDamageState(parameter.damage.damageParameter);
-        if (newState == typeof(CharacterBlowState)) return CreateBlowState();
-        if (newState == typeof(CharacterChargeBlowState)) return CreateChargeBlowState();
-        if (newState == typeof(CharacterSkillState)) return CreateSkillState();
-        if (newState == typeof(CharacterChargeSkillState)) return CreateChargeSkillState();
+        switch (newState)
+        {
+            case STATENAME.Stay:
+                return CreateStayState();
+            case STATENAME.Move:
+                return CreateMoveState();
+            case STATENAME.DashMove:
+                return CreateDashState();
+            case STATENAME.Charge:
+                return CreateChargeState(parent.gamepad.GetChargeButton);
+            case STATENAME.Blow:
+                return CreateBlowState();
+            case STATENAME.ChargeBlow:
+                return CreateChargeBlowState();
+            case STATENAME.Skill:
+                return CreateSkillState();
+            case STATENAME.ChargeSkill:
+                return CreateChargeSkillState();
+            case STATENAME.Damage:
+                return CreateDamageState(parameter.damage.damageParameter);
+            case STATENAME.Fall:
+                return CreateFallState();
+            case STATENAME.Dead:
+                return CreateDeadState();
+        }
         
         return null;
 	}
@@ -197,7 +234,7 @@ public class Character : BaseCharacter {
         if (parameter.invincibly.flag) return;
 
         //すでにHitStop状態なら、HitStopを重ねがけ
-        if (state is CharacterHitStopState)
+        if (state.name == (int)STATENAME.HitStop)
         {
             parameter.damage = damage.AddDamage(parameter.damage);
             return;
@@ -208,8 +245,10 @@ public class Character : BaseCharacter {
 	public void ChangeFallState()
 	{
         //死亡及び落下中なら何もしない
-        if (state is CharacterFallState) return;
-        if (state is CharacterDeadState) return;
+        if (state.name == (int)STATENAME.Fall ||
+            state.name == (int)STATENAME.Dead) return;
+
+
         state = CreateFallState();
         SoundManager.Play(SoundManager.fall);
 	}
@@ -223,21 +262,22 @@ public class Character : BaseCharacter {
 	
 	protected void ParameterCheckOnState()
 	{
-		if(!(state is CharacterChargeState))
+		if(state.name != (int)STATENAME.Charge)
 		{
             parameter.attackCharge.Clear();
             parameter.skillCharge.Clear();
 		}
-		
-		if(state is CharacterFallState)
-		{
-			collider.enabled = false;
-		}
-		if(state is CharacterDeadState)
-		{
-            gameObject.SetActive(false);
 
-		}
+        switch ((STATENAME)state.name)
+        {
+            case STATENAME.Fall:
+                collider.enabled = false;
+                break;
+            case STATENAME.Dead:
+                gameObject.SetActive(false);
+                break;
+        }
+
 	}
 	
 	virtual protected void StayStateCheck()
@@ -254,6 +294,10 @@ public class Character : BaseCharacter {
     /// </summary>
     protected void CheckMaps()
     {
+        //死亡及び落下中なら何もしない
+        if (state.name == (int)STATENAME.Fall ||
+            state.name == (int)STATENAME.Dead) { return; }
+
         //マップの範囲外にいたら落下
         bool isInside = baseParameter.mapPosition.SetChipPositionByScreenPosition(transform.localPosition);
         if (!isInside) { ChangeFallState(); return;}

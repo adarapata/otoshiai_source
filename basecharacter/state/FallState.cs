@@ -5,7 +5,12 @@ using System.Collections;
 /// 汎用的な落下State
 /// </summary>
 public class FallState : BaseState {
-    
+
+    public int name
+    {
+        get { return (int)GENERICSTATENAME.Fall; }
+    }
+
     private FrameCounter framecounter;
     private float scale = 0.95F;
 	public FallState(BaseCharacter parent):base(parent)
@@ -13,13 +18,13 @@ public class FallState : BaseState {
 		framecounter = new FrameCounter(60);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
 		var state = FrameUpdate();
 		
 		Falling();
 		
-		return state;
+		return (int)state;
 	}
 	
 	private void Falling()
@@ -34,9 +39,9 @@ public class FallState : BaseState {
     /// 状態が終了した場合、nullを返す
     /// </summary>
     /// <returns></returns>
-    private System.Type FrameUpdate()
+    private GENERICSTATENAME FrameUpdate()
     {
         framecounter.Update();
-        return framecounter.IsCall ? typeof(BaseState) : null;
+        return framecounter.IsCall ? GENERICSTATENAME.Changeless : GENERICSTATENAME.Fall;
     }
 }

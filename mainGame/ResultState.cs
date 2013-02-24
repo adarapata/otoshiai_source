@@ -5,6 +5,9 @@ public class ResultState : IState {
 
     private MainGameManager parent;
     FrameCounter frame;
+
+    public int name { get { return (int)MainGameManager.STATENAME.Result; } }
+
     public ResultState(MainGameManager manager)
     {
         parent = manager;
@@ -12,12 +15,12 @@ public class ResultState : IState {
     }
 
 
-    public System.Type Update()
+    public int Update()
     {
         frame.Update();
 
         if (frame.IsCall) { parent.Retry(); }
-        
-        return null;
+
+        return (int)MainGameManager.STATENAME.Changeless;
     }
 }

@@ -3,6 +3,11 @@ using System.Collections;
 
 public class CharacterDamageState : CharacterBaseState
 {
+    public override int name
+    {
+        get { return (int)Character.STATENAME.Damage; }
+    }
+
 	private DamageParameter damageParameter
 	{
 		get;
@@ -14,17 +19,17 @@ public class CharacterDamageState : CharacterBaseState
 		damageParameter.DamageCalculate(character.parameter);
 	}
 	
-	public override System.Type Update()
+	public override int Update()
 	{
 		var state = BlowOffDamage();
-		return state;
+		return (int)state;
 	}
 	
     /// <summary>
     /// êÅÇ¡îÚÇ—èàóù
     /// </summary>
     /// <returns></returns>
-	private System.Type BlowOffDamage()
+	private Character.STATENAME BlowOffDamage()
 	{
         character.collider.enabled = false;
 		character.transform.localPosition += damageParameter.velocity;
@@ -34,10 +39,10 @@ public class CharacterDamageState : CharacterBaseState
             CreateBlinkAndInvincibly(60);
             character.parameter.damage = null;
             character.collider.enabled = true;
-            return typeof(CharacterStayState); 
+            return Character.STATENAME.Stay; 
         }
-		
-		return null;
+
+        return Character.STATENAME.Changeless;
 	}
 
     /// <summary>
