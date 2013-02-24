@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Murasa : Character
+public partial class Murasa : Character
 {
     public GameObject ikari;
 

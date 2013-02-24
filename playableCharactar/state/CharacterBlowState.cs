@@ -1,96 +1,100 @@
 using UnityEngine;
 using System.Collections;
 
-public class CharacterBlowState : CharacterBaseState {
-
-    public override int name
-    {
-        get { return (int)Character.STATENAME.Blow; }
-    }
-    private BlowLogic logic;
-	public CharacterBlowState(Character parent):base(parent)
-	{
-        framecounter = new FrameCounter(7);
-        var move = new MoveParameter(character.frontDirection, 5F);
-        var blow = (GameObject.Instantiate(AttackLibrary.GetInstance.blow) as GameObject)
-            .GetComponent<NormalBlow>();
-
-        blow.parent = character;
-        blow.syncCounter = framecounter;
-        SoundManager.Play(SoundManager.attackLight);
-
-        logic = new BlowLogic(move, blow.gameObject, framecounter);
-        parameter.invincibly.Start(7, false);
-	}
-	
-	public override int Update()
-	{
-        framecounter.Update();
-
-        CharacterMove();
-
-        return (int)logic.Update();
-    }
-
-    private void CharacterMove()
-    {
-        character.transform.localPosition += logic.move.velocity;
-    }
-}
-
-public class BlowLogic
+public partial class Character : BaseCharacter
 {
-    private GameObject blow;
-    public MoveParameter move
+    protected class CharacterBlowState : CharacterBaseState
     {
-        get;
-        set;
-    }
-    private bool isReturn;
-    FrameCounter framecounter;
-	public BlowLogic(MoveParameter m, GameObject target, FrameCounter sync)
-	{
-        move = m;
-
-        blow = target;
-
-        framecounter = sync;
-	}
-	
-	public Character.STATENAME Update()
-	{
-        if (IsChangeTiming())
+        public override int name
         {
-            var nextState = isReturn ? Character.STATENAME.Stay : Character.STATENAME.Changeless;
-            CheckCall();
-            return nextState;
+            get { return (int)STATENAME.Blow; }
+        }
+        private BlowLogic logic;
+        public CharacterBlowState(Character parent)
+            : base(parent)
+        {
+            framecounter = new FrameCounter(7);
+            var move = new MoveParameter(character.frontDirection, 5F);
+            var blow = (GameObject.Instantiate(AttackLibrary.GetInstance.blow) as GameObject)
+                .GetComponent<NormalBlow>();
+
+            blow.parent = character;
+            blow.syncCounter = framecounter;
+            SoundManager.Play(SoundManager.attackLight);
+
+            logic = new BlowLogic(move, blow.gameObject, framecounter);
+            parameter.invincibly.Start(7, false);
         }
 
-        return Character.STATENAME.Changeless;
-	}
-
-    private void CheckCall()
-    {
-        if (!isReturn) ChangeDirection();
-    }
-
-    private bool IsChangeTiming()
-    {
-        if (blow == null)
+        public override int Update()
         {
-            return isReturn ? framecounter.IsCall :
-                true;
+            framecounter.Update();
+
+            CharacterMove();
+
+            return (int)logic.Update();
         }
 
-        return framecounter.IsCall;
-    }
-    private void ChangeDirection()
-    {
-        move.direction += 180;
-        isReturn = true;
-        if (blow == null)
+        private void CharacterMove()
         {
-            framecounter.ChangeCallTiming(framecounter.count);
+            character.transform.localPosition += logic.move.velocity;
+        }
+    }
+
+    protected class BlowLogic
+    {
+        private GameObject blow;
+        public MoveParameter move
+        {
+            get;
+            set;
+        }
+        private bool isReturn;
+        FrameCounter framecounter;
+        public BlowLogic(MoveParameter m, GameObject target, FrameCounter sync)
+        {
+            move = m;
+
+            blow = target;
+
+            framecounter = sync;
+        }
+
+        public STATENAME Update()
+        {
+            if (IsChangeTiming())
+            {
+                var nextState = isReturn ? STATENAME.Stay : STATENAME.Changeless;
+                CheckCall();
+                return nextState;
+            }
+
+            return STATENAME.Changeless;
+        }
+
+        private void CheckCall()
+        {
+            if (!isReturn) ChangeDirection();
+        }
+
+        private bool IsChangeTiming()
+        {
+            if (blow == null)
+            {
+                return isReturn ? framecounter.IsCall :
+                    true;
+            }
+
+            return framecounter.IsCall;
+        }
+        private void ChangeDirection()
+        {
+            move.direction += 180;
+            isReturn = true;
+            if (blow == null)
+            {
+                framecounter.ChangeCallTiming(framecounter.count);
+            }
         }
     }
 }

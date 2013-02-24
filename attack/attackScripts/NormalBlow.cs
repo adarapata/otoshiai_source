@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class NormalBlow : BaseAttack {
+public class NormalBlow : BaseAttack
+{
 
 
     public FrameCounter syncCounter
@@ -33,7 +34,7 @@ public class NormalBlow : BaseAttack {
     {
         if (MainGameParameter.instance.Pause) return;
         transform.localPosition = parent.transform.localPosition + baseParameter.moveParameter.velocity;
-        if (syncCounter.IsCall || !(parent.state is CharacterBlowState)) SelfDestroy();
+        if (syncCounter.IsCall || parent.state.name != (int)Character.STATENAME.Blow) SelfDestroy();
     }
 
     void OnTriggerEnter(Collider other)

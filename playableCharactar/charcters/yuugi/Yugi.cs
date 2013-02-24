@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Yugi : Character {
+public partial class Yugi : Character {
 
     protected override IState CreateSkillState()
     {

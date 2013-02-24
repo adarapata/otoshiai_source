@@ -16,7 +16,7 @@ public class Circle : BaseCharacter {
         sprite.pivot = UIWidget.Pivot.Bottom;
         sprite.pivot = UIWidget.Pivot.Center;
 
-        if(!(parent.state is YugiChargeSkillState))
+        if(parent.state.name != (int)Character.STATENAME.ChargeSkill)
         {
             Destroy(gameObject);
         }
