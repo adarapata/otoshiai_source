@@ -10,3 +10,9 @@ enum GENERICSTATENAME : int
     Move,
     Fall
 }
+
+enum GENERICATTACKSTATENAME : int
+{
+    Homing = 0,
+    Changeless = GENERICSTATENAME.Changeless
+}
