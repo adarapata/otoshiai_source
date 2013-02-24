@@ -8,7 +8,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.ChargeSkill; }
+            get { return (int)STATENAME.ChargeSkill; }
         }
         public CharacterChargeSkillState(Character parent)
             : base(parent)
@@ -18,7 +18,7 @@ public partial class Character : BaseCharacter
 
         public override int Update()
         {
-            return (int)Character.STATENAME.Stay;
+            return (int)STATENAME.Stay;
         }
     }
 }

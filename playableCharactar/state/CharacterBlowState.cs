@@ -5,10 +5,9 @@ public partial class Character : BaseCharacter
 {
     protected class CharacterBlowState : CharacterBaseState
     {
-
         public override int name
         {
-            get { return (int)Character.STATENAME.Blow; }
+            get { return (int)STATENAME.Blow; }
         }
         private BlowLogic logic;
         public CharacterBlowState(Character parent)
@@ -61,16 +60,16 @@ public partial class Character : BaseCharacter
             framecounter = sync;
         }
 
-        public Character.STATENAME Update()
+        public STATENAME Update()
         {
             if (IsChangeTiming())
             {
-                var nextState = isReturn ? Character.STATENAME.Stay : Character.STATENAME.Changeless;
+                var nextState = isReturn ? STATENAME.Stay : STATENAME.Changeless;
                 CheckCall();
                 return nextState;
             }
 
-            return Character.STATENAME.Changeless;
+            return STATENAME.Changeless;
         }
 
         private void CheckCall()

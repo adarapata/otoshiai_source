@@ -8,7 +8,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.ChargeBlow; }
+            get { return (int)STATENAME.ChargeBlow; }
         }
         private BlowLogic logic;
         public CharacterChargeBlowState(Character parent)

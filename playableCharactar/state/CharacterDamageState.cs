@@ -7,7 +7,7 @@ public partial class Character : BaseCharacter
     {
         public override int name
         {
-            get { return (int)Character.STATENAME.Damage; }
+            get { return (int)STATENAME.Damage; }
         }
 
         private DamageParameter damageParameter
@@ -32,7 +32,7 @@ public partial class Character : BaseCharacter
         /// êÅÇ¡îÚÇ—èàóù
         /// </summary>
         /// <returns></returns>
-        private Character.STATENAME BlowOffDamage()
+        private STATENAME BlowOffDamage()
         {
             character.collider.enabled = false;
             character.transform.localPosition += damageParameter.velocity;
@@ -42,10 +42,10 @@ public partial class Character : BaseCharacter
                 CreateBlinkAndInvincibly(60);
                 character.parameter.damage = null;
                 character.collider.enabled = true;
-                return Character.STATENAME.Stay;
+                return STATENAME.Stay;
             }
 
-            return Character.STATENAME.Changeless;
+            return STATENAME.Changeless;
         }
 
         /// <summary>

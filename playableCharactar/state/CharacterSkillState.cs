@@ -8,7 +8,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.Skill; }
+            get { return (int)STATENAME.Skill; }
         }
 
         public CharacterSkillState(Character parent)
@@ -19,7 +19,7 @@ public partial class Character : BaseCharacter
 
         public override int Update()
         {
-            return (int)Character.STATENAME.Stay;
+            return (int)STATENAME.Stay;
         }
     }
 }

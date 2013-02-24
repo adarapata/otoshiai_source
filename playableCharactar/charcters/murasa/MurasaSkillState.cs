@@ -7,7 +7,7 @@ public partial class Murasa : Character
     {
 
         private Shibuki shibuki;
-        public int name { get { return (int)Character.STATENAME.Skill; } }
+        public int name { get { return (int)STATENAME.Skill; } }
         public MurasaSkillState(Character parent)
             : base(parent)
         {
@@ -23,7 +23,7 @@ public partial class Murasa : Character
             if (framecounter.count % 3 == 0) { CreateBullet(); }
 
 
-            return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
+            return (int)(framecounter.IsCall ? STATENAME.Stay : STATENAME.Changeless);
         }
 
         private void CreateBullet()

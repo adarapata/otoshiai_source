@@ -14,7 +14,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.HitStop; }
+            get { return (int)STATENAME.HitStop; }
         }
 
         private HitStop hitstop
@@ -36,10 +36,10 @@ public partial class Character : BaseCharacter
         public override int Update()
         {
             hitstop.Update();
-            if (hitstop.isEnd) { return (int)Character.STATENAME.Damage; }
+            if (hitstop.isEnd) { return (int)STATENAME.Damage; }
 
             CharacterShake();
-            return (int)Character.STATENAME.Changeless;
+            return (int)STATENAME.Changeless;
         }
 
         /// <summary>

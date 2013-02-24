@@ -10,7 +10,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.DashMove; }
+            get { return (int)STATENAME.DashMove; }
         }
 
         public CharacterDashMoveState(Character parent, IGamePad pad)
@@ -38,20 +38,20 @@ public partial class Character : BaseCharacter
             return (int)newState;
         }
 
-        protected override Character.STATENAME CheckOfKey()
+        protected override STATENAME CheckOfKey()
         {
             Stick st = gamepad.pushStick;
 
-            if (st == Stick.None) return Character.STATENAME.Stay;
+            if (st == Stick.None) return STATENAME.Stay;
 
-            if (gamepad.IsPush(Button.A) | gamepad.IsPush(Button.B)) return Character.STATENAME.Charge;
+            if (gamepad.IsPush(Button.A) | gamepad.IsPush(Button.B)) return STATENAME.Charge;
 
             SetDirectionByStick(st);
 
             if (!gamepad.IsPush(Button.D) || parameter.stamina.quantity < CONSUMPTION)
-                return Character.STATENAME.Move;
+                return STATENAME.Move;
 
-            return Character.STATENAME.Changeless;
+            return STATENAME.Changeless;
         }
 
         private void StaminaUse()
@@ -64,5 +64,4 @@ public partial class Character : BaseCharacter
             return stamina.quantity > PARMIT_STAMINA;
         }
     }
-
 }

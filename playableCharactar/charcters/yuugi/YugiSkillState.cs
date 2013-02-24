@@ -20,7 +20,7 @@ public partial class Yugi : Character
 
             framecounter.Update();
 
-            return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
+            return (int)(framecounter.IsCall ? STATENAME.Stay : STATENAME.Changeless);
         }
 
         private void CreateBullet()

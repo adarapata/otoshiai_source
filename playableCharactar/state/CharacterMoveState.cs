@@ -29,7 +29,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.Move; }
+            get { return (int)STATENAME.Move; }
         }
 
         public CharacterMoveState(Character parent, IGamePad pad)
@@ -60,20 +60,20 @@ public partial class Character : BaseCharacter
         }
 
 
-        virtual protected Character.STATENAME CheckOfKey()
+        virtual protected STATENAME CheckOfKey()
         {
             Stick st = gamepad.pushStick;
 
-            if (st == Stick.None) return Character.STATENAME.Stay;
+            if (st == Stick.None) return STATENAME.Stay;
 
-            if (gamepad.GetChargeButton != null) return Character.STATENAME.Charge;
+            if (gamepad.GetChargeButton != null) return STATENAME.Charge;
 
             SetDirectionByStick(st);
 
             if (gamepad.IsPush(Button.D) && CharacterDashMoveState.IsParmittion(parameter.stamina))
-                return Character.STATENAME.DashMove;
+                return STATENAME.DashMove;
 
-            return Character.STATENAME.Changeless;
+            return STATENAME.Changeless;
         }
 
         protected void Move()

@@ -6,7 +6,7 @@ public partial class Murasa : Character
     protected class MurasaChargeSkillState : CharacterSkillState
     {
         private Ikari ikari;
-        public int name { get { return (int)Character.STATENAME.ChargeSkill; } }
+        public int name { get { return (int)STATENAME.ChargeSkill; } }
         public MurasaChargeSkillState(Murasa parent)
             : base(parent)
         {
@@ -19,7 +19,7 @@ public partial class Murasa : Character
         {
             framecounter.Update();
 
-            return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
+            return (int)(framecounter.IsCall ? STATENAME.Stay : STATENAME.Changeless);
         }
 
         private void CreateBullet()

@@ -94,9 +94,9 @@ public partial class Yugi : Character
         {
             var nextState = childState.Update();
 
-            if (nextState != (int)SUBSTATENAME.Changeless) { return (int)Character.STATENAME.Stay; }
+            if (nextState != (int)SUBSTATENAME.Changeless) { return (int)STATENAME.Stay; }
 
-            return (int)Character.STATENAME.Changeless;
+            return (int)STATENAME.Changeless;
         }
 
         public void ChangeState(SUBSTATENAME nextState)

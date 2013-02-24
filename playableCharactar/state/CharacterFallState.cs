@@ -9,7 +9,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.Fall; }
+            get { return (int)STATENAME.Fall; }
         }
 
         public CharacterFallState(Character parent)
@@ -34,11 +34,11 @@ public partial class Character : BaseCharacter
             character.transform.localScale = fall;
         }
 
-        private Character.STATENAME FrameUpdate()
+        private STATENAME FrameUpdate()
         {
             framecounter.Update();
             if (framecounter.IsCall) { SoundManager.Play(SoundManager.death); }
-            return framecounter.IsCall ? Character.STATENAME.Dead : Character.STATENAME.Changeless;
+            return framecounter.IsCall ? STATENAME.Dead : STATENAME.Changeless;
         }
     }
 }

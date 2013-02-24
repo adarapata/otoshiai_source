@@ -7,7 +7,7 @@ public partial class Character : BaseCharacter
     {
         public override int name
         {
-            get { return (int)Character.STATENAME.Dead; }
+            get { return (int)STATENAME.Dead; }
         }
         /// <summary>
         /// コンストラクタ
@@ -21,7 +21,7 @@ public partial class Character : BaseCharacter
 
         public override int Update()
         {
-            return (int)Character.STATENAME.Changeless;
+            return (int)STATENAME.Changeless;
         }
     }
 }

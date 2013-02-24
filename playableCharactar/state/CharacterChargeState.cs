@@ -10,7 +10,7 @@ public partial class Character : BaseCharacter
 
         public override int name
         {
-            get { return (int)Character.STATENAME.Charge; }
+            get { return (int)STATENAME.Charge; }
         }
 
         private Charge charge
@@ -43,7 +43,7 @@ public partial class Character : BaseCharacter
             return (int)st;
         }
 
-        protected override Character.STATENAME CheckOfKey()
+        protected override STATENAME CheckOfKey()
         {
             Stick st = gamepad.pushStick;
 
@@ -59,14 +59,14 @@ public partial class Character : BaseCharacter
                 AnimationFrameUpdate();
             }
 
-            return Character.STATENAME.Changeless;
+            return STATENAME.Changeless;
         }
 
-        private Character.STATENAME GetNextState()
+        private STATENAME GetNextState()
         {
-            if (pushButton == Button.A) return charge.isMax ? Character.STATENAME.ChargeBlow : Character.STATENAME.Blow;
+            if (pushButton == Button.A) return charge.isMax ? STATENAME.ChargeBlow : STATENAME.Blow;
 
-            return charge.isMax ? Character.STATENAME.ChargeSkill : Character.STATENAME.Skill;
+            return charge.isMax ? STATENAME.ChargeSkill : STATENAME.Skill;
         }
     }
 }
