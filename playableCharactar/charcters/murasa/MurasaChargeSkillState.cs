@@ -1,33 +1,36 @@
 using UnityEngine;
 using System.Collections;
 
-public class MurasaChargeSkillState : CharacterSkillState
+public partial class Murasa : Character
 {
-    private Ikari ikari;
-    public int name { get { return (int)Character.STATENAME.ChargeSkill; } }
-    public MurasaChargeSkillState(Murasa parent)
-        : base(parent)
+    protected class MurasaChargeSkillState : CharacterSkillState
     {
-        framecounter = new FrameCounter(10);
-        CreateBullet();
-        parameter.stamina.quantity -= 10;
-    }
+        private Ikari ikari;
+        public int name { get { return (int)Character.STATENAME.ChargeSkill; } }
+        public MurasaChargeSkillState(Murasa parent)
+            : base(parent)
+        {
+            framecounter = new FrameCounter(10);
+            CreateBullet();
+            parameter.stamina.quantity -= 10;
+        }
 
-    public override int Update()
-    {
-        framecounter.Update();
+        public override int Update()
+        {
+            framecounter.Update();
 
-        return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
-    }
+            return (int)(framecounter.IsCall ? Character.STATENAME.Stay : Character.STATENAME.Changeless);
+        }
 
-    private void CreateBullet()
-    {
-        var list = AttackLibrary.GetInstance;
-        ikari = (GameObject.Instantiate(list.ikari) as GameObject).GetComponent<Ikari>();
-        ikari.parent = character;
-        ikari.Init();
-        ikari.SetTransformParent();
-        (character as Murasa).ikari = ikari.gameObject;
-        SoundManager.Play(SoundManager.shot1);
+        private void CreateBullet()
+        {
+            var list = AttackLibrary.GetInstance;
+            ikari = (GameObject.Instantiate(list.ikari) as GameObject).GetComponent<Ikari>();
+            ikari.parent = character;
+            ikari.Init();
+            ikari.SetTransformParent();
+            (character as Murasa).ikari = ikari.gameObject;
+            SoundManager.Play(SoundManager.shot1);
+        }
     }
 }
