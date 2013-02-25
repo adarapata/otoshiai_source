@@ -68,9 +68,9 @@ public class BaseCharacter : MonoBehaviour {
     /// </summary>
     /// <param name="other"></param>
     /// <returns></returns>
-    protected bool IsCheckSameTeam(Collider other)
+    protected bool IsCheckSameTeam(Transform eTransform)
     {
-        return transform.parent.Equals(other.gameObject.transform.parent);
+        return transform.parent.Equals(eTransform.parent);
     }
 
     public void SetTeamTransform(Team _team, Transform parent)
