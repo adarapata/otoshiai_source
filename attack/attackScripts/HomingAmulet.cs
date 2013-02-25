@@ -70,6 +70,6 @@ public class HomingAmulet : BaseAttack {
 
     private void OnTriggerEnter(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
 }

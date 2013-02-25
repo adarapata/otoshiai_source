@@ -34,7 +34,7 @@ public class Ikaring : BaseAttack {
 
     private void OnTriggerEnter(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
 
     protected override void ColliedAttack(BaseAttack enemy)

@@ -32,7 +32,7 @@ public class Shibuki : BaseAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
 
     protected override void ColliedCharacter(Character enemy)
