@@ -318,7 +318,7 @@ public partial class Character : BaseCharacter {
 
     void OnTriggerEnter(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
     void OnTriggerStay(Collider other)
     {
@@ -326,11 +326,11 @@ public partial class Character : BaseCharacter {
         if (enemy.Type == OBJECTTYPE.Box) CheckColliedingBox(enemy as BaseBox);
     }
 
-    virtual protected void ColliedCheck(Collider other)
+    virtual protected void ColliedCheck(GameObject obj)
     {
-        if (IsCheckSameTeam(other)) return;
+        if (IsCheckSameTeam(obj.transform)) return;
 
-        var enemy = other.GetComponent<BaseCharacter>();
+        var enemy = obj.GetComponent<BaseCharacter>();
         if (enemy.Type == OBJECTTYPE.Character) CheckColliedByCharacter(enemy as Character);
     }
 
