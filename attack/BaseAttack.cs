@@ -38,16 +38,16 @@ public class BaseAttack : BaseCharacter {
 
     private void OnTriggerStay(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
     /// <summary>
     /// 衝突したオブジェクトの型を判別して各メソッドに飛ばす
     /// </summary>
     /// <param name="other"></param>
-    virtual protected void ColliedCheck(Collider other)
+    virtual protected void ColliedCheck(GameObject obj)
     {
-        if (IsCheckSameTeam(other)) { return; }
-        var enemy = other.GetComponent<BaseCharacter>();
+        if (IsCheckSameTeam(obj.transform)) { return; }
+        var enemy = obj.GetComponent<BaseCharacter>();
 
         switch (enemy.Type)
         {

@@ -40,7 +40,7 @@ public partial class MainGameManager : MonoBehaviour
         characters = new BetterList<Character>();
 
         parameter = MainGameParameter.instance;
-        //parameter.CreateTemplateData();
+        parameter.CreateTemplateData();
         foreach (var player in parameter.players)
         {
             CraeteCharacter(player);

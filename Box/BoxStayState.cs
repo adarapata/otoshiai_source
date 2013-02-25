@@ -1,19 +1,30 @@
 using UnityEngine;
 using System.Collections;
 
-public class BoxStayState : BaseState {
-
-    private FrameCounter counter;
-    public BoxStayState(BaseBox parent)
-        : base(parent)
+public partial class BaseBox : BaseCharacter
+{
+    protected class BoxStayState : BaseState
     {
-        counter = new FrameCounter(10000);
-    }
+        public override int name
+        {
+            get
+            {
+                return (int)STATENAME.Stay;
+            }
+        }
 
-    public override int Update()
-    {
-        counter.Update();
-        
-        return (int)(counter.IsCall ? BaseBox.STATENAME.Stay : BaseBox.STATENAME.Changeless);
+        private FrameCounter counter;
+        public BoxStayState(BaseBox parent)
+            : base(parent)
+        {
+            counter = new FrameCounter(10000);
+        }
+
+        public override int Update()
+        {
+            counter.Update();
+
+            return (int)(counter.IsCall ? STATENAME.Stay : STATENAME.Changeless);
+        }
     }
 }

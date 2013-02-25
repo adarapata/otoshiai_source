@@ -30,7 +30,7 @@ public class Youmu : Character {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (IsCheckSameTeam(other)) return;
+
     }
 
     void OnTriggerStay(Collider other)
