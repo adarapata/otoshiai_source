@@ -37,6 +37,6 @@ public class ChargeBlow : BaseAttack {
 
     void OnTriggerEnter(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
 }

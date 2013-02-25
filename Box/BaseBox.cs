@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class BaseBox : BaseCharacter {
+public partial class BaseBox : BaseCharacter {
 
     public enum STATENAME : int
     {
@@ -55,6 +55,7 @@ public class BaseBox : BaseCharacter {
     /// </summary>
     virtual public void Crash()
     {
+        Debug.Log("crach");
         SoundManager.Play(SoundManager.hitLight);
         SelfDestroy();
     }
@@ -83,7 +84,7 @@ public class BaseBox : BaseCharacter {
     /// <param name="other"></param>
     protected void ColliedOnMoveState(Collider other)
     {
-        if (state.name != (int)STATENAME.Move) return;
+        if (state.name != (int)STATENAME.Move) { return; }
 
         var enemy = other.GetComponent<BaseCharacter>();
         if (enemy.Type == OBJECTTYPE.Character)
@@ -124,5 +125,32 @@ public class BaseBox : BaseCharacter {
         Damage d = new Damage(20, false, 20, baseParameter.moveParameter.direction, false);
         (enemy as Character).ChangeHitState(d);
         SelfDestroy();
+    }
+
+    public Vector3 PositionFix(Vector3 enemyPos)
+    {
+        //Šp“x‹‚ß‚é
+        Vector2 fix = enemyPos - transform.localPosition;
+        int angleA = (int)Vector2.Angle(Vector2.one, fix);
+        int angleB = (int)Vector2.Angle(new Vector2(-1, 1), fix);
+        bool x, y;
+        x = angleA > 0 & angleA <= 90;
+        y = angleB > 0 & angleB <= 90;
+
+        Vector3 pos = enemyPos;
+        Vector2 boxis = transform.localPosition;
+
+        if (x)
+        {
+            if (y) pos.y = boxis.y + 16 + 10;
+            else pos.x = boxis.x + 16 + 6;
+        }
+        else
+        {
+            if (y) pos.x = boxis.x - 16 - 6;
+            else pos.y = boxis.y - 16 - 10;
+        }
+
+        return pos;
     }
 }

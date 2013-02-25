@@ -17,6 +17,15 @@ public partial class MainGameManager : MonoBehaviour
             parent.StartCoroutine(StartCount());
 
             startWord = Resources.Load("Objects/word/StartWord") as GameObject;
+
+
+            var boxObject = Resources.Load("Objects/Box/ItemBox") as GameObject;
+            var box = Instantiate(boxObject) as GameObject;
+
+            var script = box.GetComponent<BaseBox>();
+            script.transform.parent = parent.teamPanels[(int)TEAMCODE.none].transform;
+            script.transform.localScale = Vector3.one;
+            script.transform.localPosition = new Vector3(30, 30, 0);
         }
 
         public int Update()

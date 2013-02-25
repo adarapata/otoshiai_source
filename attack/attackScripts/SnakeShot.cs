@@ -40,7 +40,7 @@ public class SnakeShot : BaseAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        ColliedCheck(other);
+        ColliedCheck(other.gameObject);
     }
 
     private void Search()
