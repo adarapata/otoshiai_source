@@ -362,29 +362,7 @@ public partial class Character : BaseCharacter {
             return;
         }
 
-        //Šp“x‹‚ß‚é
-        Vector2 fix = transform.localPosition - box.transform.localPosition;
-        int angleA = (int)Vector2.Angle(Vector2.one, fix);
-        int angleB = (int)Vector2.Angle(new Vector2(-1, 1), fix);
-        bool x, y;
-        x = angleA > 0 & angleA <= 90;
-        y = angleB > 0 & angleB <= 90;
-
-        Vector3 pos = transform.localPosition;
-        Vector2 boxis = box.transform.localPosition;
-
-        if (x)
-        {
-            if(y) pos.y = boxis.y + 16 + 10;
-            else pos.x = boxis.x + 16 + 6;
-        }
-        else 
-        {
-            if (y) pos.x = boxis.x - 16 - 6;
-            else pos.y = boxis.y - 16 - 10;
-        }
-
-        transform.localPosition = pos;
+        transform.localPosition = box.PositionFix(transform.localPosition);
     }
 
     /// <summary>
@@ -393,8 +371,11 @@ public partial class Character : BaseCharacter {
     /// <returns></returns>
     protected BaseBox GetNearBox()
     {
+        //Œü‚¢‚Ä‚é•ûŒü‚ÌƒŒƒC‚ğì‚é
         Ray r = new Ray(transform.position, PolarCoordinates.ConvertToPolar(frontDirection, 1F));
         RaycastHit h = new RaycastHit();
+
+        //–Ú‚Ì‘O‚É” ‚ª‚ ‚Á‚½ê‡
         if (Physics.Raycast(r, out h, 0.05F)) 
         {
             var script = h.collider.gameObject.GetComponent<BaseBox>();
