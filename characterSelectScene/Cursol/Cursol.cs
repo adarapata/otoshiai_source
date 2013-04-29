@@ -114,7 +114,7 @@ public partial class Cursol : BaseCharacter {
 
         var scale = gameObject.GetComponent<TweenScale>();
         if (scale != null) { Destroy(scale); }
-        MainGameParameter.instance.players.Add(parent);
+        CharacterSelectManager.AddPlayer(parent);
     }
 
     /// <summary>

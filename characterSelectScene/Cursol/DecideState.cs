@@ -29,11 +29,7 @@ public partial class Cursol : BaseCharacter
 
             if (player.gamepad.IsDown(Button.A) || player.gamepad.IsDown(Button.Start))
             {
-                if (MainGameParameter.instance.players.size >= 2)
-                {
-                    MusicManager.GetInstance().Stop();
-                    Application.LoadLevel("mainScene");
-                }
+                CharacterSelectManager.ChangeMainScene();
             }
 
             return (int)STATENAME.Changeless;
