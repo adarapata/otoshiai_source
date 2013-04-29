@@ -32,24 +32,15 @@ public class MusicManager : MonoBehaviour {
     /// <returns></returns>
     public static MusicManager GetInstance()
     {
-       return FindObjectOfType(typeof(MusicManager)) as MusicManager;
-    }
-
-    /// <summary>
-    /// ƒV[ƒ“ã‚ÉMusicManager‚ª‘¶İ‚µ‚È‚¢ê‡‚Ì‚İA¶¬‚·‚é
-    /// </summary>
-    /// <returns></returns>
-    public static bool CreateInstance()
-    {
-        if (FindObjectOfType(typeof(MusicManager)) == null)
+        var self = FindObjectOfType(typeof(MusicManager)) as MusicManager;
+        if (self == null)
         {
-            var self = Resources.Load("Objects/music/MusicManager") as GameObject;
-            Instantiate(self);
-            return true;
+            //‘¶İ‚µ‚È‚¢ê‡¶¬
+            var managerObject = Resources.Load("Objects/music/MusicManager") as GameObject;
+            self = (Instantiate(managerObject) as GameObject).GetComponent<MusicManager>();
         }
-        return false;
+        return self;
     }
-
 }
 
 public enum TrackName
