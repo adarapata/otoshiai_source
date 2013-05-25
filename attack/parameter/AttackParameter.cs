@@ -28,7 +28,7 @@ public class AttackParameter {
 /// </summary>
 public class AttackLevel
 {
-    public const int MIN_LEVEL = 5;
+    public const int MIN_LEVEL = 1;
     public const int MAX_LEVEL = 5;
 
     private int m_level;
