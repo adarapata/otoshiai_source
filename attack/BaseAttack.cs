@@ -94,6 +94,7 @@ public class BaseAttack : BaseCharacter {
     /// <param name="enemy"></param>
     virtual protected void ColliedCharacter(Character enemy)
     {
+        AttackLibrary.GetInstance.CreateHitBurst(enemy.transform.localPosition);
         enemy.ChangeHitState(attackParameter.damage);
         SelfDestroy();
     }
